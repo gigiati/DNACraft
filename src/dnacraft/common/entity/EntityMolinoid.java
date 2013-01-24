@@ -19,11 +19,10 @@ public class EntityMolinoid extends EntityAnimal {
 	};
 
 	private int heatCycleFrequency;
-	private int heatCycleLength;
+	private int heatDuration;
 	private LoveStatus currentLoveStatus = LoveStatus.CHILLING_OUT;
 
-	private int timeLeftUntilHeat = 0;
-	private int timeLeftOnHeat = 0;
+	private int loveCycleTimeRemaining = 0;
 
 	public EntityMolinoid(World world) {
 		super(world);
@@ -48,8 +47,9 @@ public class EntityMolinoid extends EntityAnimal {
 
 		heatCycleFrequency = 100 + (int) (1000 * genome
 				.get(Genome.HEAT_FREQUENCY));
-		heatCycleLength = 200;
-		timeLeftUntilHeat = heatCycleFrequency;
+		heatDuration = 200;
+		
+		loveCycleTimeRemaining = heatCycleFrequency;
 
 	}
 
@@ -60,30 +60,46 @@ public class EntityMolinoid extends EntityAnimal {
 
 	@Override
 	public void onLivingUpdate() {
-
-		if (!this.worldObj.isRemote) {
-			if (currentLoveStatus == LoveStatus.CHILLING_OUT) {
-				if (timeLeftUntilHeat <= 0) {
-					currentLoveStatus = LoveStatus.ON_HEAT;
-					timeLeftOnHeat = heatCycleLength;
-					onHeat();
-				} else {
-					timeLeftUntilHeat--;
-				}
-			} else if (currentLoveStatus == LoveStatus.ON_HEAT) {
-				// randomly look for targets. if we find one, change to IN_LOVE
-				if (timeLeftOnHeat <= 0) {
-					currentLoveStatus = LoveStatus.CHILLING_OUT;
-					timeLeftUntilHeat = heatCycleFrequency;
-					onChillout();
-				} else {
-					timeLeftOnHeat--;
-				}
-			}
+		
+		loveCycleTimeRemaining = this.getLoveCycleTimeRemaining();
+		if (this.worldObj.isRemote){
+			System.out.println(loveCycleTimeRemaining);
 		}
-
+		if (loveCycleTimeRemaining <= 0) {
+			if (currentLoveStatus == LoveStatus.CHILLING_OUT) {
+				currentLoveStatus = LoveStatus.ON_HEAT;
+				loveCycleTimeRemaining = heatDuration;
+				onHeat();
+			}else if (currentLoveStatus == LoveStatus.ON_HEAT) {
+				currentLoveStatus = LoveStatus.CHILLING_OUT;
+				loveCycleTimeRemaining = heatCycleFrequency;
+				onChillout();
+			}
+		} else {
+			loveCycleTimeRemaining--;
+		}
+		
+		this.setLoveCycleTimeRemaining(loveCycleTimeRemaining);
+		
 		super.onLivingUpdate();
 	}
+
+	@Override
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(15, new Integer(loveCycleTimeRemaining));
+    }
+
+    public int getLoveCycleTimeRemaining()
+    {
+        return this.dataWatcher.getWatchableObjectInt(15);
+    }
+    
+    public void setLoveCycleTimeRemaining(int time)
+    {
+        this.dataWatcher.updateObject(15, Integer.valueOf(time));
+    }
 
 	private void onHeat() {
 		System.out.println("On heat!");
