@@ -30,12 +30,12 @@ public class Genome extends ArrayList<Double> {
 	public final static int BIRTH_FAILURE		= 17;
 	public final static int CONCPETION_FAILURE	= 18;
 	public final static int GESTATION_PERIOD	= 19;
-	public final static int MATURITY			= 20;
+	public final static int BREEDING_AGE		= 20;
 	
 	public Genome() {
 		super();
 		for (int i = 0; i <= 20; i++) {
-			this.add(i, 0.0);
+			this.add(i, Math.random() / 2);
 		}
 	}
 	
