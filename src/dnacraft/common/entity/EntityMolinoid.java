@@ -48,7 +48,7 @@ public class EntityMolinoid extends EntityAnimal {
 		heatCycleFrequency = 100 + (int) (1000 * genome
 				.get(Genome.HEAT_FREQUENCY));
 		heatDuration = 200;
-		
+
 		loveCycleTimeRemaining = heatCycleFrequency;
 
 	}
@@ -60,9 +60,9 @@ public class EntityMolinoid extends EntityAnimal {
 
 	@Override
 	public void onLivingUpdate() {
-		
+
 		loveCycleTimeRemaining = this.getLoveCycleTimeRemaining();
-		if (this.worldObj.isRemote){
+		if (this.worldObj.isRemote) {
 			System.out.println(loveCycleTimeRemaining);
 		}
 		if (loveCycleTimeRemaining <= 0) {
@@ -70,7 +70,7 @@ public class EntityMolinoid extends EntityAnimal {
 				currentLoveStatus = LoveStatus.ON_HEAT;
 				loveCycleTimeRemaining = heatDuration;
 				onHeat();
-			}else if (currentLoveStatus == LoveStatus.ON_HEAT) {
+			} else if (currentLoveStatus == LoveStatus.ON_HEAT) {
 				currentLoveStatus = LoveStatus.CHILLING_OUT;
 				loveCycleTimeRemaining = heatCycleFrequency;
 				onChillout();
@@ -78,28 +78,25 @@ public class EntityMolinoid extends EntityAnimal {
 		} else {
 			loveCycleTimeRemaining--;
 		}
-		
+
 		this.setLoveCycleTimeRemaining(loveCycleTimeRemaining);
-		
+
 		super.onLivingUpdate();
 	}
 
 	@Override
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.dataWatcher.addObject(15, new Integer(loveCycleTimeRemaining));
-    }
+	protected void entityInit() {
+		super.entityInit();
+		this.dataWatcher.addObject(15, new Integer(loveCycleTimeRemaining));
+	}
 
-    public int getLoveCycleTimeRemaining()
-    {
-        return this.dataWatcher.getWatchableObjectInt(15);
-    }
-    
-    public void setLoveCycleTimeRemaining(int time)
-    {
-        this.dataWatcher.updateObject(15, Integer.valueOf(time));
-    }
+	public int getLoveCycleTimeRemaining() {
+		return this.dataWatcher.getWatchableObjectInt(15);
+	}
+
+	public void setLoveCycleTimeRemaining(int time) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(time));
+	}
 
 	private void onHeat() {
 		System.out.println("On heat!");
