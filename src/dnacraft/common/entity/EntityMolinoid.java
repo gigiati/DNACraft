@@ -22,27 +22,18 @@ public class EntityMolinoid extends EntityAnimal {
 
 	private int maxHealth = 20;
 
-	public enum LoveStatus {
-		CHILLING_OUT, ON_HEAT, IN_LOVE
-	};
-
 	private int heatCycleFrequency;
 	private int heatDuration;
-	private LoveStatus currentLoveStatus = LoveStatus.CHILLING_OUT;
 
 	private int loveCycleTimeRemaining = 0;
-
-	private boolean male = false;
-
+	
+	public static final int ME_NO_LOVE = 0;
+	public static final int ON_HEAT = 1;
+	public static final int IN_LOVE = 2;
+	
 	public EntityMolinoid(World world) {
-		this(world, new Genome());
-	}
-
-	public EntityMolinoid(World world, Genome newGenome) {
 		super(world);
-
-		setGenome(newGenome);
-
+		
 		this.texture = "/mob/pig.png";
 		this.setSize(0.9F, 0.9F);
 		float speed = 0.23F;
@@ -56,7 +47,9 @@ public class EntityMolinoid extends EntityAnimal {
 		this.tasks.addTask(4, new EntityAIWatchClosest(this,
 				EntityPlayer.class, 6.0F));
 		this.tasks.addTask(5, new EntityAILookIdle(this));
-
+		
+		this.genome = new Genome();
+		
 	}
 
 	@Override
@@ -70,7 +63,6 @@ public class EntityMolinoid extends EntityAnimal {
 	}
 
 	public void setGenome(Genome g) {
-
 		// keep a reference to our genome
 		genome = g;
 
@@ -88,34 +80,29 @@ public class EntityMolinoid extends EntityAnimal {
 
 	@Override
 	public int getMaxHealth() {
-		return maxHealth;
+		System.out.println("maxHealth = "+ maxHealth);
+		return maxHealth == 0 ? 20 : maxHealth;
 	}
 
 	@Override
 	public void onLivingUpdate() {
-
-		if (!this.isMale()) {
-
-			loveCycleTimeRemaining = this.getLoveCycleTimeRemaining();
-
+		if (!this.worldObj.isRemote && !this.isMale()) {
+			
+			int currentLoveStatus = this.getLoveCycleState();
+		
 			if (loveCycleTimeRemaining <= 0) {
-				if (currentLoveStatus == LoveStatus.CHILLING_OUT) {
-					currentLoveStatus = LoveStatus.ON_HEAT;
+				if (currentLoveStatus == ME_NO_LOVE) {
+					this.setLoveCycleState(ON_HEAT);
 					loveCycleTimeRemaining = heatDuration;
-					onHeat();
-				} else if (currentLoveStatus == LoveStatus.ON_HEAT) {
-					currentLoveStatus = LoveStatus.CHILLING_OUT;
+				} else if (currentLoveStatus == ON_HEAT) {
+					this.setLoveCycleState(ME_NO_LOVE);
 					loveCycleTimeRemaining = heatCycleFrequency;
-					onChillout();
 				}
 			} else {
 				loveCycleTimeRemaining--;
 			}
-
-			if (!this.worldObj.isRemote) {
-				this.setLoveCycleTimeRemaining(loveCycleTimeRemaining);
-			}
 		}
+		
 		super.onLivingUpdate();
 
 	}
@@ -123,30 +110,39 @@ public class EntityMolinoid extends EntityAnimal {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		if (!this.isMale()) {
-			this.dataWatcher.addObject(15, new Integer(loveCycleTimeRemaining));
-		}
+		this.dataWatcher.addObject(15, new Byte((byte)0));
+        this.dataWatcher.addObject(16, new Byte((byte)0));
+        if (!this.worldObj.isRemote) {
+        	this.setMale(Math.random() < 0.5);
+        }
 	}
 
-	public int getLoveCycleTimeRemaining() {
-		return this.dataWatcher.getWatchableObjectInt(15);
+	public int getLoveCycleState() {
+		return this.dataWatcher.getWatchableObjectByte(15);
 	}
 
-	public void setLoveCycleTimeRemaining(int time) {
-		this.dataWatcher.updateObject(15, Integer.valueOf(time));
+	public void setLoveCycleState(int state) {
+		this.dataWatcher.updateObject(15, Byte.valueOf((byte)state));
 	}
+	
+    public boolean isMale()
+    {
+		return (this.dataWatcher.getWatchableObjectByte(16) & 16) != 0;
+    }
 
-	private void onHeat() {
-		System.out.println("On heat!");
-	}
+    public void setMale(boolean par1)
+    {
+        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-	private void onChillout() {
-		System.out.println("Chilling out!");
-	}
-
-	private void onInLove() {
-
-	}
+        if (par1)
+        {
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 16)));
+        }
+        else
+        {
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -17)));
+        }
+    }
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
@@ -163,34 +159,33 @@ public class EntityMolinoid extends EntityAnimal {
 	}
 
 	public EntityAgeable spawnBabyAnimal(EntityMolinoid parent) {
+		EntityMolinoid baby = new EntityMolinoid(parent.worldObj);
 		Genome newGenome = GenomeManager.mutate(this.getGenome(),
 				parent.getGenome());
-		return new EntityMolinoid(parent.worldObj, newGenome);
+		baby.setGenome(newGenome);
+		return baby;
 	}
 
 	public Genome getGenome() {
 		return genome;
 	}
 
-	public LoveStatus getLoveStatus() {
-		return this.currentLoveStatus;
-	}
-
-	public boolean isMale() {
-		return male;
-	}
 
 	@Override
 	public boolean canMateWith(EntityAnimal otherMob) {
+		
+		if (otherMob == this) return false;
+		
 		EntityMolinoid otherMolinoid = (EntityMolinoid) otherMob;
 
 		// males dont wanna mate with males!
 		if (this.isMale())
 			return false;
-
+		
 		// not mating unless im on heat!
-		if (this.getLoveStatus() != LoveStatus.ON_HEAT)
+		if (this.getLoveCycleState() != ON_HEAT)
 			return false;
+
 
 		return isAttractedTo(otherMolinoid);
 	}

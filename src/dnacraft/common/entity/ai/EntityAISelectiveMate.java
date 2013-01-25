@@ -36,7 +36,10 @@ public class EntityAISelectiveMate extends EntityAIBase {
         if (this.theAnimal.isMale())
         {
             this.targetMate = this.getNearbyMate();
-            return this.targetMate != null;
+            if (this.targetMate != null) {
+                this.targetMate.inLove = 10000;
+                return true;
+            }
         }
         return false;
     }
