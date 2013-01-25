@@ -8,6 +8,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import dnacraft.common.CommonProxy;
+import dnacraft.common.block.BlockCentrifuge;
+import dnacraft.common.item.ItemGenome;
 
 @Mod( modid = "DNACraft", name = "DNACraft", version = "0.0.1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -18,6 +20,16 @@ public class DNACraft {
 
 	@SidedProxy( clientSide = "dnacraft.client.ClientProxy", serverSide = "dnacraft.common.CommonProxy" )
 	public static CommonProxy proxy;
+	
+	public static class Items
+	{
+		public static ItemGenome itemGenome;
+	}
+	
+	public static class Blocks
+	{
+		public static BlockCentrifuge blockCentrifuge;
+	}
 	
 	@Mod.PreInit
 	public void preInit( FMLPreInitializationEvent evt )
