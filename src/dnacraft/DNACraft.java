@@ -9,7 +9,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import dnacraft.common.CommonProxy;
 import dnacraft.common.block.BlockCentrifuge;
-import dnacraft.common.item.ItemGenome;
+import dnacraft.common.item.ItemGeneric;
+import dnacraft.common.item.ItemUnstackable;
 
 @Mod( modid = "DNACraft", name = "DNACraft", version = "0.0.1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -23,7 +24,8 @@ public class DNACraft {
 	
 	public static class Items
 	{
-		public static ItemGenome itemGenome;
+		public static ItemUnstackable itemUnstackable;
+		public static ItemGeneric itemGeneric;
 	}
 	
 	public static class Blocks
