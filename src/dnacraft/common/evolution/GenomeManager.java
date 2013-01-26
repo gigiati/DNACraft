@@ -1,4 +1,4 @@
-package dnacraft.common;
+package dnacraft.common.evolution;
 
 public class GenomeManager {
 	
