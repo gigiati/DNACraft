@@ -1,0 +1,8 @@
+dnacraft.fragments.seeds.name=Seed DNA Fragment
+dnacraft.fragments.porkRaw.name=Raw Pork DNA Fragment
+dnacraft.fragments.porkCooked.name=Cooked Pork DNA Fragment
+
+dnacraft.machines.centrifuge.name=DNA Centrifuge
+dnacraft.machines.splicer.name=DNA Splicer
+
+dnacraft.dna.name=DNA

@@ -1,7 +1,7 @@
 package dnacraft.common.block;
 
 import dnacraft.DNACraft;
-import dnacraft.common.tileentity.TileEntityCentrifuge;
+import dnacraft.common.tileentity.TileEntitySplicer;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -9,22 +9,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockCentrifuge extends BlockContainer {
+public class BlockSplicer extends BlockContainer {
 
-	public BlockCentrifuge(int par1, Material par2Material) {
+	public BlockSplicer(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(CreativeTabs.tabMisc);
 	}
 
-	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityCentrifuge();
+		return new TileEntitySplicer();
 	}
 
 	@Override
 	public String getBlockName() {
-		return "dnacraft.machines.centrifuge";
+		return "dnacraft.machines.splicer";
 	}
 	
 	@Override
@@ -34,11 +33,10 @@ public class BlockCentrifuge extends BlockContainer {
 			if (player.isSneaking()) {
 				return false;
 			}
-			player.openGui(DNACraft.instance, 1987, world, x, y, z);
+			player.openGui(DNACraft.instance, 1988, world, x, y, z);
 			return true;
 		}
 
 		return true;
 	}
-
 }

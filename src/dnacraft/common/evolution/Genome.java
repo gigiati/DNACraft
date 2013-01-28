@@ -1,43 +1,42 @@
 package dnacraft.common.evolution;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Genome extends ArrayList<Double> {
+import net.minecraft.item.Item;
+
+import dnacraft.common.evolution.genome.GenomePorkCooked;
+import dnacraft.common.evolution.genome.GenomePorkRaw;
+import dnacraft.common.evolution.genome.GenomeSeeds;
+
+public abstract class Genome {
 	
-	public final static int SIZE 				= 0;
-	public final static int WEIGHT 				= 1;
-	public final static int COLOR 				= 2;
+	public static Genome seeds = new GenomeSeeds();
+	public static Genome porkRaw = new GenomePorkRaw();
+	public static Genome porkCooked = new GenomePorkCooked();
 	
-	public final static int MAX_HEALTH 			= 3;
-	public final static int REGEN_RATE 			= 4;
-	public final static int AGGRESSION 			= 5;
+	private HashMap<String, Double> traits = new HashMap<String, Double>();
 	
-	public final static int DROP_YIELD 			= 6;
-	public final static int DROP_VARIATION 		= 7;
-	
-	public final static int HEAT_TOLERANCE 		= 8;
-	public final static int COLD_TOLERANCE 		= 9;
-	
-	public final static int SOCIABILITY 		= 10;
-	public final static int MUTABILITY 			= 11;
-	public final static int LIFE_EXPECTANCY 	= 12;
-	public final static int ATTRACTIVENESS 		= 13;
-	
-	public final static int EXCRETION_RATE 		= 14;
-	
-	public final static int HEAT_FREQUENCY		= 15;
-	public final static int HEAT_LENGTH			= 16;
-	public final static int BIRTH_FAILURE		= 17;
-	public final static int CONCPETION_FAILURE	= 18;
-	public final static int GESTATION_PERIOD	= 19;
-	public final static int BREEDING_AGE		= 20;
-	
-	public Genome() {
-		super();
-		for (int i = 0; i <= 20; i++) {
-			this.add(i, Math.random() / 2);
-		}
+	public void addTrait(String name, double value) {
+		traits.put(name,  value);
 	}
 	
-
+	public Map.Entry<String,Double> getRandomTrait() {
+		
+		double totalWeight = 0.0;
+		for (Map.Entry<String,Double> entry : traits.entrySet())
+		{
+		    totalWeight += entry.getValue();
+		}
+		double random = Math.random() * totalWeight;
+		for (Map.Entry<String,Double> entry : traits.entrySet())
+		{
+			random -= entry.getValue();
+			if (random <= 0.0d)
+		    {
+		        return entry;
+		    }
+		}
+		return null;
+	}
 }
