@@ -27,7 +27,6 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 
 	public TileEntitySplicer() {
 		super();
-		itemStacks = new ItemStack[3];
 	}
 	
 

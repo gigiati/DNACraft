@@ -26,8 +26,9 @@ public class ContainerCentrifuge extends BaseContainer
 		this.playerInventory = playerInventory;
 		this.centrifuge = centrifuge;
 
-		addSlotToContainer(new Slot(centrifuge, 0, 62, 36));
-		addSlotToContainer(new Slot(centrifuge, 1, 98, 36));
+		addSlotToContainer(new Slot(centrifuge, 0, 62, 22));
+		addSlotToContainer(new Slot(centrifuge, 1, 62, 50));
+		addSlotToContainer(new Slot(centrifuge, 2, 98, 36));
 
 		for (int l = 0; l < 3; l++) {
 			for (int k1 = 0; k1 < 9; k1++) {
