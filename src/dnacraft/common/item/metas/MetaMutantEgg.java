@@ -1,14 +1,17 @@
 package dnacraft.common.item.metas;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Facing;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
-import dnacraft.common.entity.EntityMutantEgg;
 
 public class MetaMutantEgg implements IMeta {
 
@@ -61,6 +64,18 @@ public class MetaMutantEgg implements IMeta {
             if (side == 1 && Block.blocksList[blockID] != null && Block.blocksList[blockID].getRenderType() == 11)
             {
                 var12 = 0.5D;
+            }
+            
+            Entity mob = EntityList.createEntityByName("Mutant", world);
+            if (mob != null && mob instanceof EntityLiving)
+            {
+                EntityLiving livingMob = (EntityLiving)mob;
+                mob.setLocationAndAngles((double)x + 0.5D, (double)y + var12, (double)z + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
+                livingMob.rotationYawHead = livingMob.rotationYaw;
+                livingMob.renderYawOffset = livingMob.rotationYaw;
+                livingMob.initCreature();
+                world.spawnEntityInWorld(mob);
+                livingMob.playLivingSound();
             }
 
             --itemStack.stackSize;

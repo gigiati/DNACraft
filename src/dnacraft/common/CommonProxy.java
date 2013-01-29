@@ -29,6 +29,7 @@ import dnacraft.common.block.BlockCentrifuge;
 import dnacraft.common.block.BlockSplicer;
 import dnacraft.common.container.ContainerCentrifuge;
 import dnacraft.common.container.ContainerSplicer;
+import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.evolution.Genome;
 import dnacraft.common.evolution.TraitManager;
 import dnacraft.common.evolution.genome.GenomeSeeds;
@@ -101,6 +102,7 @@ public class CommonProxy {
 		Items.itemGeneric.addMeta(new MetaDNAFragment(1, "dnacraft.fragments.porkRaw", Item.porkRaw, Genome.porkRaw));
 		Items.itemGeneric.addMeta(new MetaDNAFragment(2, "dnacraft.fragments.porkCooked", Item.porkCooked, Genome.porkCooked));
 		
+		EntityRegistry.registerGlobalEntityID(EntityMutant.class, "Mutant", EntityRegistry.findGlobalUniqueEntityId(), 24, 30 );
 		
 		NetworkRegistry.instance().registerGuiHandler(DNACraft.instance, new GuiHandler());
 		setupLanguages();

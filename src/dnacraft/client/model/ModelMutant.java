@@ -7,10 +7,10 @@ import net.minecraft.entity.Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelMolinoid extends ModelQuadruped
+public class ModelMutant extends ModelQuadruped
 {
 
-	public ModelMolinoid() {
+	public ModelMutant() {
 		super(4, 2);
 	}
 	
