@@ -40,4 +40,12 @@ public class MetaDNA implements IMeta {
 		return newItemStack(1);
 	}
 
+	@Override
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player,
+			World world, int x, int y, int z, int side, float par8, float par9,
+			float par10) {
+		return false;
+	}
+	
+
 }

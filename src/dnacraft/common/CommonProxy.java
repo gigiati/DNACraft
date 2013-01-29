@@ -36,6 +36,7 @@ import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 import dnacraft.common.item.metas.MetaDNA;
 import dnacraft.common.item.metas.MetaDNAFragment;
+import dnacraft.common.item.metas.MetaMutantEgg;
 import dnacraft.common.tileentity.TileEntityCentrifuge;
 import dnacraft.common.tileentity.TileEntitySplicer;
 
@@ -93,6 +94,7 @@ public class CommonProxy {
 
 		Items.itemUnstackable = new ItemUnstackable(821);
 		Items.itemUnstackable.addMeta(new MetaDNA(0));
+		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		
 		Items.itemGeneric = new ItemGeneric(822);
 		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.seeds", Item.seeds, Genome.seeds));

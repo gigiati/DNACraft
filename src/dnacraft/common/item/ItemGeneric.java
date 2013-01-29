@@ -46,6 +46,16 @@ public class ItemGeneric extends Item {
 		}
         return "";
     }
+	
+	@Override
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10) {
+		IMeta meta = getMeta(itemStack.getItemDamage());
+		if (meta != null) {
+			return meta.onItemUse(itemStack, player, world, x, y, z, side, par8, par9, par10);
+		}
+        return true;
+	}
+
 
 	@Override
 	@SideOnly(Side.CLIENT)
