@@ -19,23 +19,8 @@ public class DefinitionChicken implements IMobDefinition {
 	public BodyPart[] getLegs(ModelBase base) {
 		
 		return new BodyPart[] {
-			new BodyPart(base, "/mob/chicken.png", 26, 0, 3, 5, 3, -1.0F, 0.0F, -3.0F) {
-				
-				@Override
-				public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
-						float maxLegSwing, float wingSwing, float yaw,
-						float pitch, float scale) {
-					renderer.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F * maxLegSwing;
-				}
-			},
-			new BodyPart(base, "/mob/chicken.png", 26, 0, 3, 5, 3, -1.0F, 0.0F, -3.0F) {
-				@Override
-				public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
-						float maxLegSwing, float wingSwing, float yaw,
-						float pitch, float scale) {
-					renderer.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float)Math.PI) * 1.4F * maxLegSwing;
-				}
-			}
+			new BodyPart(base, "/mob/chicken.png", 26, 0, 3, 5, 3, -1.0F, 0.0F, -3.0F),
+			new BodyPart(base, "/mob/chicken.png", 26, 0, 3, 5, 3, -1.0F, 0.0F, -3.0F)
 		};
 	}
 
@@ -53,6 +38,14 @@ public class DefinitionChicken implements IMobDefinition {
 	@Override
 	public float getAdditionalLegHeight() {
 		return 0;
+	}
+
+	@Override
+	public void setLegRotations(BodyPart[] parts, Entity entity,
+			float legSwing, float maxLegSwing, float wingSwing, float yaw,
+			float pitch, float scale) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

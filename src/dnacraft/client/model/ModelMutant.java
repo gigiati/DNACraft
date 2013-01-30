@@ -21,17 +21,9 @@ import dnacraft.client.rendering.BodyPart;
 @SideOnly(Side.CLIENT)
 public class ModelMutant extends ModelBase {
 
-	public HashMap<String, BodyPart[]> legs = new HashMap<String, BodyPart[]>();
-	public HashMap<String, Body> bodies = new HashMap<String, Body>();
-	public HashMap<String, BodyPart> heads = new HashMap<String, BodyPart>();
-	public HashMap<String, Float> additionalLegHeight = new HashMap<String, Float>();
+	public HashMap<String, IMobDefinition> mobs = new HashMap<String, IMobDefinition>();
 	public void register(IMobDefinition mobdef) {
-
-		legs.put(mobdef.getName(), mobdef.getLegs(this));
-		bodies.put(mobdef.getName(), mobdef.getBody(this));
-		heads.put(mobdef.getName(), mobdef.getHead(this));
-		additionalLegHeight.put(mobdef.getName(), mobdef.getAdditionalLegHeight());
-
+		mobs.put(mobdef.getName(), mobdef);
 	}
 
 	public ModelMutant() {
@@ -42,11 +34,11 @@ public class ModelMutant extends ModelBase {
 			float wingSwing, float yaw, float pitch, float scale) {
 
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
-
-		Body bodyDef = this.bodies.get("pig");
-		BodyPart[] legsDef = this.legs.get("spider");
-		float additionalLegHeight = this.additionalLegHeight.get("spider");
-		BodyPart headDef = this.heads.get("pig");
+		
+		Body bodyDef = this.mobs.get("pig").getBody(this);
+		BodyPart[] legsDef = this.mobs.get("spider").getLegs(this);
+		float additionalLegHeight = this.mobs.get("spider").getAdditionalLegHeight();
+		BodyPart headDef = this.mobs.get("pig").getHead(this);
 
 		// first get the leg height from one of the legs
 		// so we know where to render the body
@@ -83,6 +75,8 @@ public class ModelMutant extends ModelBase {
 		// the attachment point on the body for when there's 2 legs
 		Vec3[] legAttachments = bodyDef.getLegAttachmentPoints(legsDef.length);
 
+		this.mobs.get("spider").setLegRotations(legsDef, entity, legSwing, maxLegSwing, wingSwing, yaw, pitch, scale);
+		
 		// loop through the leg defintions
 		for (int i = 0; i < legsDef.length; i++) {
 
@@ -99,9 +93,6 @@ public class ModelMutant extends ModelBase {
 			legRenderer.setRotationPoint((float) attachmentPoint.xCoord,
 					(float) (24 - additionalLegHeight - attachmentPoint.yCoord),
 					(float) attachmentPoint.zCoord);
-
-			leg.setRotation(legRenderer, entity, legSwing, maxLegSwing,
-					wingSwing, yaw, pitch, scale);
 
 			legRenderer.render(scale);
 		}

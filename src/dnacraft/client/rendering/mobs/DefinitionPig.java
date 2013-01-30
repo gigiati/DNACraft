@@ -18,39 +18,10 @@ public class DefinitionPig implements IMobDefinition {
 	public BodyPart[] getLegs(ModelBase base) {
 
 		return new BodyPart[] {
-			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F) {
-				
-				@Override
-				public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
-						float maxLegSwing, float wingSwing, float yaw,
-						float pitch, float scale) {
-					renderer.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F * maxLegSwing;
-				}
-			},
-			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F) {
-				@Override
-				public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
-						float maxLegSwing, float wingSwing, float yaw,
-						float pitch, float scale) {
-					renderer.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float)Math.PI) * 1.4F * maxLegSwing;
-				}
-			},
-			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F) {
-				@Override
-				public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
-						float maxLegSwing, float wingSwing, float yaw,
-						float pitch, float scale) {
-					renderer.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float)Math.PI) * 1.4F * maxLegSwing;
-				}
-			},
-			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F) {
-				@Override
-				public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
-						float maxLegSwing, float wingSwing, float yaw,
-						float pitch, float scale) {
-					renderer.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F * maxLegSwing;
-				}
-			}
+			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F),
+			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F),
+			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F),
+			new BodyPart(base, "/mob/pig.png", 0, 16, 4, 6, 4, -2.0F, 0.0F, -2.0F)
 		};
 	}
 	
@@ -115,5 +86,13 @@ public class DefinitionPig implements IMobDefinition {
 	@Override
 	public float getAdditionalLegHeight() {
 		return 0;
+	}
+
+	@Override
+	public void setLegRotations(BodyPart[] parts, Entity entity,
+			float legSwing, float maxLegSwing, float wingSwing, float yaw,
+			float pitch, float scale) {
+		// TODO Auto-generated method stub
+		
 	}
 }
