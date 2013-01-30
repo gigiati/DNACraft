@@ -23,12 +23,13 @@ public class ModelMutant extends ModelBase {
 
 	public HashMap<String, BodyPart[]> legs = new HashMap<String, BodyPart[]>();
 	public HashMap<String, Body> bodies = new HashMap<String, Body>();
+	public HashMap<String, BodyPart> heads = new HashMap<String, BodyPart>();
 
 	public void register(IMobDefinition mobdef) {
 
 		legs.put(mobdef.getName(), mobdef.getLegs(this));
-
 		bodies.put(mobdef.getName(), mobdef.getBody(this));
+		heads.put(mobdef.getName(), mobdef.getHead(this));
 
 	}
 
@@ -42,7 +43,8 @@ public class ModelMutant extends ModelBase {
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
 
 		Body bodyDef = this.bodies.get("pig");
-		BodyPart[] legsDef = this.legs.get("pig");
+		BodyPart[] legsDef = this.legs.get("chicken");
+		BodyPart headDef = this.heads.get("pig");
 
 		// first get the leg height from one of the legs
 		// so we know where to render the body
@@ -63,6 +65,17 @@ public class ModelMutant extends ModelBase {
 		// render the body
 		bodyRenderer.render(scale);
 
+		// render the head
+		ModelRenderer headRenderer = headDef.getRenderer();
+
+		Vec3 headAttachmentPoint = bodyDef.getHeadAttachmentPoint();
+		headRenderer.setRotationPoint((float) headAttachmentPoint.xCoord,
+				(float) (24 - legheight - headAttachmentPoint.yCoord),
+				(float) headAttachmentPoint.zCoord);
+		headDef.setRotation(headRenderer, entity, legSwing, maxLegSwing,
+				wingSwing, yaw, pitch, scale);
+		headRenderer.render(scale);
+
 		// so, a body has relative attachment points for either 2, 4 or 8 legs.
 		// we know we have 2 legs (because we're rendering pig legs), so we get
 		// the attachment point on the body for when there's 2 legs
@@ -79,6 +92,8 @@ public class ModelMutant extends ModelBase {
 			// now render the leg..etc.
 			ModelRenderer legRenderer = leg.getRenderer();
 
+			renderEngine.bindTexture(renderEngine.getTexture(leg.getTexture()));
+
 			legRenderer.setRotationPoint((float) attachmentPoint.xCoord,
 					(float) (24 - leg.getHeight() + attachmentPoint.yCoord),
 					(float) attachmentPoint.zCoord);
@@ -90,20 +105,5 @@ public class ModelMutant extends ModelBase {
 		}
 
 	}
-	/*
-	 * public void renderCowFeet(Entity entity, float legSwing, float
-	 * prevLegSwing, float wingSwing, float yaw, float pitch, float scale) {
-	 * RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
-	 * renderEngine.bindTexture(renderEngine.getTexture("/mob/cow.png"));
-	 * this.leg1.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F *
-	 * prevLegSwing; this.leg1.render(scale); }
-	 * 
-	 * public void renderWings(Entity entity, float legSwing, float
-	 * prevLegSwing, float wingSwing, float yaw, float pitch, float scale) {
-	 * RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
-	 * renderEngine.bindTexture(renderEngine.getTexture("/mob/chicken.png"));
-	 * this.rightWing.rotateAngleZ = wingSwing; this.leftWing.rotateAngleZ =
-	 * -wingSwing; this.rightWing.render(scale); this.leftWing.render(scale); }
-	 */
 
 }

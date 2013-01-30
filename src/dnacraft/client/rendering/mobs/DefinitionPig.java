@@ -67,8 +67,8 @@ public class DefinitionPig implements IMobDefinition {
 		};
 		
 		pigBody.setLegAttachmentPoints(new Vec3[] {
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0)
+				Vec3.createVectorHelper(3.0, 0.0, 0.0),
+				Vec3.createVectorHelper(-3.0, 0.0, 0.0)
 		});
 		
 		pigBody.setLegAttachmentPoints(new Vec3[] {
@@ -89,11 +89,26 @@ public class DefinitionPig implements IMobDefinition {
 				Vec3.createVectorHelper(0.0, 0.0, 0.0)
 		});
 		
+		pigBody.setHeadAttachmentPoint(Vec3.createVectorHelper(0.0F, 6.0F, -6.0F));
+		
 		return pigBody;
 	}
 
 	@Override
 	public String getName() {
 		return "pig";
+	}
+
+	@Override
+	public BodyPart getHead(ModelBase base) {
+		return new BodyPart(base, "/mob/pig.png", 0, 0, 8, 8, 8, -4.0F, -4.0F, -8.0F) {
+			@Override
+			public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
+					float maxLegSwing, float wingSwing, float yaw,
+					float pitch, float scale) {
+		        renderer.rotateAngleX = pitch / (180F / (float)Math.PI);
+		        renderer.rotateAngleY = yaw / (180F / (float)Math.PI);
+			}
+		};
 	}
 }

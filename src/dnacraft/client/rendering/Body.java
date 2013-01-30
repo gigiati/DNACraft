@@ -9,7 +9,7 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class Body extends BodyPart {
 
-	protected Vec3 headAttachment;
+	protected Vec3 headAttachmentPoint;
 	protected HashMap<Integer, Vec3[]> legAttachmentPoints = new HashMap<Integer, Vec3[]>();
 	protected Vec3[] wingAttachmentPoints;
 	protected Vec3[] armAttachmentPoints;
@@ -27,6 +27,14 @@ public class Body extends BodyPart {
 
 	public Vec3[] getLegAttachmentPoints(int forNumLegs) {
 		return legAttachmentPoints.get(forNumLegs);
+	}
+	
+	public void setHeadAttachmentPoint(Vec3 point) {
+		headAttachmentPoint = point;
+	}
+	
+	public Vec3 getHeadAttachmentPoint() {
+		return headAttachmentPoint;
 	}
 
 }

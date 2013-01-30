@@ -9,4 +9,5 @@ public interface IMobDefinition {
 	public String getName();
 	public BodyPart[] getLegs(ModelBase base);
 	public Body getBody(ModelBase base);
+	public BodyPart getHead(ModelBase base);
 }
