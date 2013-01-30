@@ -11,6 +11,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dnacraft.api.IMobDefinition;
@@ -45,27 +46,41 @@ public class ModelMutant extends ModelBase
     	Body bodyDef = this.bodies.get("pig");
     	BodyPart[] legsDef = this.legs.get("pig");
     	
-    	int legheight = 6;
+    	// first get the leg height from one of the legs
+    	// so we know where to render the body
+    	int legheight = legsDef[0].getHeight();
 
-        renderEngine.bindTexture(renderEngine.getTexture("/mob/plig.png"));
+    	// bind the body texture
+        renderEngine.bindTexture(renderEngine.getTexture(bodyDef.getTexture()));
+        // get the body model
     	ModelRenderer body = bodyDef.getRenderer();
-    	body.setRotationPoint(-5.0F, 10.0F, -8.0F);
-    	//bodyDef.setRotation(body, entity, legSwing, prevLegSwing, wingSwing, yaw, pitch, scale);
+    	
+    	//set the body x, y, z
+    	//body.setRotationPoint(0, 0, 0);
+    	
+    	// render the body
     	body.render(scale);
-    	/*
-    	renderEngine.bindTexture(renderEngine.getTexture("/mob/char.png"));
-        this.head.rotateAngleX = pitch / (180F / (float)Math.PI);
-        this.head.rotateAngleY = yaw / (180F / (float)Math.PI);
-        this.head.render(scale);
-
-        this.body.rotateAngleX = ((float)Math.PI / 2F);
-        this.body.render(scale);
-        
-        this.renderWings(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch, scale);
+    	
+    	// so, a body has relative attachment points for either 2, 4 or 8 legs.
+    	// we know we have 2 legs (because we're rendering pig legs), so we get
+    	// the attachment point on the body for when there's 2 legs
+    	Vec3[] legAttachments = bodyDef.getLegAttachmentPoints(legsDef.length);
+    	
+    	// loop through the leg defintions
+    	for (int i=0; i<legsDef.length; i++) {
+    		
+    		BodyPart leg = legsDef[i];
+    		
+    		// get the attachment point
+    		Vec3 attachmentPoint = legAttachments[i];
+    		
+    		// now render the leg..etc.
+    		
+    	}
       
 
     }
-    
+    /*
     public void renderCowFeet(Entity entity, float legSwing, float prevLegSwing, float wingSwing, float yaw, float pitch, float scale) {
         RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
         renderEngine.bindTexture(renderEngine.getTexture("/mob/cow.png"));
