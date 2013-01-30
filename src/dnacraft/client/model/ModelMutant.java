@@ -48,7 +48,7 @@ public class ModelMutant extends ModelBase
     	
     	// first get the leg height from one of the legs
     	// so we know where to render the body
-    	int legheight = legsDef[0].getHeight();
+    	int legheight = 5;//legsDef[0].getHeight();
 
     	// bind the body texture
         renderEngine.bindTexture(renderEngine.getTexture(bodyDef.getTexture()));
@@ -56,11 +56,14 @@ public class ModelMutant extends ModelBase
     	ModelRenderer body = bodyDef.getRenderer();
     	
     	//set the body x, y, z
-    	//body.setRotationPoint(0, 0, 0);
+    	body.setRotationPoint(0, (float)24 - legheight, bodyDef.getWidth() / 2);
+    	
+    	bodyDef.setRotation(body, entity, legSwing, prevLegSwing, wingSwing, yaw, pitch, scale);
     	
     	// render the body
     	body.render(scale);
     	
+    	/*
     	// so, a body has relative attachment points for either 2, 4 or 8 legs.
     	// we know we have 2 legs (because we're rendering pig legs), so we get
     	// the attachment point on the body for when there's 2 legs
@@ -77,7 +80,7 @@ public class ModelMutant extends ModelBase
     		// now render the leg..etc.
     		
     	}
-      
+        */
 
     }
     /*
@@ -97,6 +100,5 @@ public class ModelMutant extends ModelBase
         this.rightWing.render(scale);
         this.leftWing.render(scale);
     }  */
-    }
     
 }

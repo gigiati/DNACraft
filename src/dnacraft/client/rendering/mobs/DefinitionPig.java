@@ -55,13 +55,13 @@ public class DefinitionPig implements IMobDefinition {
 	
 	public Body getBody(ModelBase base) {
 
-		Body pigBody = new Body(base, "/mob/pig.png", 28, 8, 10, 16, 8, 0, -8.0F, 0) {
+		Body pigBody = new Body(base, "/mob/pig.png", 28, 8, 10, 16, 8, -5.0F, 0, 0) {
 
 			@Override
 			public void setRotation(ModelRenderer renderer, Entity entity, float legSwing,
 					float prevLegSwing, float wingSwing, float yaw,
 					float pitch, float scale) {
-				//renderer.rotateAngleX = ((float)Math.PI / 2F);
+				renderer.rotateAngleX = ((float)Math.PI / 2F);
 			}
 		};
 		
