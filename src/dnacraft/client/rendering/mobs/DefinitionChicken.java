@@ -50,4 +50,9 @@ public class DefinitionChicken implements IMobDefinition {
 		return null;
 	}
 
+	@Override
+	public float getAdditionalLegHeight() {
+		return 0;
+	}
+
 }

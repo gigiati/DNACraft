@@ -24,12 +24,13 @@ public class ModelMutant extends ModelBase {
 	public HashMap<String, BodyPart[]> legs = new HashMap<String, BodyPart[]>();
 	public HashMap<String, Body> bodies = new HashMap<String, Body>();
 	public HashMap<String, BodyPart> heads = new HashMap<String, BodyPart>();
-
+	public HashMap<String, Float> additionalLegHeight = new HashMap<String, Float>();
 	public void register(IMobDefinition mobdef) {
 
 		legs.put(mobdef.getName(), mobdef.getLegs(this));
 		bodies.put(mobdef.getName(), mobdef.getBody(this));
 		heads.put(mobdef.getName(), mobdef.getHead(this));
+		additionalLegHeight.put(mobdef.getName(), mobdef.getAdditionalLegHeight());
 
 	}
 
@@ -43,12 +44,13 @@ public class ModelMutant extends ModelBase {
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
 
 		Body bodyDef = this.bodies.get("pig");
-		BodyPart[] legsDef = this.legs.get("chicken");
+		BodyPart[] legsDef = this.legs.get("spider");
+		float additionalLegHeight = this.additionalLegHeight.get("spider");
 		BodyPart headDef = this.heads.get("pig");
 
 		// first get the leg height from one of the legs
 		// so we know where to render the body
-		int legheight = legsDef[0].getHeight();
+		float legheight = legsDef[0].getHeight() + additionalLegHeight;
 
 		// bind the body texture
 		renderEngine.bindTexture(renderEngine.getTexture(bodyDef.getTexture()));
@@ -95,7 +97,7 @@ public class ModelMutant extends ModelBase {
 			renderEngine.bindTexture(renderEngine.getTexture(leg.getTexture()));
 
 			legRenderer.setRotationPoint((float) attachmentPoint.xCoord,
-					(float) (24 - leg.getHeight() + attachmentPoint.yCoord),
+					(float) (24 - additionalLegHeight - attachmentPoint.yCoord),
 					(float) attachmentPoint.zCoord);
 
 			leg.setRotation(legRenderer, entity, legSwing, maxLegSwing,

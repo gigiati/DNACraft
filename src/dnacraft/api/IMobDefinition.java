@@ -8,6 +8,7 @@ import dnacraft.client.rendering.BodyPart;
 public interface IMobDefinition {
 	public String getName();
 	public BodyPart[] getLegs(ModelBase base);
+	public float getAdditionalLegHeight();
 	public Body getBody(ModelBase base);
 	public BodyPart getHead(ModelBase base);
 }

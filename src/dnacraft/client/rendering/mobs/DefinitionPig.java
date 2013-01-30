@@ -79,14 +79,14 @@ public class DefinitionPig implements IMobDefinition {
 		});
 		
 		pigBody.setLegAttachmentPoints(new Vec3[] {
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0),
-				Vec3.createVectorHelper(0.0, 0.0, 0.0)
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
 		});
 		
 		pigBody.setHeadAttachmentPoint(Vec3.createVectorHelper(0.0F, 6.0F, -6.0F));
@@ -110,5 +110,10 @@ public class DefinitionPig implements IMobDefinition {
 		        renderer.rotateAngleY = yaw / (180F / (float)Math.PI);
 			}
 		};
+	}
+
+	@Override
+	public float getAdditionalLegHeight() {
+		return 0;
 	}
 }
