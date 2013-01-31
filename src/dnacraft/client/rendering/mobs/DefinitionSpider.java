@@ -25,14 +25,14 @@ public class DefinitionSpider extends BaseDefinition implements IMobDefinition {
 	public DefinitionSpider(ModelBase base) {
 		
 		legAttachmentPoints2 = new Vec3[] {
-				Vec3.createVectorHelper(3.0, -8.0F, 0.0),
-				Vec3.createVectorHelper(-3.0, -8.0F, 0.0),
+				Vec3.createVectorHelper(-2.0F, -8.0F, 7.0F),
+				Vec3.createVectorHelper(2.0F, -8.0F, 7.0F),
 		};
 		legAttachmentPoints4 = new Vec3[] {
-				Vec3.createVectorHelper(3.0, -8.0F, 7.0),
-				Vec3.createVectorHelper(-3.0, -8.0F, 7.0),
-				Vec3.createVectorHelper(3.0, -8.0F, -5.0),
-				Vec3.createVectorHelper(-3.0, -8.0F, -5.0),
+				Vec3.createVectorHelper(3.0, -8.0F, 9.0),
+				Vec3.createVectorHelper(-3.0, -8.0F, 9.0),
+				Vec3.createVectorHelper(3.0, -8.0F, 2.0),
+				Vec3.createVectorHelper(-3.0, -8.0F, 2.0),
 		};
 		legAttachmentPoints8 = new Vec3[] {
 				Vec3.createVectorHelper(-4.0, -3.0F, -1.0),
