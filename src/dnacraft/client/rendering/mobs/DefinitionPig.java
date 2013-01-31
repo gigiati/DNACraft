@@ -21,19 +21,20 @@ public class DefinitionPig implements IMobDefinition {
 	private ModelRenderer leg2;
 	private ModelRenderer leg3;
 	private ModelRenderer leg4;
-
 	private ModelRenderer body;
-
 	private ModelRenderer head;
-
+	
 	private Vec3[] legAttachmentPoints2 = new Vec3[] {
 			Vec3.createVectorHelper(3.0, 0.0, 0.0),
-			Vec3.createVectorHelper(-3.0, 0.0, 0.0), };
+			Vec3.createVectorHelper(-3.0, 0.0, 0.0),
+	};
+	
 	private Vec3[] legAttachmentPoints4 = new Vec3[] {
 			Vec3.createVectorHelper(3.0, 0.0, 7.0),
 			Vec3.createVectorHelper(-3.0, 0.0, 7.0),
 			Vec3.createVectorHelper(3.0, 0.0, -5.0),
-			Vec3.createVectorHelper(-3.0, 0.0, -5.0), };
+			Vec3.createVectorHelper(-3.0, 0.0, -5.0),
+	};
 
 	private Vec3[] legAttachmentPoints8 = new Vec3[] {
 			Vec3.createVectorHelper(0.0, 3.0F, 0.0),
@@ -43,11 +44,16 @@ public class DefinitionPig implements IMobDefinition {
 			Vec3.createVectorHelper(0.0, 3.0F, 0.0),
 			Vec3.createVectorHelper(0.0, 3.0F, 0.0),
 			Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-			Vec3.createVectorHelper(0.0, 3.0F, 0.0), };
+			Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+	};
 
-	private Vec3 headAttachmentPoint = Vec3.createVectorHelper(0.0F, 6.0F,
-			-6.0F);
+	private Vec3 headAttachmentPoint = Vec3.createVectorHelper(0.0F, 6.0F, -6.0F);
 
+	private Vec3[] wingAttachmentPoints = new Vec3[] {
+			Vec3.createVectorHelper(-5.0F, 6.0F, 0.0F),
+			Vec3.createVectorHelper(5.0F, 6.0F, 0.0F),
+	};
+	
 	public DefinitionPig(ModelBase base) {
 		leg1 = new ModelRenderer(base, 0, 16);
 		leg1.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4);
@@ -63,6 +69,8 @@ public class DefinitionPig implements IMobDefinition {
 
 		head = new ModelRenderer(base, 0, 0);
 		head.addBox(-4.0F, -4.0F, -8.0F, 8, 8, 8);
+		
+        head.setTextureOffset(16, 16).addBox(-2.0F, 0.0F, -9.0F, 4, 3, 1);
 	}
 
 	private void bindTexture() {
@@ -81,21 +89,16 @@ public class DefinitionPig implements IMobDefinition {
 			float wingSwing, float yaw, float pitch, float scale,
 			Vec3[] legAttachmentPoints) {
 
+		bindTexture();
 		setLegRotation(leg1, legAttachmentPoints[0]);
 		setLegRotation(leg2, legAttachmentPoints[1]);
 		setLegRotation(leg3, legAttachmentPoints[2]);
 		setLegRotation(leg4, legAttachmentPoints[3]);
 
-		this.leg1.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F
-				* prevLegSwing;
-		this.leg2.rotateAngleX = MathHelper.cos(legSwing * 0.6662F
-				+ (float) Math.PI)
-				* 1.4F * prevLegSwing;
-		this.leg3.rotateAngleX = MathHelper.cos(legSwing * 0.6662F
-				+ (float) Math.PI)
-				* 1.4F * prevLegSwing;
-		this.leg4.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F
-				* prevLegSwing;
+		this.leg1.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F * prevLegSwing;
+		this.leg2.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float) Math.PI) * 1.4F * prevLegSwing;
+		this.leg3.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float) Math.PI) * 1.4F * prevLegSwing;
+		this.leg4.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F * prevLegSwing;
 
 		leg1.render(scale);
 		leg2.render(scale);
@@ -116,14 +119,24 @@ public class DefinitionPig implements IMobDefinition {
 	@Override
 	public void renderHead(Entity entity, float legSwing, float prevLegSwing,
 			float wingSwing, float yaw, float pitch, float scale,
-			int legHeight, Vec3 headAttachmentPoint) {
-		head.setRotationPoint((float) headAttachmentPoint.xCoord,
-				(float) (24 - legHeight - headAttachmentPoint.yCoord),
-				(float) headAttachmentPoint.zCoord);
+			int legHeight, Vec3 attachmentpoint) {
+		
+		head.setRotationPoint(
+				(float) attachmentpoint.xCoord,
+				(float) (24 - legHeight - attachmentpoint.yCoord),
+				(float) attachmentpoint.zCoord
+		);
 		bindTexture();
 		head.rotateAngleX = pitch / (180F / (float) Math.PI);
 		head.rotateAngleY = yaw / (180F / (float) Math.PI);
 		head.render(scale);
+	}
+
+	@Override
+	public void renderWings(Entity entity, float legSwing, float prevLegSwing,
+			float wingSwing, float yaw, float pitch, float scale,
+			int legHeight, Vec3[] attachmentpoints) {
+
 	}
 
 	@Override
@@ -137,6 +150,11 @@ public class DefinitionPig implements IMobDefinition {
 			return this.legAttachmentPoints8;
 		}
 		return null;
+	}
+	
+	@Override
+	public Vec3[] getWingAttachmentPoints() {
+		return this.wingAttachmentPoints;
 	}
 
 	@Override
