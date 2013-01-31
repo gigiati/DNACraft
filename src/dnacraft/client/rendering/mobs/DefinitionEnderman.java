@@ -25,10 +25,10 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 		};
 		
 		legAttachmentPoints4 = new Vec3[] {
-				Vec3.createVectorHelper(3.0, 0.0, 7.0),
-				Vec3.createVectorHelper(-3.0, 0.0, 7.0),
-				Vec3.createVectorHelper(3.0, 0.0, -5.0),
-				Vec3.createVectorHelper(-3.0, 0.0, -5.0),
+				Vec3.createVectorHelper(1.0, -8.0, 1.0),
+				Vec3.createVectorHelper(-1.0, -8.0, 1.0),
+				Vec3.createVectorHelper(1.0, -8.0, -1.0),
+				Vec3.createVectorHelper(-1.0, -8.0, -1.0),
 		};
 
 		legAttachmentPoints8 = new Vec3[] {
@@ -45,8 +45,8 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 		headAttachmentPoint = Vec3.createVectorHelper(0, 0, 0);
 		
 		wingAttachmentPoints = new Vec3[] {
-				Vec3.createVectorHelper(-5.0F, -1.0F, 0.0F),
-				Vec3.createVectorHelper(5.0F, -1.0F, 0.0F),
+				Vec3.createVectorHelper(-4.0F, -1.0F, 0.0F),
+				Vec3.createVectorHelper(4.0F, -1.0F, 0.0F),
 		};
 		
         this.head = new ModelRenderer(base, 0, 0);
@@ -63,7 +63,7 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
         this.leftLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 30, 2);
         
         this.body = new ModelRenderer(base, 32, 16);
-        this.body.addBox(-4.0F, -0.0F, 0, 8, 12, 4);
+        this.body.addBox(-4.0F, -0.0F, -2.0F, 8, 12, 4);
 	}
 
 	private void bindTexture() {

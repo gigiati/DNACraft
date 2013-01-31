@@ -35,9 +35,9 @@ public class ModelMutant extends ModelBase {
 
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
 		
-		IMobDefinition body = this.mobs.get("chicken");
-		IMobDefinition legs = this.mobs.get("enderman");
-		IMobDefinition head = this.mobs.get("pig");
+		IMobDefinition body = this.mobs.get("spider");
+		IMobDefinition legs = this.mobs.get("chicken");
+		IMobDefinition head = this.mobs.get("spider");
 		IMobDefinition wings = this.mobs.get("chicken");
 
 		int legheight = legs.getLegHeight();
