@@ -35,9 +35,9 @@ public class ModelMutant extends ModelBase {
 
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
 		
-		IMobDefinition body = this.mobs.get("pig");
+		IMobDefinition body = this.mobs.get("chicken");
 		IMobDefinition legs = this.mobs.get("enderman");
-		IMobDefinition head = this.mobs.get("chicken");
+		IMobDefinition head = this.mobs.get("pig");
 		IMobDefinition wings = this.mobs.get("chicken");
 
 		int legheight = legs.getLegHeight();
@@ -62,6 +62,7 @@ public class ModelMutant extends ModelBase {
 			pitch,
 			scale,
 			legheight,
+			body.getBodyHeight(),
 			body.getHeadAttachmentPoint()
 		);
 		
@@ -73,6 +74,7 @@ public class ModelMutant extends ModelBase {
 			yaw,
 			pitch,
 			scale,
+			body.getBodyHeight(),
 			body.getLegAttachmentPoints(legs.getNumberOfLegs())
 		);
 
@@ -85,6 +87,7 @@ public class ModelMutant extends ModelBase {
 			pitch,
 			scale,
 			legheight,
+			body.getBodyHeight(),
 			body.getWingAttachmentPoints()
 		);
 
