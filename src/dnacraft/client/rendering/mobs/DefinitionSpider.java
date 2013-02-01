@@ -51,6 +51,8 @@ public class DefinitionSpider extends BaseDefinition implements IMobDefinition {
 				Vec3.createVectorHelper(-5.0F, -1.0F, 7.0F),
 				Vec3.createVectorHelper(5.0F, -1.0F, 7.0F),
 		};
+		
+		tailAttachmentPoint = Vec3.createVectorHelper(0, -2, 10);
 
 		head = new ModelRenderer(base, 32, 4);
         head.addBox(-4.0F, -4.0F, -8.0F, 8, 8, 8);
@@ -203,6 +205,14 @@ public class DefinitionSpider extends BaseDefinition implements IMobDefinition {
 	@Override
 	public int getBodyHeight() {
 		return 8;
+	}
+
+	@Override
+	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
+			float wingSwing, float yaw, float pitch, float scale,
+			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

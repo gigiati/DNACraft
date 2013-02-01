@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.TextureOffset;
 import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -29,16 +30,23 @@ public class ModelMutant extends ModelBase {
 	public ModelMutant() {
 
 	}
-
+	
+	@Override
+	public void setTextureOffset(String par1Str, int par2, int par3)
+    {
+        super.setTextureOffset(par1Str, par2, par3);
+    }
+	
 	public void render(Entity entity, float legSwing, float prevLegSwing,
 			float wingSwing, float yaw, float pitch, float scale) {
 
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
 		
-		IMobDefinition body = this.mobs.get("spider");
+		IMobDefinition body = this.mobs.get("enderman");
 		IMobDefinition legs = this.mobs.get("enderman");
-		IMobDefinition head = this.mobs.get("chicken");
-		IMobDefinition wings = this.mobs.get("chicken");
+		IMobDefinition head = this.mobs.get("ocelot");
+		IMobDefinition wings = this.mobs.get("enderman");
+		IMobDefinition tail = this.mobs.get("ocelot");
 
 		int legheight = legs.getLegHeight();
 
@@ -77,7 +85,7 @@ public class ModelMutant extends ModelBase {
 			body.getBodyHeight(),
 			body.getLegAttachmentPoints(legs.getNumberOfLegs())
 		);
-
+		
 		wings.renderWings(
 			entity,
 			legSwing,
@@ -90,7 +98,19 @@ public class ModelMutant extends ModelBase {
 			body.getBodyHeight(),
 			body.getWingAttachmentPoints()
 		);
-
+		
+		tail.renderTail(
+				entity,
+				legSwing,
+				prevLegSwing,
+				wingSwing,
+				yaw,
+				pitch,
+				scale,
+				legheight,
+				body.getBodyHeight(),
+				body.getTailAttachmentPoint()
+			);
 	}
 
 }

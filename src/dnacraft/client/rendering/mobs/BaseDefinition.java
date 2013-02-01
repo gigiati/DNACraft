@@ -12,6 +12,7 @@ public abstract class BaseDefinition {
 	protected Vec3[] legAttachmentPoints8;
 	protected Vec3 headAttachmentPoint;
 	protected Vec3[] wingAttachmentPoints;
+	protected Vec3 tailAttachmentPoint;
 	
 	protected void bindTexture(String texture) {
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
@@ -40,6 +41,10 @@ public abstract class BaseDefinition {
 
 	public Vec3 getHeadAttachmentPoint() {
 		return this.headAttachmentPoint;
+	}
+	
+	public Vec3 getTailAttachmentPoint() {
+		return this.tailAttachmentPoint;
 	}
 	
 	protected void bindToAttachmentPoint(ModelRenderer renderer, Vec3 attachmentPoint, int legHeight, int bodyHeight) {

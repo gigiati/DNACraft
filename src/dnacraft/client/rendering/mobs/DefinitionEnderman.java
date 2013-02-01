@@ -20,26 +20,26 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 	public DefinitionEnderman(ModelBase base) {
 		
 		legAttachmentPoints2 = new Vec3[] {
-				Vec3.createVectorHelper(3.0, -8.0, 0.0),
-				Vec3.createVectorHelper(-3.0, -8.0, 0.0),
+				Vec3.createVectorHelper(3.0, -12.0, 0.0),
+				Vec3.createVectorHelper(-3.0, -12.0, 0.0),
 		};
 		
 		legAttachmentPoints4 = new Vec3[] {
-				Vec3.createVectorHelper(1.0, -8.0, 1.0),
-				Vec3.createVectorHelper(-1.0, -8.0, 1.0),
-				Vec3.createVectorHelper(1.0, -8.0, -1.0),
-				Vec3.createVectorHelper(-1.0, -8.0, -1.0),
+				Vec3.createVectorHelper(1.0, -12.0, 1.0),
+				Vec3.createVectorHelper(-1.0, -12.0, 1.0),
+				Vec3.createVectorHelper(1.0, -12.0, -1.0),
+				Vec3.createVectorHelper(-1.0, -12.0, -1.0),
 		};
 
 		legAttachmentPoints8 = new Vec3[] {
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
-				Vec3.createVectorHelper(0.0, 3.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
+				Vec3.createVectorHelper(0.0, -10.0F, 0.0),
 		};
 
 		headAttachmentPoint = Vec3.createVectorHelper(0, 0, 0);
@@ -48,6 +48,8 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 				Vec3.createVectorHelper(-4.0F, -1.0F, 0.0F),
 				Vec3.createVectorHelper(4.0F, -1.0F, 0.0F),
 		};
+
+		tailAttachmentPoint = Vec3.createVectorHelper(0, -10, 2);
 		
         this.head = new ModelRenderer(base, 0, 0);
         this.head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8);
@@ -161,8 +163,15 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 
 	@Override
 	public int getNumberOfLegs() {
-		// TODO Auto-generated method stub
 		return 2;
+	}
+
+	@Override
+	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
+			float wingSwing, float yaw, float pitch, float scale,
+			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

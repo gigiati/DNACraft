@@ -55,6 +55,8 @@ public class DefinitionChicken extends BaseDefinition implements IMobDefinition 
 		
 		headAttachmentPoint = Vec3.createVectorHelper(0.0F, -2.0F, -4.0F);
 		
+		tailAttachmentPoint = Vec3.createVectorHelper(0, -1, 4);
+		
         this.head = new ModelRenderer(base, 0, 0);
         this.head.addBox(-2.0F, -6.0F, -2.0F, 4, 6, 3);
         this.bill = new ModelRenderer(base, 14, 0);
@@ -160,5 +162,13 @@ public class DefinitionChicken extends BaseDefinition implements IMobDefinition 
 	@Override
 	public int getBodyHeight() {
 		return 6;
+	}
+
+	@Override
+	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
+			float wingSwing, float yaw, float pitch, float scale,
+			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
+		// TODO Auto-generated method stub
+		
 	}
 }
