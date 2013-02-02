@@ -11,7 +11,13 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import dnacraft.common.evolution.TraitManager;
 
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -38,13 +44,20 @@ public class EntityMutant extends EntityAnimal implements
 
 	public EntityMutant(World world) {
 		super(world);
+        this.setSize(0.9F, 1.3F);
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+        this.tasks.addTask(2, new EntityAIWander(this, 0.25F));
+        this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(4, new EntityAILookIdle(this));
 	}
 	
-	public void setDNAFromItemStack(ItemStack stack) {
-		if (stack.hasTagCompound()) {
-			this.dna = stack.getTagCompound().getCompoundTag("traits");
+	public void setDNAFromTagCompound(NBTTagCompound tagCompound) {
+		if (tagCompound != null && tagCompound.hasKey("traits")) {
+			this.dna = tagCompound.getCompoundTag("traits");
 		}
-        this.head = TraitManager.instance.getBodyPartFromDNA(this.dna);
+		this.head = TraitManager.instance.getBodyPartFromDNA(this.dna);
         this.body = TraitManager.instance.getBodyPartFromDNA(this.dna);
         this.legs = TraitManager.instance.getBodyPartFromDNA(this.dna);
         this.tail = TraitManager.instance.getBodyPartFromDNA(this.dna);
@@ -54,12 +67,26 @@ public class EntityMutant extends EntityAnimal implements
         	this.arms = "pig";
         }
 	}
+	
+	public void setDNAFromItemStack(ItemStack stack) {
+		NBTTagCompound dna = null;
+		if (stack.hasTagCompound()) {
+			dna = stack.getTagCompound();
+		}
+		setDNAFromTagCompound(dna);
+        
+	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable var1) {
 		return null;
 	}
 
+    public boolean isAIEnabled()
+    {
+        return true;
+    }
+    
 	@Override
 	public void initCreature() {
 	}
@@ -72,12 +99,11 @@ public class EntityMutant extends EntityAnimal implements
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		this.handleWings();
+		//this.handleWings();
 
 	}
 
 	public void handleWings() {
-
 		this.field_70888_h = this.field_70886_e;
 		this.field_70884_g = this.destPos;
 		this.destPos = (float) ((double) this.destPos + (double) (this.onGround ? -1
@@ -107,11 +133,29 @@ public class EntityMutant extends EntityAnimal implements
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeEntityToNBT(tag);
+		if (this.dna != null) {
+			tag.setCompoundTag("traits", this.dna);
+		}
+		tag.setString("head", this.head);
+		tag.setString("body", this.body);
+		tag.setString("wings", this.wings);
+		tag.setString("arms", this.arms);
+		tag.setString("tail", this.tail);
+		tag.setString("legs", this.legs);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readEntityFromNBT(tag);
+		if (tag.hasKey("traits")) {
+			dna = tag.getCompoundTag("traits");
+		}
+		this.head = tag.getString("head");
+		this.body = tag.getString("body");
+		this.wings = tag.getString("wings");
+		this.arms = tag.getString("arms");
+		this.tail = tag.getString("tail");
+		this.legs = tag.getString("legs");
 	}
 
 	public void writeSpawnData(ByteArrayDataOutput data) {

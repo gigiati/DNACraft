@@ -51,7 +51,7 @@ public class ModelMutant extends ModelBase {
 		IMobDefinition arms = this.mobs.get(mutant.getArmsModel());
 
 		int legheight = legs.getLegHeight();
-
+		
 		body.renderBody(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch,
 				scale, legheight);
 

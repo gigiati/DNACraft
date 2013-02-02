@@ -58,7 +58,6 @@ public class TraitManager extends HashMap<String, Double> {
 			SPIDER,
 			OCELOT,
 			ENDERMAN
-			
 	});
 	
 	public TraitManager() {
