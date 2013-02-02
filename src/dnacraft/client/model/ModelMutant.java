@@ -18,11 +18,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import dnacraft.api.IMobDefinition;
 import dnacraft.client.rendering.Body;
 import dnacraft.client.rendering.BodyPart;
+import dnacraft.common.entity.EntityMutant;
 
 @SideOnly(Side.CLIENT)
 public class ModelMutant extends ModelBase {
 
 	public HashMap<String, IMobDefinition> mobs = new HashMap<String, IMobDefinition>();
+
 	public void register(IMobDefinition mobdef) {
 		mobs.put(mobdef.getName(), mobdef);
 	}
@@ -30,87 +32,49 @@ public class ModelMutant extends ModelBase {
 	public ModelMutant() {
 
 	}
-	
+
 	@Override
-	public void setTextureOffset(String par1Str, int par2, int par3)
-    {
-        super.setTextureOffset(par1Str, par2, par3);
-    }
-	
+	public void setTextureOffset(String par1Str, int par2, int par3) {
+		super.setTextureOffset(par1Str, par2, par3);
+	}
+
 	public void render(Entity entity, float legSwing, float prevLegSwing,
 			float wingSwing, float yaw, float pitch, float scale) {
 
 		RenderEngine renderEngine = Minecraft.getMinecraft().renderEngine;
-		
-		IMobDefinition body = this.mobs.get("enderman");
-		IMobDefinition legs = this.mobs.get("enderman");
-		IMobDefinition head = this.mobs.get("ocelot");
-		IMobDefinition wings = this.mobs.get("enderman");
-		IMobDefinition tail = this.mobs.get("ocelot");
+		EntityMutant mutant = (EntityMutant) entity;
+		IMobDefinition body = this.mobs.get(mutant.getBodyModel());
+		IMobDefinition legs = this.mobs.get(mutant.getLegsModel());
+		IMobDefinition head = this.mobs.get(mutant.getHeadModel());
+		IMobDefinition wings = this.mobs.get(mutant.getWingsModel());
+		IMobDefinition tail = this.mobs.get(mutant.getTailModel());
+		IMobDefinition arms = this.mobs.get(mutant.getArmsModel());
 
 		int legheight = legs.getLegHeight();
 
-		body.renderBody(
-			entity,
-			legSwing,
-			prevLegSwing,
-			wingSwing,
-			yaw,
-			pitch,
-			scale,
-			legheight
-		);
+		body.renderBody(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch,
+				scale, legheight);
+
+		head.renderHead(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch,
+				scale, legheight, body.getBodyHeight(),
+				body.getHeadAttachmentPoint());
+
+		legs.renderLegs(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch,
+				scale, body.getBodyHeight(),
+				body.getLegAttachmentPoints(legs.getNumberOfLegs()));
+
+		wings.renderWings(entity, legSwing, prevLegSwing, wingSwing, yaw,
+				pitch, scale, legheight, body.getBodyHeight(),
+				body.getWingAttachmentPoints());
 		
-		head.renderHead(
-			entity,
-			legSwing,
-			prevLegSwing,
-			wingSwing,
-			yaw,
-			pitch,
-			scale,
-			legheight,
-			body.getBodyHeight(),
-			body.getHeadAttachmentPoint()
-		);
+		arms.renderArms(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch,
+				scale, legheight, body.getBodyHeight(),
+				body.getArmAttachmentPoints());
 		
-		legs.renderLegs(
-			entity,
-			legSwing,
-			prevLegSwing,
-			wingSwing,
-			yaw,
-			pitch,
-			scale,
-			body.getBodyHeight(),
-			body.getLegAttachmentPoints(legs.getNumberOfLegs())
-		);
-		
-		wings.renderWings(
-			entity,
-			legSwing,
-			prevLegSwing,
-			wingSwing,
-			yaw,
-			pitch,
-			scale,
-			legheight,
-			body.getBodyHeight(),
-			body.getWingAttachmentPoints()
-		);
-		
-		tail.renderTail(
-				entity,
-				legSwing,
-				prevLegSwing,
-				wingSwing,
-				yaw,
-				pitch,
-				scale,
-				legheight,
-				body.getBodyHeight(),
-				body.getTailAttachmentPoint()
-			);
+		tail.renderTail(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch,
+				scale, legheight, body.getBodyHeight(),
+				body.getTailAttachmentPoint());
+
 	}
 
 }

@@ -17,7 +17,9 @@ import dnacraft.client.rendering.mobs.DefinitionCreeper;
 import dnacraft.client.rendering.mobs.DefinitionEnderman;
 import dnacraft.client.rendering.mobs.DefinitionOcelot;
 import dnacraft.client.rendering.mobs.DefinitionPig;
+import dnacraft.client.rendering.mobs.DefinitionSheep;
 import dnacraft.client.rendering.mobs.DefinitionSpider;
+import dnacraft.client.rendering.mobs.DefinitionZombie;
 import dnacraft.common.CommonProxy;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.tileentity.TileEntityCentrifuge;
@@ -45,6 +47,8 @@ public class ClientProxy extends CommonProxy {
 		mutant.register(new DefinitionSpider(mutant));
 		mutant.register(new DefinitionCreeper(mutant));
 		mutant.register(new DefinitionOcelot(mutant));
+		mutant.register(new DefinitionSheep(mutant));
+		mutant.register(new DefinitionZombie(mutant));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMutant.class, new RenderMutant(mutant, 0.7F));
 	}
 }

@@ -50,6 +50,11 @@ public class DefinitionOcelot extends BaseDefinition implements IMobDefinition {
 				Vec3.createVectorHelper(2.0F, 0.0F, 0.0F),
 		};
 		
+		armAttachmentPoints = new Vec3[] {
+				Vec3.createVectorHelper(-2.0F, 0.0F, 0.0F),
+				Vec3.createVectorHelper(2.0F, 0.0F, 0.0F),
+		};
+		
 		tailAttachmentPoint = Vec3.createVectorHelper(0, -1, 8);
         base.setTextureOffset("head.main", 0, 0);
         base.setTextureOffset("head.nose", 0, 24);
@@ -130,14 +135,6 @@ public class DefinitionOcelot extends BaseDefinition implements IMobDefinition {
 	}
 
 	@Override
-	public void renderWings(Entity entity, float legSwing, float prevLegSwing,
-			float wingSwing, float yaw, float pitch, float scale,
-			int legHeight, int bodyHeight, Vec3[] attachmentPoints) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
 			float wingSwing, float yaw, float pitch, float scale,
 			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
@@ -154,7 +151,7 @@ public class DefinitionOcelot extends BaseDefinition implements IMobDefinition {
 		tail2.render(scale);
 		
 	}
-
+	
 	@Override
 	public String getName() {
 		return "ocelot";

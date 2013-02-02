@@ -46,8 +46,13 @@ public class DefinitionCreeper extends BaseDefinition implements IMobDefinition 
 		headAttachmentPoint = Vec3.createVectorHelper(0, 0, 0);
 		
 		wingAttachmentPoints = new Vec3[] {
-				Vec3.createVectorHelper(-4.0F, -1.0F, 0.0F),
-				Vec3.createVectorHelper(4.0F, -1.0F, 0.0F),
+				Vec3.createVectorHelper(-4.0F, 0F, 0.0F),
+				Vec3.createVectorHelper(4.0F, 0F, 0.0F),
+		};
+		
+		armAttachmentPoints = new Vec3[] {
+				Vec3.createVectorHelper(-6.0F, 0F, 0.0F),
+				Vec3.createVectorHelper(6.0F, 0F, 0.0F),
 		};
 
 		tailAttachmentPoint = Vec3.createVectorHelper(0, -9, 3);
@@ -113,14 +118,6 @@ public class DefinitionCreeper extends BaseDefinition implements IMobDefinition 
 	}
 
 	@Override
-	public void renderWings(Entity entity, float legSwing, float prevLegSwing,
-			float wingSwing, float yaw, float pitch, float scale,
-			int legHeight, int bodyHeight, Vec3[] attachmentPoints) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String getName() {
 		return "creeper";
 	}
@@ -144,11 +141,4 @@ public class DefinitionCreeper extends BaseDefinition implements IMobDefinition 
 		super.bindTexture("/mob/creeper.png");
 	}
 
-	@Override
-	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
-			float wingSwing, float yaw, float pitch, float scale,
-			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
-		// TODO Auto-generated method stub
-		
-	}
 }

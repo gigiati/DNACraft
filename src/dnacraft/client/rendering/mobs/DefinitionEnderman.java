@@ -16,12 +16,14 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
     private ModelRenderer body;
 	private ModelRenderer leftLeg;
     private ModelRenderer rightLeg;
+    private ModelRenderer leftArm;
+    private ModelRenderer rightArm;
 
 	public DefinitionEnderman(ModelBase base) {
 		
 		legAttachmentPoints2 = new Vec3[] {
-				Vec3.createVectorHelper(3.0, -12.0, 0.0),
-				Vec3.createVectorHelper(-3.0, -12.0, 0.0),
+				Vec3.createVectorHelper(2.0, -12.0, 0.0),
+				Vec3.createVectorHelper(-2.0, -12.0, 0.0),
 		};
 		
 		legAttachmentPoints4 = new Vec3[] {
@@ -48,24 +50,36 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 				Vec3.createVectorHelper(-4.0F, -1.0F, 0.0F),
 				Vec3.createVectorHelper(4.0F, -1.0F, 0.0F),
 		};
+		
+		armAttachmentPoints = new Vec3[] {
+				Vec3.createVectorHelper(-5.0F, -1.0F, 0.0F),
+				Vec3.createVectorHelper(5.0F, -1.0F, 0.0F),
+		};
 
 		tailAttachmentPoint = Vec3.createVectorHelper(0, -10, 2);
 		
-        this.head = new ModelRenderer(base, 0, 0);
-        this.head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8);
+        head = new ModelRenderer(base, 0, 0);
+        head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8);
 
-        this.headwear = new ModelRenderer(base, 0, 16);
-        this.headwear.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, -0.5F);
+        headwear = new ModelRenderer(base, 0, 16);
+        headwear.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, -0.5F);
         
-        this.rightLeg = new ModelRenderer(base, 56, 0);
-        this.rightLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 30, 2);
+        rightLeg = new ModelRenderer(base, 56, 0);
+        rightLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 30, 2);
         
-        this.leftLeg = new ModelRenderer(base, 56, 0);
-        this.leftLeg.mirror = true;
-        this.leftLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 30, 2);
+        leftLeg = new ModelRenderer(base, 56, 0);
+        leftLeg.mirror = true;
+        leftLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 30, 2);
         
-        this.body = new ModelRenderer(base, 32, 16);
-        this.body.addBox(-4.0F, -0.0F, -2.0F, 8, 12, 4);
+
+        rightArm = new ModelRenderer(base, 56, 0);
+        rightArm.addBox(-1.0F, -2.0F, -1.0F, 2, 30, 2);
+        leftArm = new ModelRenderer(base, 56, 0);
+        leftArm.mirror = true;
+        leftArm.addBox(-1.0F, -2.0F, -1.0F, 2, 30, 2);
+        
+        body = new ModelRenderer(base, 32, 16);
+        body.addBox(-4.0F, -0.0F, -2.0F, 8, 12, 4);
 	}
 
 	private void bindTexture() {
@@ -98,33 +112,33 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 		bindToAttachmentPoint(leftLeg, attachmentPoints[0], getLegHeight(), bodyHeight);
 		bindToAttachmentPoint(rightLeg, attachmentPoints[1], getLegHeight(), bodyHeight);
 
-        this.rightLeg.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F * prevLegSwing;
-        this.leftLeg.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float)Math.PI) * 1.4F * prevLegSwing;
-        this.rightLeg.rotateAngleY = 0.0F;
-        this.leftLeg.rotateAngleY = 0.0F;
+        rightLeg.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 1.4F * prevLegSwing;
+        leftLeg.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float)Math.PI) * 1.4F * prevLegSwing;
+        rightLeg.rotateAngleY = 0.0F;
+        leftLeg.rotateAngleY = 0.0F;
 
-        this.rightLeg.rotateAngleX = (float)((double)this.rightLeg.rotateAngleX * 0.5D);
-        this.leftLeg.rotateAngleX = (float)((double)this.leftLeg.rotateAngleX * 0.5D);
+        rightLeg.rotateAngleX = (float)((double)rightLeg.rotateAngleX * 0.5D);
+        leftLeg.rotateAngleX = (float)((double)leftLeg.rotateAngleX * 0.5D);
         float var9 = 0.4F;
         float var8 = -14.0F;
-        if (this.rightLeg.rotateAngleX > var9)
+        if (rightLeg.rotateAngleX > var9)
         {
-            this.rightLeg.rotateAngleX = var9;
+            rightLeg.rotateAngleX = var9;
         }
 
-        if (this.leftLeg.rotateAngleX > var9)
+        if (leftLeg.rotateAngleX > var9)
         {
-            this.leftLeg.rotateAngleX = var9;
+            leftLeg.rotateAngleX = var9;
         }
 
-        if (this.rightLeg.rotateAngleX < -var9)
+        if (rightLeg.rotateAngleX < -var9)
         {
-            this.rightLeg.rotateAngleX = -var9;
+            rightLeg.rotateAngleX = -var9;
         }
 
-        if (this.leftLeg.rotateAngleX < -var9)
+        if (leftLeg.rotateAngleX < -var9)
         {
-            this.leftLeg.rotateAngleX = -var9;
+            leftLeg.rotateAngleX = -var9;
         }
 		leftLeg.render(scale);
 		rightLeg.render(scale);
@@ -137,13 +151,42 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 		bindTexture();
 		body.render(scale);
 	}
-
+	
 	@Override
-	public void renderWings(Entity entity, float legSwing, float prevLegSwing,
+	public void renderArms(Entity entity, float legSwing, float prevLegSwing,
 			float wingSwing, float yaw, float pitch, float scale,
 			int legHeight, int bodyHeight, Vec3[] attachmentPoints) {
-		// TODO Auto-generated method stub
-		
+		bindTexture();
+		bindToAttachmentPoint(leftArm, attachmentPoints[0], legHeight, bodyHeight);
+		bindToAttachmentPoint(rightArm, attachmentPoints[1], legHeight, bodyHeight);
+		rightArm.rotateAngleX = MathHelper.cos(legSwing * 0.6662F + (float)Math.PI) * 2.0F * prevLegSwing * 0.5F;
+        leftArm.rotateAngleX = MathHelper.cos(legSwing * 0.6662F) * 2.0F * prevLegSwing * 0.5F;
+
+        rightArm.rotateAngleX = (float)((double)rightArm.rotateAngleX * 0.5D);
+        leftArm.rotateAngleX = (float)((double)leftArm.rotateAngleX * 0.5D);
+        float var9 = 0.4F;
+
+        if (rightArm.rotateAngleX > var9)
+        {
+            rightArm.rotateAngleX = var9;
+        }
+
+        if (leftArm.rotateAngleX > var9)
+        {
+            leftArm.rotateAngleX = var9;
+        }
+
+        if (rightArm.rotateAngleX < -var9)
+        {
+            rightArm.rotateAngleX = -var9;
+        }
+
+        if (leftArm.rotateAngleX < -var9)
+        {
+            leftArm.rotateAngleX = -var9;
+        }
+        leftArm.render(scale);
+        rightArm.render(scale);
 	}
 
 	@Override
@@ -165,13 +208,4 @@ public class DefinitionEnderman extends BaseDefinition implements IMobDefinition
 	public int getNumberOfLegs() {
 		return 2;
 	}
-
-	@Override
-	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
-			float wingSwing, float yaw, float pitch, float scale,
-			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

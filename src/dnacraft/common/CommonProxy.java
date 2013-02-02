@@ -102,8 +102,11 @@ public class CommonProxy {
 		Items.itemGeneric.addMeta(new MetaDNAFragment(1, "dnacraft.fragments.porkRaw", Item.porkRaw, Genome.porkRaw));
 		Items.itemGeneric.addMeta(new MetaDNAFragment(2, "dnacraft.fragments.porkCooked", Item.porkCooked, Genome.porkCooked));
 		
-		EntityRegistry.registerGlobalEntityID(EntityMutant.class, "Mutant", EntityRegistry.findGlobalUniqueEntityId(), 24, 30 );
-		
+		int IDs = 600;
+
+	    EntityRegistry.registerModEntity(EntityMutant.class, "Mutant", 600, DNACraft.instance, 64, 1, true);
+		//EntityRegistry.registerGlobalEntityID(EntityMutant.class, "Mutant", EntityRegistry.findGlobalUniqueEntityId(), 24, 30 );
+		//EntityRegistry.registerModEntity(EntityMutant.class, "Mutant", 255, DNACraft.instance, 50, 1, true);
 		NetworkRegistry.instance().registerGuiHandler(DNACraft.instance, new GuiHandler());
 		setupLanguages();
 	}

@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySplicer extends BaseInventoryTileEntity implements IInventory {
@@ -98,12 +99,15 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 							newCompound = (NBTTagCompound) input1.getTagCompound().copy();
 						}
 						if (meta2 instanceof MetaDNA && input2.hasTagCompound()) {
-							Collection col = input2.getTagCompound().getTags();
-							Iterator it = col.iterator();
-							while (it.hasNext()) {
-								NBTBase nbt = (NBTBase) it.next();
-								if (nbt.getId() == 6) {
-									traitsToAdd.put(nbt.getName(), ((NBTTagDouble) nbt).data);
+							if (input2.getTagCompound().hasKey("traits")) {
+								NBTTagCompound tags = input2.getTagCompound().getCompoundTag("traits");
+								Collection col = tags.getTags();
+								Iterator it = col.iterator();
+								while (it.hasNext()) {
+									NBTBase nbt = (NBTBase) it.next();
+									if (nbt.getId() == 6) {
+										traitsToAdd.put(nbt.getName(), ((NBTTagDouble) nbt).data);
+									}
 								}
 							}
 						}
@@ -112,13 +116,17 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					if (newCompound == null) {
 						newCompound = new NBTTagCompound();
 					}
+					if (!newCompound.hasKey("traits")) {
+						newCompound.setCompoundTag("traits", new NBTTagCompound());
+					}
+					NBTTagCompound traitsCompound = newCompound.getCompoundTag("traits");
 					for (Map.Entry<String, Double> trait : traitsToAdd.entrySet()) {
 						double val = 0.0;
-						if (newCompound.hasKey(trait.getKey())) {
-							val = newCompound.getDouble(trait.getKey());
+						if (traitsCompound.hasKey(trait.getKey())) {
+							val = traitsCompound.getDouble(trait.getKey());
 						}
 						val += trait.getValue();
-						newCompound.setDouble(trait.getKey(), val);
+						traitsCompound.setDouble(trait.getKey(), val);
 					}
 					
 					ItemStack newStack = dna1.newItemStack();

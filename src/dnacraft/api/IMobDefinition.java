@@ -20,6 +20,9 @@ public interface IMobDefinition {
 	public void renderWings(Entity entity, float legSwing,
 			float prevLegSwing, float wingSwing, float yaw,
 			float pitch, float scale, int legHeight, int bodyHeight, Vec3[] attachmentPoints);
+	public void renderArms(Entity entity, float legSwing,
+			float prevLegSwing, float wingSwing, float yaw,
+			float pitch, float scale, int legHeight, int bodyHeight, Vec3[] attachmentPoints);
 	public void renderTail(Entity entity, float legSwing,
 			float prevLegSwing, float wingSwing, float yaw,
 			float pitch, float scale, int legHeight, int bodyHeight, Vec3 attachmentPoint);
@@ -27,6 +30,7 @@ public interface IMobDefinition {
 	public Vec3 getHeadAttachmentPoint();
 	public Vec3 getTailAttachmentPoint();
 	public Vec3[] getWingAttachmentPoints();
+	public Vec3[] getArmAttachmentPoints();
 	public String getName();
 	public int getLegHeight();
 	public int getBodyHeight();

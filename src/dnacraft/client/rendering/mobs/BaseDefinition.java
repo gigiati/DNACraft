@@ -3,6 +3,7 @@ package dnacraft.client.rendering.mobs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.RenderEngine;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.Vec3;
 
 public abstract class BaseDefinition {
@@ -12,6 +13,7 @@ public abstract class BaseDefinition {
 	protected Vec3[] legAttachmentPoints8;
 	protected Vec3 headAttachmentPoint;
 	protected Vec3[] wingAttachmentPoints;
+	protected Vec3[] armAttachmentPoints;
 	protected Vec3 tailAttachmentPoint;
 	
 	protected void bindTexture(String texture) {
@@ -47,6 +49,25 @@ public abstract class BaseDefinition {
 		return this.tailAttachmentPoint;
 	}
 	
+	public Vec3[] getArmAttachmentPoints() {
+		return this.armAttachmentPoints;
+	}
+
+	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
+			float wingSwing, float yaw, float pitch, float scale,
+			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
+	}
+
+	public void renderArms(Entity entity, float legSwing, float prevLegSwing,
+			float wingSwing, float yaw, float pitch, float scale,
+			int legHeight, int bodyHeight, Vec3[] attachmentPoints) {
+	}
+	
+	public void renderWings(Entity entity, float legSwing, float prevLegSwing,
+			float wingSwing, float yaw, float pitch, float scale,
+			int legHeight, int bodyHeight, Vec3[] attachmentPoints) {
+		
+	}
 	protected void bindToAttachmentPoint(ModelRenderer renderer, Vec3 attachmentPoint, int legHeight, int bodyHeight) {
 		renderer.setRotationPoint(
 				(float) attachmentPoint.xCoord,

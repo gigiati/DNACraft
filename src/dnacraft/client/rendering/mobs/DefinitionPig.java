@@ -55,6 +55,11 @@ public class DefinitionPig extends BaseDefinition implements IMobDefinition {
 				Vec3.createVectorHelper(5.0F, -1.0F, 0.0F),
 		};
 		
+		armAttachmentPoints = new Vec3[] {
+				Vec3.createVectorHelper(-5.0F, -1.0F, 0.0F),
+				Vec3.createVectorHelper(5.0F, -1.0F, 0.0F),
+		};
+		
 		tailAttachmentPoint = Vec3.createVectorHelper(0, -1, 8);
 		
 		leg1 = new ModelRenderer(base, 0, 16);
@@ -127,14 +132,6 @@ public class DefinitionPig extends BaseDefinition implements IMobDefinition {
 	}
 
 	@Override
-	public void renderWings(Entity entity, float legSwing, float prevLegSwing,
-			float wingSwing, float yaw, float pitch, float scale,
-			int legHeight, int bodyHeight, Vec3[] attachmentpoints) {
-
-	}
-
-
-	@Override
 	public String getName() {
 		return "pig";
 	}
@@ -154,12 +151,4 @@ public class DefinitionPig extends BaseDefinition implements IMobDefinition {
 		return 8;
 	}
 
-	@Override
-	public void renderTail(Entity entity, float legSwing, float prevLegSwing,
-			float wingSwing, float yaw, float pitch, float scale,
-			int legHeight, int bodyHeight, Vec3 attachmentPoint) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
