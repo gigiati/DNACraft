@@ -81,6 +81,15 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					HashMap<String, Double> traitsToAdd = new HashMap<String, Double>();
 					NBTTagCompound newCompound = null;
 					if (fragment != null) {
+
+						if (Math.random() < 0.95) {
+							if (meta1 instanceof MetaDNAFragment) {
+								this.decrStackSize(0, 1);
+							}else {
+								this.decrStackSize(1, 1);
+							}
+							return;
+						}
 						Genome genomeForFragment = fragment.getGenome();
 						if (genomeForFragment == null) {
 							return;

@@ -8,18 +8,36 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import dnacraft.common.entity.ai.EntityAIMutantSwell;
 import dnacraft.common.evolution.TraitManager;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentThorns;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAICreeperSwell;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityMutant extends EntityAnimal implements
@@ -27,35 +45,54 @@ public class EntityMutant extends EntityAnimal implements
 
 	public HashMap<String, Double> genome = new HashMap<String, Double>();
 
+	/* wings stuff */
 	public float field_70886_e = 0.0F;
 	public float destPos = 0.0F;
 	public float field_70884_g;
 	public float field_70888_h;
 	public float field_70889_i = 1.0F;
 
-	public String head = "creeper";
-	private String legs = "creeper";
-	private String body = "creeper";
-	private String arms = "creeper";
-	private String wings = "creeper";
-	private String tail = "creeper";
-	
+	/* model/generics stuff */
+	public String head;
+	private String legs;
+	private String body;
+	private String arms;
+	private String wings;
+	private String tail;
 	public NBTTagCompound dna = null;
+	
+	/* creeper stuff */
+    private int timeSinceIgnited;
+    private int fuseTime = 30;
+    private int lastActiveTime;
+    private int explosionRadius = 3;
 
 	public EntityMutant(World world) {
 		super(world);
         this.setSize(0.9F, 1.3F);
         this.getNavigator().setAvoidsWater(true);
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-        this.tasks.addTask(2, new EntityAIWander(this, 0.25F));
-        this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(4, new EntityAILookIdle(this));
+        int i = 0;
+        this.moveSpeed = 0.3F;
+        
+        this.tasks.addTask(i++, new EntityAISwimming(this));
+        //this.tasks.addTask(i++, new EntityAIMutantSwell(this));
+        //this.tasks.addTask(i++, new EntityAIAttackOnCollide(this, EntityLiving.class, this.moveSpeed, false));
+        this.tasks.addTask(i++, new EntityAIPanic(this, 0.38F));
+        this.tasks.addTask(i++, new EntityAIWander(this, this.moveSpeed));
+        //this.tasks.addTask(i++, new EntityAILeapAtTarget(this, 0.3F));
+        this.tasks.addTask(i++, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(i++, new EntityAILookIdle(this));
+
+        //this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true));
+        //this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
 	}
 	
 	public void setDNAFromTagCompound(NBTTagCompound tagCompound) {
 		if (tagCompound != null && tagCompound.hasKey("traits")) {
 			this.dna = tagCompound.getCompoundTag("traits");
+			System.out.println("We have DNA");
+		}else {
+		System.out.println("We have no DNA");
 		}
 		this.head = TraitManager.instance.getBodyPartFromDNA(this.dna);
         this.body = TraitManager.instance.getBodyPartFromDNA(this.dna);
@@ -87,6 +124,55 @@ public class EntityMutant extends EntityAnimal implements
         return true;
     }
     
+    public boolean attackEntityAsMob(Entity par1Entity)
+    {
+        int var2 = 2;
+
+        if (this.isPotionActive(Potion.damageBoost))
+        {
+            var2 += 3 << this.getActivePotionEffect(Potion.damageBoost).getAmplifier();
+        }
+
+        if (this.isPotionActive(Potion.weakness))
+        {
+            var2 -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
+        }
+
+        int var3 = 0;
+
+        if (par1Entity instanceof EntityLiving)
+        {
+            var2 += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLiving)par1Entity);
+            var3 += EnchantmentHelper.getKnockbackModifier(this, (EntityLiving)par1Entity);
+        }
+
+        boolean var4 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
+
+        if (var4)
+        {
+            if (var3 > 0)
+            {
+                par1Entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F));
+                this.motionX *= 0.6D;
+                this.motionZ *= 0.6D;
+            }
+
+            int var5 = EnchantmentHelper.getFireAspectModifier(this);
+
+            if (var5 > 0)
+            {
+                par1Entity.setFire(var5 * 4);
+            }
+
+            if (par1Entity instanceof EntityLiving)
+            {
+                EnchantmentThorns.func_92044_a(this, (EntityLiving)par1Entity, this.rand);
+            }
+        }
+
+        return var4;
+    }
+    
 	@Override
 	public void initCreature() {
 	}
@@ -95,14 +181,91 @@ public class EntityMutant extends EntityAnimal implements
 	public int getMaxHealth() {
 		return 30;
 	}
+	
+	@Override
+	public void onUpdate() {
+		this.handleCreeperBehaviour();
+		super.onUpdate();
+	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		//this.handleWings();
-
+		this.handleWings();
 	}
 
+	
+	
+    /**
+     * Returns the current state of creeper, -1 is idle, 1 is 'in fuse'
+     */
+    public int getCreeperState()
+    {
+        return this.dataWatcher.getWatchableObjectByte(16);
+    }
+
+    /**
+     * Returns true if the creeper is powered by a lightning bolt.
+     */
+    public boolean getPowered()
+    {
+        return this.dataWatcher.getWatchableObjectByte(17) == 1;
+    }
+    /**
+     * Sets the state of creeper, -1 to idle and 1 to be 'in fuse'
+     */
+    public void setCreeperState(int par1)
+    {
+        this.dataWatcher.updateObject(16, Byte.valueOf((byte)par1));
+    }
+    private void handleCreeperBehaviour() {
+    	if (this.isEntityAlive())
+        {
+            this.lastActiveTime = this.timeSinceIgnited;
+            int var1 = this.getCreeperState();
+
+            if (var1 > 0 && this.timeSinceIgnited == 0)
+            {
+                this.playSound("random.fuse", 1.0F, 0.5F);
+            }
+
+            this.timeSinceIgnited += var1;
+
+            if (this.timeSinceIgnited < 0)
+            {
+                this.timeSinceIgnited = 0;
+            }
+
+            if (this.timeSinceIgnited >= this.fuseTime)
+            {
+                this.timeSinceIgnited = this.fuseTime;
+
+                if (!this.worldObj.isRemote)
+                {
+                    boolean var2 = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+
+                    if (this.getPowered())
+                    {
+                        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float)(this.explosionRadius * 2), var2);
+                    }
+                    else
+                    {
+                        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float)this.explosionRadius, var2);
+                    }
+
+                    this.setDead();
+                }
+            }
+        }
+	}
+
+	protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(16, Byte.valueOf((byte) - 1));
+        this.dataWatcher.addObject(17, Byte.valueOf((byte)0));
+    }
+    
 	public void handleWings() {
 		this.field_70888_h = this.field_70886_e;
 		this.field_70884_g = this.destPos;
@@ -142,6 +305,15 @@ public class EntityMutant extends EntityAnimal implements
 		tag.setString("arms", this.arms);
 		tag.setString("tail", this.tail);
 		tag.setString("legs", this.legs);
+
+
+        if (this.dataWatcher.getWatchableObjectByte(17) == 1)
+        {
+            tag.setBoolean("powered", true);
+        }
+
+        tag.setShort("Fuse", (short)this.fuseTime);
+        tag.setByte("ExplosionRadius", (byte)this.explosionRadius);
 	}
 
 	@Override
@@ -156,6 +328,19 @@ public class EntityMutant extends EntityAnimal implements
 		this.arms = tag.getString("arms");
 		this.tail = tag.getString("tail");
 		this.legs = tag.getString("legs");
+		
+		
+		/*
+		 * CREEPER behaviour
+		 */
+		this.dataWatcher.updateObject(17, Byte.valueOf((byte)(tag.getBoolean("powered") ? 1 : 0)));
+
+        if (tag.hasKey("Fuse"))
+	        this.fuseTime = tag.getShort("Fuse");
+        
+        if (tag.hasKey("ExplosionRadius"))
+        	this.explosionRadius = tag.getByte("ExplosionRadius");
+        
 	}
 
 	public void writeSpawnData(ByteArrayDataOutput data) {

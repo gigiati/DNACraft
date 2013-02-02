@@ -17,9 +17,10 @@ public class TraitManager extends HashMap<String, Double> {
 
 	public static final String COLOR_RED = "red";
 	public static final String COLOR_GREEN = "green";
-	public static final String COLOR_YELLOW = "green";
+	public static final String COLOR_YELLOW = "yellow";
 	public static final String COLOR_PINK = "pink";
 	public static final String COLOR_WHITE = "white";
+	public static final String COLOR_BLACK = "black";
 	
 	public static final String ZOMBIE = "zombie";
 	public static final String CREEPER = "creeper";

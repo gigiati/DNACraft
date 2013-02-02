@@ -11,6 +11,7 @@ public class GenomePorkRaw extends Genome {
 		addTrait(TraitManager.COLOR_RED, 0.2);
 		addTrait(TraitManager.SIZE_SMALL, 1);
 		addTrait(TraitManager.FOOD, 0.5);
+		addTrait(TraitManager.PIG, 0.4);
 	}
 	
 }

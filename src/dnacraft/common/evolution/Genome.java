@@ -8,12 +8,14 @@ import net.minecraft.item.Item;
 import dnacraft.common.evolution.genome.GenomePorkCooked;
 import dnacraft.common.evolution.genome.GenomePorkRaw;
 import dnacraft.common.evolution.genome.GenomeSeeds;
+import dnacraft.common.evolution.genome.GenomeSpider;
 
 public abstract class Genome {
 
 	public static Genome seeds = new GenomeSeeds();
 	public static Genome porkRaw = new GenomePorkRaw();
 	public static Genome porkCooked = new GenomePorkCooked();
+	public static Genome spider = new GenomeSpider();
 
 	private HashMap<String, Double> traits = new HashMap<String, Double>();
 
