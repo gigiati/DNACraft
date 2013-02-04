@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.Set;
 
 import dnacraft.common.Tally;
+import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.evolution.dna.DNAChicken;
 import dnacraft.common.evolution.dna.DNACreeper;
 import dnacraft.common.evolution.dna.DNAEnderman;
@@ -21,6 +22,8 @@ import dnacraft.common.evolution.dna.DNASpider;
 import dnacraft.common.evolution.dna.DNAZombie;
 import dnacraft.common.item.metas.MetaDNA;
 
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
@@ -47,9 +50,17 @@ public class DNA extends HashMap<String, Genome> {
 	}
 
 	public Tally getActiveGeneTally(String type) {
+		return getGeneTally(type, true);
+	}
+
+	public Tally getInactiveGeneTally(String type) {
+		return getGeneTally(type, false);
+	}
+
+	public Tally getGeneTally(String type, boolean active) {
 		Tally tally = new Tally();
 		for (Gene gene : get(type)) {
-			if (gene.isActive()) {
+			if (gene.isActive() == active) {
 				tally.increment(gene.getTrait());
 			}
 		}
@@ -59,15 +70,14 @@ public class DNA extends HashMap<String, Genome> {
 	public int getLargestGene(String genome) {
 		return getActiveGeneTally(genome).largest().getKey();
 	}
-	
+
 	public int getRandomWeightedGene(String genome) {
 		return getActiveGeneTally(genome).randomWeighted().getKey();
 	}
-	
+
 	public int getRandomWeightedGene(String genome, double pow) {
 		return getActiveGeneTally(genome).randomWeighted(pow).getKey();
 	}
-	
 
 	public NBTTagCompound toNBT() {
 		NBTTagCompound compound = new NBTTagCompound();
@@ -158,5 +168,17 @@ public class DNA extends HashMap<String, Genome> {
 			System.out.println(str);
 		}
 
+	}
+	
+	public static DNA getDNAForEntity(Object entity) {
+		
+		if (entity instanceof EntityPig) {
+			return DNA.pig;
+		}else if (entity instanceof EntityChicken) {
+			return DNA.chicken;
+		}else if (entity instanceof EntityMutant) {
+			return ((EntityMutant)entity).dna.clone();
+		}
+		return null;
 	}
 }

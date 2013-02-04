@@ -96,12 +96,12 @@ public class EntityMutant extends EntityAnimal implements
 		if (tagCompound != null && tagCompound.hasKey("traits")) {
 			this.dna = DNA.fromNBT(tagCompound.getCompoundTag("traits"));
 		}
-		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE, 1.8);
-		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE, 1.8);
-		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE, 1.8);
-		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE, 1.8);
-		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE, 1.8);
-		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 1.8);
+		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE, 2.5);
+		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE, 2.5);
+		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE, 2.5);
+		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE, 2.5);
+		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE, 2.5);
+		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 2.5);
 		if (this.arms != this.body) {
 			this.arms = Trait.ANIMAL_PIG;
 		}

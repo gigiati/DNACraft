@@ -10,6 +10,9 @@ dnacraft.fragments.sheep.name=Sheep DNA Fragment
 
 dnacraft.machines.centrifuge.name=DNA Centrifuge
 dnacraft.machines.splicer.name=DNA Splicer
+dnacraft.machines.sequencer.name=DNA Sequencer
 
 dnacraft.dna.name=DNA
 dnacraft.egg.name=Mutant Egg
+dnacraft.syringe.name=Syringe
+dnacraft.bloodsample.name=Blood Sample

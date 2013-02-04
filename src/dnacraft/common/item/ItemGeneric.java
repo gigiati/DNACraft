@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import dnacraft.api.IMeta;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ public class ItemGeneric extends Item {
 
 	private HashMap<Integer, IMeta> metaitems = new HashMap<Integer, IMeta>();
 
+	
 	public ItemGeneric(int i) {
 		super(i);
 		setHasSubtypes(true);
@@ -42,7 +44,7 @@ public class ItemGeneric extends Item {
     {
 		IMeta meta = getMeta(stack.getItemDamage());
 		if (meta != null) {
-			return meta.getItemNameIS();
+			return meta.getItemNameIS(stack);
 		}
         return "";
     }
@@ -55,7 +57,16 @@ public class ItemGeneric extends Item {
 		}
         return true;
 	}
-
+	
+	@Override
+	public boolean hitEntity(ItemStack itemStack, EntityLiving target,
+			EntityLiving player) {
+		IMeta meta = getMeta(itemStack.getItemDamage());
+		if (meta != null) {
+			return meta.hitEntity(itemStack, target, player);
+		}
+        return true;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -73,8 +84,20 @@ public class ItemGeneric extends Item {
 		return metaitems.get(id);
 	}
 	
+	public IMeta getMeta(Class klass) {
+		
+		for (Entry<Integer, IMeta> entry : this.metaitems.entrySet()) {
+			if (entry.getValue().getClass().equals(klass)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+	
 	public IMeta getMeta(ItemStack itemStack) {
 		return getMeta(itemStack.getItemDamage());
 	}
+	
+
 
 }

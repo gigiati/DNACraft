@@ -23,17 +23,22 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import dnacraft.DNACraft;
 import dnacraft.DNACraft.Items;
 import dnacraft.common.block.BlockCentrifuge;
+import dnacraft.common.block.BlockSequencer;
 import dnacraft.common.block.BlockSplicer;
 import dnacraft.common.container.ContainerCentrifuge;
+import dnacraft.common.container.ContainerSequencer;
 import dnacraft.common.container.ContainerSplicer;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
+import dnacraft.common.item.metas.MetaBloodSample;
 import dnacraft.common.item.metas.MetaDNA;
 import dnacraft.common.item.metas.MetaDNAFragment;
 import dnacraft.common.item.metas.MetaMutantEgg;
+import dnacraft.common.item.metas.MetaSyringe;
 import dnacraft.common.tileentity.TileEntityCentrifuge;
+import dnacraft.common.tileentity.TileEntitySequencer;
 import dnacraft.common.tileentity.TileEntitySplicer;
 
 public class CommonProxy {
@@ -65,6 +70,8 @@ public class CommonProxy {
 					return new ContainerCentrifuge(player.inventory, (TileEntityCentrifuge) tile);
 				}else if (tile instanceof TileEntitySplicer) {
 					return new ContainerSplicer(player.inventory, (TileEntitySplicer) tile);
+				}else if (tile instanceof TileEntitySequencer) {
+					return new ContainerSequencer(player.inventory, (TileEntitySequencer) tile);
 				}
 			}
 
@@ -87,10 +94,16 @@ public class CommonProxy {
 		DNACraft.Blocks.blockSplicer = new BlockSplicer(501, Material.ground);
 		GameRegistry.registerBlock(DNACraft.Blocks.blockSplicer, "dnacraft.machines.splicer");
 		GameRegistry.registerTileEntity(TileEntitySplicer.class, "splicer");
+		
+		DNACraft.Blocks.blockSequencer = new BlockSequencer(502, Material.ground);
+		GameRegistry.registerBlock(DNACraft.Blocks.blockSequencer, "dnacraft.machines.sequencer");
+		GameRegistry.registerTileEntity(TileEntitySequencer.class, "sequencer");
 
 		Items.itemUnstackable = new ItemUnstackable(821);
 		Items.itemUnstackable.addMeta(new MetaDNA(0));
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
+		Items.itemUnstackable.addMeta(new MetaSyringe(2));
+		Items.itemUnstackable.addMeta(new MetaBloodSample(3));
 		
 		Items.itemGeneric = new ItemGeneric(822);
 		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.pig", DNA.pig, Item.porkRaw, Item.porkCooked));

@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.entity.EntityMutant;
+import dnacraft.common.evolution.Genome;
 
 public class MetaDNA implements IMeta {
 
@@ -28,7 +29,7 @@ public class MetaDNA implements IMeta {
 	}
 
 	@Override
-	public String getItemNameIS() {
+	public String getItemNameIS(ItemStack stack) {
 		return "dnacraft.dna";
 	}
 
@@ -56,6 +57,7 @@ public class MetaDNA implements IMeta {
         }
         else
         {	
+        	
             int blockID = world.getBlockId(x, y, z);
             x += Facing.offsetsXForSide[side];
             y += Facing.offsetsYForSide[side];
@@ -83,5 +85,13 @@ public class MetaDNA implements IMeta {
             return true;
         }
     }
+
+	@Override
+	public boolean hitEntity(ItemStack itemStack, EntityLiving  target,
+			EntityLiving player) {
+		return true;
+	}
+	
+	
 
 }

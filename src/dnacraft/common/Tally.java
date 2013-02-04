@@ -20,6 +20,7 @@ public class Tally extends HashMap<Integer, Integer> {
 	public Map.Entry<Integer, Integer> randomWeighted() {
 		return randomWeighted(1);
 	}
+	
 	public Map.Entry<Integer, Integer> randomWeighted(double pow) {
 		double totalWeight = 0;
 		for (Map.Entry<Integer, Integer> entry : entrySet())
@@ -45,5 +46,20 @@ public class Tally extends HashMap<Integer, Integer> {
 			val = get(key);
 		}
 		put(key, val + 1);
+	}
+	
+	public String toString() {
+		String str = "";
+		String[] parts = new String[size()];
+		int i = 0;
+		for (Map.Entry<Integer, Integer> entry : entrySet()) {
+			parts[i] = entry.getKey() + ":"  + entry.getValue();
+			i++;
+		}
+		i = 0;
+		StringBuilder sb = new StringBuilder();
+        for(i = 0; i < parts.length-1; i++)
+            sb.append(parts[i] + ",");
+        return sb.toString() + parts[i];
 	}
 }

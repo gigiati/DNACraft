@@ -27,7 +27,7 @@ public class MetaMutantEgg implements IMeta {
 	}
 
 	@Override
-	public String getItemNameIS() {
+	public String getItemNameIS(ItemStack stack) {
 		return "dnacraft.egg";
 	}
 
@@ -82,5 +82,11 @@ public class MetaMutantEgg implements IMeta {
 
             return true;
         }
-    }
+    }	
+	
+	@Override
+	public boolean hitEntity(ItemStack itemStack, EntityLiving target,
+			EntityLiving player) {
+		return true;
+	}
 }

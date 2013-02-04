@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class BaseInventoryTileEntity extends TileEntity {
 
-	protected ItemStack[] itemStacks = new ItemStack[3];
+	protected ItemStack[] itemStacks = new ItemStack[4];
 
 	public int getSizeInventory() {
 		return this.itemStacks.length;

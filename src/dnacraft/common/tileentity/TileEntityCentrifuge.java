@@ -22,7 +22,7 @@ public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IIn
 			ItemStack bottle = itemStacks[1];
 
 			if (input != null && input.stackSize > 0 && bottle != null && bottle.stackSize > 0) {
-				ItemStack output = getFragmentForItemStack(input);
+				ItemStack output = MetaDNAFragment.getFragmentForItemStack(input).newItemStack();
 				Item bottleItem = bottle.getItem();
 				if (output != null && bottleItem != null && bottleItem instanceof ItemGlassBottle) {
 					if (itemStacks[2] != null) {
@@ -42,17 +42,6 @@ public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IIn
 				}
 			}
 		}
-	}
-	
-	private ItemStack getFragmentForItemStack(ItemStack stack) {
-		Item item = stack.getItem();
-		if (item != null) {
-			if (MetaDNAFragment.fragmentsForItems.containsKey(item)) {
-				MetaDNAFragment meta = MetaDNAFragment.fragmentsForItems.get(item);
-				return meta.newItemStack();
-			}
-		}
-		return null;
 	}
 
 	@Override

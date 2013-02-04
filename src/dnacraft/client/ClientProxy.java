@@ -7,6 +7,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import dnacraft.client.gui.GuiCentrifuge;
+import dnacraft.client.gui.GuiSequencer;
 import dnacraft.client.gui.GuiSplicer;
 import dnacraft.client.model.ModelMutant;
 import dnacraft.client.renderer.entity.RenderMutant;
@@ -23,6 +24,7 @@ import dnacraft.client.rendering.mobs.DefinitionZombie;
 import dnacraft.common.CommonProxy;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.tileentity.TileEntityCentrifuge;
+import dnacraft.common.tileentity.TileEntitySequencer;
 import dnacraft.common.tileentity.TileEntitySplicer;
 
 public class ClientProxy extends CommonProxy {
@@ -33,6 +35,8 @@ public class ClientProxy extends CommonProxy {
 			return new GuiCentrifuge(inventory, (TileEntityCentrifuge) tile);
 		} else if (tile instanceof TileEntitySplicer) {
 			return new GuiSplicer(inventory, (TileEntitySplicer) tile);
+		} else if (tile instanceof TileEntitySequencer) {
+			return new GuiSequencer(inventory, (TileEntitySequencer) tile);
 		}
 		return null;
 	}
