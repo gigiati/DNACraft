@@ -16,13 +16,16 @@ public class MetaDNAFragment implements IMeta {
 	private int id;
 	private String name;
 	
-	public static HashMap<Item, MetaDNAFragment> fragmentsForItems = new HashMap<Item, MetaDNAFragment>();
+	public static HashMap<Object, MetaDNAFragment> fragmentsForItems = new HashMap<Object, MetaDNAFragment>();
 	
-	public MetaDNAFragment(int id, String name, Item item, DNA dna) {
+
+	public MetaDNAFragment(int id, String name, DNA dna, Object...objs) {
 		this.dna = dna;
 		this.id = id;
 		this.name = name;
-		fragmentsForItems.put(item, this);
+		for (Object obj : objs) {
+			fragmentsForItems.put(obj, this);
+		}
 	}
 	
 	@Override

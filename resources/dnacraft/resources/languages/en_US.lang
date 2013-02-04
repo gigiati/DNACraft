@@ -1,6 +1,12 @@
-dnacraft.fragments.seeds.name=Seed DNA Fragment
-dnacraft.fragments.porkRaw.name=Raw Pork DNA Fragment
-dnacraft.fragments.porkCooked.name=Cooked Pork DNA Fragment
+dnacraft.fragments.seed.name=Seed DNA Fragment
+dnacraft.fragments.pig.name=Pig DNA Fragment
+dnacraft.fragments.chicken.name=Chicken DNA Fragment
+dnacraft.fragments.zombie.name=Zombie DNA Fragment
+dnacraft.fragments.creeper.name=Creeper DNA Fragment
+dnacraft.fragments.ocelot.name=Ocelot DNA Fragment
+dnacraft.fragments.spider.name=Spider DNA Fragment
+dnacraft.fragments.enderman.name=Enderman DNA Fragment
+dnacraft.fragments.sheep.name=Sheep DNA Fragment
 
 dnacraft.machines.centrifuge.name=DNA Centrifuge
 dnacraft.machines.splicer.name=DNA Splicer

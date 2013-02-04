@@ -20,10 +20,19 @@ public class Trait {
 	public static final int DROP_PORK_COOKED 	= 1;
 	public static final int DROP_FEATHER 		= 2;
 	public static final int DROP_CHICKEN 		= 3;
+	public static final int DROP_ROTTEN_FLESH	= 4;
+	public static final int DROP_GUNPOWDER		= 5;
+	public static final int DROP_SPIDER_EYE		= 6;
+	public static final int DROP_STRING			= 7;
+	public static final int DROP_ENDERPEARL		= 8;
+	public static final int DROP_WOOL			= 9;
 	
 	public static final int COLOR_PINK 			= 0;
 	public static final int COLOR_RED 			= 1;
 	public static final int COLOR_WHITE 		= 2;
+	public static final int COLOR_GREEN 		= 3;
+	public static final int COLOR_BLACK 		= 4;
+	public static final int COLOR_YELLOW 		= 5;
 	
 
 }

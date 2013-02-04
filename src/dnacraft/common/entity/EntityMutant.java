@@ -10,6 +10,8 @@ import com.google.common.io.ByteArrayDataOutput;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import dnacraft.common.entity.ai.EntityAIMutantSwell;
 import dnacraft.common.evolution.DNA;
+import dnacraft.common.evolution.Genome;
+import dnacraft.common.evolution.Trait;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -91,23 +93,15 @@ public class EntityMutant extends EntityAnimal implements
 		if (tagCompound != null && tagCompound.hasKey("traits")) {
 			this.dna = DNA.fromNBT(tagCompound.getCompoundTag("traits"));
 		}
-		this.head = this.dna.getHeadType();
-		this.body = this.dna.getHeadType();
-		this.arms = this.dna.getHeadType();
-		this.wings = this.dna.getHeadType();
-		this.legs = this.dna.getHeadType();
-		this.tail = this.dna.getHeadType();
-		/*
-		this.head = TraitManager.instance.getBodyPartFromDNA(this.dna);
-        this.body = TraitManager.instance.getBodyPartFromDNA(this.dna);
-        this.legs = TraitManager.instance.getBodyPartFromDNA(this.dna);
-        this.tail = TraitManager.instance.getBodyPartFromDNA(this.dna);
-        this.wings = TraitManager.instance.getBodyPartFromDNA(this.dna);
-        this.arms = TraitManager.instance.getBodyPartFromDNA(this.dna);
-        if (this.arms != this.body) {
-        	this.arms = "pig";
-        }
-        */
+		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE);
+		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE);
+		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE);
+		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE);
+		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE);
+		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE);
+		if (this.arms != this.body) {
+			this.arms = Trait.ANIMAL_PIG;
+		}
 	}
 	
 	public void setDNAFromItemStack(ItemStack stack) {

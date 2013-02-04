@@ -82,7 +82,7 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 							NBTTagCompound tag2 = input2.getTagCompound();
 							dnaFromTag2 = DNA.fromNBT(tag2.getCompoundTag("traits"));
 						}
-						newDNA = DNA.merge(dnaFromTag2, dnaFromTag2);
+						newDNA = DNA.merge(dnaFromTag1, dnaFromTag2);
 					}else if (dna1 != null && fragment != null) {
 						DNA stackDNA = new DNA();
 						ItemStack stack = null;

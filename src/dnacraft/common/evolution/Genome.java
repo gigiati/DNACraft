@@ -92,10 +92,8 @@ public class Genome extends ArrayList<Gene> {
 	public Genome mergeWith (Genome target) {
 		Genome child = new Genome(this.getType());
 		for (int i = 0; i < this.size(); i++) {
-			Gene childGene = new Gene(this.get(i), target.get(i));
+			child.add(new Gene(this.get(i), target.get(i)));
 		}
-		
 		return child;
-		
 	}
 }

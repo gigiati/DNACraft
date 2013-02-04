@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -92,8 +93,14 @@ public class CommonProxy {
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		
 		Items.itemGeneric = new ItemGeneric(822);
-		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.porkRaw", Item.porkRaw, DNA.pig));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(1, "dnacraft.fragments.chicken", Item.feather, DNA.chicken));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.pig", DNA.pig, Item.porkRaw, Item.porkCooked));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(1, "dnacraft.fragments.chicken", DNA.chicken, Item.feather, Item.chickenRaw, Item.chickenCooked));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(2, "dnacraft.fragments.zombie", DNA.zombie, Item.rottenFlesh));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(3, "dnacraft.fragments.enderman", DNA.enderman, Item.enderPearl, Item.eyeOfEnder));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(4, "dnacraft.fragments.spider", DNA.spider, Item.spiderEye, Item.silk));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(5, "dnacraft.fragments.sheep", DNA.sheep, Item.itemsList[Block.cloth.blockID]));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(6, "dnacraft.fragments.ocelot", DNA.ocelot, Item.fishRaw, Item.fishCooked));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(7, "dnacraft.fragments.creeper", DNA.creeper, Item.gunpowder));
 		
 		int IDs = 600;
 

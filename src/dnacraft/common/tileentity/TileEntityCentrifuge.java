@@ -20,6 +20,7 @@ public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IIn
 		if (!worldObj.isRemote) {
 			ItemStack input = itemStacks[0];
 			ItemStack bottle = itemStacks[1];
+
 			if (input != null && input.stackSize > 0 && bottle != null && bottle.stackSize > 0) {
 				ItemStack output = getFragmentForItemStack(input);
 				Item bottleItem = bottle.getItem();

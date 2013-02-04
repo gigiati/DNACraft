@@ -10,8 +10,15 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
+import dnacraft.common.Tally;
 import dnacraft.common.evolution.dna.DNAChicken;
+import dnacraft.common.evolution.dna.DNACreeper;
+import dnacraft.common.evolution.dna.DNAEnderman;
+import dnacraft.common.evolution.dna.DNAOcelot;
 import dnacraft.common.evolution.dna.DNAPig;
+import dnacraft.common.evolution.dna.DNASheep;
+import dnacraft.common.evolution.dna.DNASpider;
+import dnacraft.common.evolution.dna.DNAZombie;
 import dnacraft.common.item.metas.MetaDNA;
 
 import net.minecraft.nbt.NBTBase;
@@ -22,6 +29,12 @@ public class DNA extends HashMap<String, Genome> {
 
 	public static DNA pig = new DNAPig();
 	public static DNA chicken = new DNAChicken();
+	public static DNA zombie = new DNAZombie();
+	public static DNA creeper = new DNACreeper();
+	public static DNA enderman = new DNAEnderman();
+	public static DNA spider = new DNASpider();
+	public static DNA sheep = new DNASheep();
+	public static DNA ocelot = new DNAOcelot();
 
 	private static Random rnd = new Random();
 
@@ -33,13 +46,24 @@ public class DNA extends HashMap<String, Genome> {
 		put(genome.getType(), genome);
 	}
 
-	public int getMostActive(String key) {
-		return 0;
+	public Tally getActiveGeneTally(String type) {
+		Tally tally = new Tally();
+		for (Gene gene : get(type)) {
+			if (gene.isActive()) {
+				tally.increment(gene.getTrait());
+			}
+		}
+		return tally;
 	}
 
-	public int getHeadType() {
-		return 0;
+	public int getLargestGene(String genome) {
+		return getActiveGeneTally(genome).largest().getKey();
 	}
+	
+	public int getRandomWeightedGene(String genome) {
+		return getActiveGeneTally(genome).randomWeighted().getKey();
+	}
+	
 
 	public NBTTagCompound toNBT() {
 		NBTTagCompound compound = new NBTTagCompound();
@@ -69,7 +93,6 @@ public class DNA extends HashMap<String, Genome> {
 		Set<String> unique = new HashSet<String>();
 		unique.addAll(dna1.keySet());
 		unique.addAll(dna2.keySet());
-
 		for (String key : unique) {
 			Genome child = new Genome(key);
 			Genome father = dna1.get(key);
@@ -83,7 +106,8 @@ public class DNA extends HashMap<String, Genome> {
 			}
 			newDNA.put(key, child);
 		}
-		return null;
+
+		return newDNA;
 	}
 
 	public DNA clone() {
@@ -96,8 +120,6 @@ public class DNA extends HashMap<String, Genome> {
 
 	public static DNA mergeFragment(DNA stackDNA, DNA fragment) {
 
-		stackDNA.debug();
-		
 		if (stackDNA.size() <= 0) {
 			return fragment.clone();
 		}
@@ -110,20 +132,17 @@ public class DNA extends HashMap<String, Genome> {
 			if (i == item) {
 				int rndTrait = rnd.nextInt(40);
 				Genome fragmentGenome = fragment.get(entry.getKey());
-				System.out.println("Moving " + entry.getKey() + " index "+ rndTrait + " value = "+ fragmentGenome.get(rndTrait).getTrait());
 				newGenome.set(rndTrait, fragmentGenome.get(rndTrait).clone());
 			}
 			newDNA.put(entry.getKey(), newGenome);
 			i = i + 1;
 		}
-		
-		newDNA.debug();
 
 		return newDNA;
 	}
-	
+
 	public void debug() {
-		
+
 		for (Entry<String, Genome> entry : entrySet()) {
 			System.out.println("Genome: " + entry.getKey());
 			Genome genome = entry.getValue();
@@ -134,6 +153,6 @@ public class DNA extends HashMap<String, Genome> {
 			}
 			System.out.println(str);
 		}
-		
+
 	}
 }
