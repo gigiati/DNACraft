@@ -64,6 +64,10 @@ public class DNA extends HashMap<String, Genome> {
 		return getActiveGeneTally(genome).randomWeighted().getKey();
 	}
 	
+	public int getRandomWeightedGene(String genome, double pow) {
+		return getActiveGeneTally(genome).randomWeighted(pow).getKey();
+	}
+	
 
 	public NBTTagCompound toNBT() {
 		NBTTagCompound compound = new NBTTagCompound();

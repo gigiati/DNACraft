@@ -13,6 +13,7 @@ import dnacraft.common.evolution.DNA;
 import dnacraft.common.evolution.Genome;
 import dnacraft.common.evolution.Trait;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
@@ -31,10 +32,12 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -93,12 +96,12 @@ public class EntityMutant extends EntityAnimal implements
 		if (tagCompound != null && tagCompound.hasKey("traits")) {
 			this.dna = DNA.fromNBT(tagCompound.getCompoundTag("traits"));
 		}
-		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE);
-		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE);
-		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE);
-		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE);
-		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE);
-		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE);
+		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE, 1.8);
+		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE, 1.8);
+		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE, 1.8);
+		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE, 1.8);
+		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE, 1.8);
+		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 1.8);
 		if (this.arms != this.body) {
 			this.arms = Trait.ANIMAL_PIG;
 		}
@@ -121,6 +124,48 @@ public class EntityMutant extends EntityAnimal implements
     public boolean isAIEnabled()
     {
         return true;
+    }
+    
+    @Override
+    public void onDeath(DamageSource par1DamageSource)
+    {
+        super.onDeath(par1DamageSource);
+        if (this.dna == null) return;
+        int drops = this.dna.getRandomWeightedGene(Genome.DROP_AMOUNT);
+        for (int i = 0; i < drops; i++) {
+            switch(this.dna.getRandomWeightedGene(Genome.DROP_TYPE))
+            {
+            case Trait.DROP_CHICKEN:
+            	this.dropItem(Item.chickenRaw.itemID, 1);
+            	break;
+            case Trait.DROP_ENDERPEARL:
+            	this.dropItem(Item.enderPearl.itemID, 1);
+            	break;
+            case Trait.DROP_FEATHER:
+            	this.dropItem(Item.feather.itemID, 1);
+            	break;
+            case Trait.DROP_GUNPOWDER:
+            	this.dropItem(Item.gunpowder.itemID, 1);
+            	break;
+            case Trait.DROP_PORK_RAW:
+            	this.dropItem(Item.porkRaw.itemID, 1);
+            	break;
+            case Trait.DROP_ROTTEN_FLESH:
+            	this.dropItem(Item.rottenFlesh.itemID, 1);
+            	break;
+            case Trait.DROP_SPIDER_EYE:
+            	this.dropItem(Item.spiderEye.itemID, 1);
+            	break;
+            case Trait.DROP_STRING:
+            	this.dropItem(Item.silk.itemID, 1);
+            	break;
+            case Trait.DROP_WOOL:
+            	this.dropItem(Item.itemsList[Block.cloth.blockID].itemID, 1);
+            	break;
+            }
+        }
+
+        //this.dropItem(var2, 1);
     }
     
     public boolean attackEntityAsMob(Entity par1Entity)
