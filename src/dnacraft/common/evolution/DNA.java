@@ -10,7 +10,8 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
-import dnacraft.common.evolution.materials.DNAPorkRaw;
+import dnacraft.common.evolution.dna.DNAChicken;
+import dnacraft.common.evolution.dna.DNAPig;
 import dnacraft.common.item.metas.MetaDNA;
 
 import net.minecraft.nbt.NBTBase;
@@ -19,7 +20,8 @@ import net.minecraft.nbt.NBTTagIntArray;
 
 public class DNA extends HashMap<String, Genome> {
 
-	public static DNA porkRaw = new DNAPorkRaw();
+	public static DNA pig = new DNAPig();
+	public static DNA chicken = new DNAChicken();
 
 	private static Random rnd = new Random();
 
@@ -94,6 +96,8 @@ public class DNA extends HashMap<String, Genome> {
 
 	public static DNA mergeFragment(DNA stackDNA, DNA fragment) {
 
+		stackDNA.debug();
+		
 		if (stackDNA.size() <= 0) {
 			return fragment.clone();
 		}
@@ -106,12 +110,30 @@ public class DNA extends HashMap<String, Genome> {
 			if (i == item) {
 				int rndTrait = rnd.nextInt(40);
 				Genome fragmentGenome = fragment.get(entry.getKey());
+				System.out.println("Moving " + entry.getKey() + " index "+ rndTrait + " value = "+ fragmentGenome.get(rndTrait).getTrait());
 				newGenome.set(rndTrait, fragmentGenome.get(rndTrait).clone());
 			}
 			newDNA.put(entry.getKey(), newGenome);
 			i = i + 1;
 		}
 		
+		newDNA.debug();
+
 		return newDNA;
+	}
+	
+	public void debug() {
+		
+		for (Entry<String, Genome> entry : entrySet()) {
+			System.out.println("Genome: " + entry.getKey());
+			Genome genome = entry.getValue();
+			String str = "";
+			for (int i = 0; i < genome.size(); i++) {
+				Gene g = genome.get(i);
+				str += g.getTrait() + ":" + (g.isActive() ? 1 : 0) + ",";
+			}
+			System.out.println(str);
+		}
+		
 	}
 }

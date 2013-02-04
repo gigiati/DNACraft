@@ -16,11 +16,14 @@ public class Trait {
 	public static final int ANIMAL_SHEEP		= 35;
 	
 	
-	public static final int DROP_PORK_RAW 		= 64;
-	public static final int DROP_PORK_COOKED 	= 65;
+	public static final int DROP_PORK_RAW 		= 0;
+	public static final int DROP_PORK_COOKED 	= 1;
+	public static final int DROP_FEATHER 		= 2;
+	public static final int DROP_CHICKEN 		= 3;
 	
-	public static final int COLOR_PINK 			= 97;
-	public static final int COLOR_RED 			= 98;
+	public static final int COLOR_PINK 			= 0;
+	public static final int COLOR_RED 			= 1;
+	public static final int COLOR_WHITE 		= 2;
 	
 
 }

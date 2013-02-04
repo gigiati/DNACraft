@@ -92,7 +92,8 @@ public class CommonProxy {
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		
 		Items.itemGeneric = new ItemGeneric(822);
-		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.porkCooked", Item.porkCooked, DNA.porkRaw));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.porkRaw", Item.porkRaw, DNA.pig));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(1, "dnacraft.fragments.chicken", Item.feather, DNA.chicken));
 		
 		int IDs = 600;
 

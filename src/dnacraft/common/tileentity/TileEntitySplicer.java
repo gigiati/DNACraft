@@ -71,17 +71,16 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					}
 					
 					DNA newDNA = null;
-					// additional logic here
 					if (dna1 != null && dna2 != null) {
 						DNA dnaFromTag1 = new DNA();
 						DNA dnaFromTag2 = new DNA();
 						if (input1.hasTagCompound()) {
 							NBTTagCompound tag1 = input1.getTagCompound();
-							dnaFromTag1 = DNA.fromTagCompound(tag1.getCompoundTag("traits"));
+							dnaFromTag1 = DNA.fromNBT(tag1.getCompoundTag("traits"));
 						}
 						if (input2.hasTagCompound()) {
 							NBTTagCompound tag2 = input2.getTagCompound();
-							dnaFromTag2 = DNA.fromTagCompound(tag2.getCompoundTag("traits"));
+							dnaFromTag2 = DNA.fromNBT(tag2.getCompoundTag("traits"));
 						}
 						newDNA = DNA.merge(dnaFromTag2, dnaFromTag2);
 					}else if (dna1 != null && fragment != null) {
@@ -93,12 +92,12 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 							stack = input2;
 						}
 						if (stack.hasTagCompound()) {
-							stackDNA = DNA.fromTagCompound(stack.getTagCompound().getCompoundTag("traits"));
+							stackDNA = DNA.fromNBT(stack.getTagCompound().getCompoundTag("traits"));
 						}
 						newDNA = DNA.mergeFragment(stackDNA, fragment.getDNA());
 					}
 					NBTTagCompound newCompound = new NBTTagCompound();
-					newCompound.setCompoundTag("traits", newDNA.toTagCompound());
+					newCompound.setCompoundTag("traits", newDNA.toNBT());
 					ItemStack newStack = dna1.newItemStack();
 					newStack.setTagCompound(newCompound);
 					itemStacks[2] = newStack;

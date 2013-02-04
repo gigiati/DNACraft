@@ -1,12 +1,12 @@
-package dnacraft.common.evolution.materials;
+package dnacraft.common.evolution.dna;
 
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.evolution.Genome;
 import dnacraft.common.evolution.Trait;
 
-public class DNAPorkRaw extends DNA {
+public class DNAPig extends DNA {
 	
-	public DNAPorkRaw() {
+	public DNAPig() {
 		
 		addGenome(Genome.createGenomeOfType(Genome.BODY_TYPE, Trait.ANIMAL_PIG));
 		addGenome(Genome.createGenomeOfType(Genome.HEAD_TYPE, Trait.ANIMAL_PIG));
