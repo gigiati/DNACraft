@@ -14,6 +14,7 @@ import dnacraft.client.renderer.entity.RenderMutant;
 import dnacraft.client.rendering.Body;
 import dnacraft.client.rendering.BodyPart;
 import dnacraft.common.entity.EntityMutant;
+import dnacraft.common.evolution.Trait;
 
 public class DefinitionPig extends BaseDefinition implements IMobDefinition {
 
@@ -132,8 +133,8 @@ public class DefinitionPig extends BaseDefinition implements IMobDefinition {
 	}
 
 	@Override
-	public String getName() {
-		return "pig";
+	public int getTrait() {
+		return Trait.ANIMAL_PIG;
 	}
 
 	@Override

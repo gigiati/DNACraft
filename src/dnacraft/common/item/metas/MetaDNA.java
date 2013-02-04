@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.entity.EntityMutant;
-import dnacraft.common.evolution.TraitManager;
 
 public class MetaDNA implements IMeta {
 

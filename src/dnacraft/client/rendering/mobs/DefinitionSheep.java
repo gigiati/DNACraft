@@ -9,6 +9,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import dnacraft.api.IMobDefinition;
+import dnacraft.common.evolution.Trait;
 
 public class DefinitionSheep extends BaseDefinition implements IMobDefinition {
 
@@ -172,8 +173,8 @@ public class DefinitionSheep extends BaseDefinition implements IMobDefinition {
 	}
 
 	@Override
-	public String getName() {
-		return "sheep";
+	public int getTrait() {
+		return Trait.ANIMAL_SHEEP;
 	}
 
 	@Override

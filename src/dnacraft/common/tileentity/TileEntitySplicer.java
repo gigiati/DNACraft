@@ -5,24 +5,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import dnacraft.DNACraft;
-import dnacraft.api.IMeta;
-import dnacraft.common.evolution.Genome;
-import dnacraft.common.helper.NetworkHelper;
-import dnacraft.common.item.ItemGeneric;
-import dnacraft.common.item.ItemUnstackable;
-import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNAFragment;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
+import dnacraft.api.IMeta;
+import dnacraft.common.evolution.DNA;
+import dnacraft.common.item.ItemGeneric;
+import dnacraft.common.item.metas.MetaDNA;
+import dnacraft.common.item.metas.MetaDNAFragment;
 
 public class TileEntitySplicer extends BaseInventoryTileEntity implements IInventory {
 
@@ -67,7 +60,6 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 						}
 					}
 					
-					
 					if (meta1 instanceof MetaDNAFragment) {
 						fragment = (MetaDNAFragment)meta1;
 					}else if (meta2 instanceof MetaDNAFragment) {
@@ -78,66 +70,35 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 						return;
 					}
 					
-					HashMap<String, Double> traitsToAdd = new HashMap<String, Double>();
-					NBTTagCompound newCompound = null;
-					if (fragment != null) {
-
-						if (Math.random() < 0.95) {
-							if (meta1 instanceof MetaDNAFragment) {
-								this.decrStackSize(0, 1);
-							}else {
-								this.decrStackSize(1, 1);
-							}
-							return;
+					DNA newDNA = null;
+					// additional logic here
+					if (dna1 != null && dna2 != null) {
+						DNA dnaFromTag1 = new DNA();
+						DNA dnaFromTag2 = new DNA();
+						if (input1.hasTagCompound()) {
+							NBTTagCompound tag1 = input1.getTagCompound();
+							dnaFromTag1 = DNA.fromTagCompound(tag1.getCompoundTag("traits"));
 						}
-						Genome genomeForFragment = fragment.getGenome();
-						if (genomeForFragment == null) {
-							return;
+						if (input2.hasTagCompound()) {
+							NBTTagCompound tag2 = input2.getTagCompound();
+							dnaFromTag2 = DNA.fromTagCompound(tag2.getCompoundTag("traits"));
 						}
-						if (meta1 instanceof MetaDNA && input1.hasTagCompound()) {
-							newCompound = (NBTTagCompound) input1.getTagCompound().copy();
-						}else if (meta2 instanceof MetaDNA && input2.hasTagCompound()) {
-							newCompound = (NBTTagCompound) input2.getTagCompound().copy();	
+						newDNA = DNA.merge(dnaFromTag2, dnaFromTag2);
+					}else if (dna1 != null && fragment != null) {
+						DNA stackDNA = new DNA();
+						ItemStack stack = null;
+						if (meta1 instanceof MetaDNA) {
+							stack = input1;
+						}else {
+							stack = input2;
 						}
-						Entry<String,Double> trait = genomeForFragment.getRandomTrait();
-						if (trait != null) {
-							traitsToAdd.put(trait.getKey(), trait.getValue());
+						if (stack.hasTagCompound()) {
+							stackDNA = DNA.fromTagCompound(stack.getTagCompound().getCompoundTag("traits"));
 						}
-					}else {
-						if (meta1 instanceof MetaDNA && input1.hasTagCompound()) {
-							newCompound = (NBTTagCompound) input1.getTagCompound().copy();
-						}
-						if (meta2 instanceof MetaDNA && input2.hasTagCompound()) {
-							if (input2.getTagCompound().hasKey("traits")) {
-								NBTTagCompound tags = input2.getTagCompound().getCompoundTag("traits");
-								Collection col = tags.getTags();
-								Iterator it = col.iterator();
-								while (it.hasNext()) {
-									NBTBase nbt = (NBTBase) it.next();
-									if (nbt.getId() == 6) {
-										traitsToAdd.put(nbt.getName(), ((NBTTagDouble) nbt).data);
-									}
-								}
-							}
-						}
+						newDNA = DNA.mergeFragment(stackDNA, fragment.getDNA());
 					}
-
-					if (newCompound == null) {
-						newCompound = new NBTTagCompound();
-					}
-					if (!newCompound.hasKey("traits")) {
-						newCompound.setCompoundTag("traits", new NBTTagCompound());
-					}
-					NBTTagCompound traitsCompound = newCompound.getCompoundTag("traits");
-					for (Map.Entry<String, Double> trait : traitsToAdd.entrySet()) {
-						double val = 0.0;
-						if (traitsCompound.hasKey(trait.getKey())) {
-							val = traitsCompound.getDouble(trait.getKey());
-						}
-						val += trait.getValue();
-						traitsCompound.setDouble(trait.getKey(), val);
-					}
-					
+					NBTTagCompound newCompound = new NBTTagCompound();
+					newCompound.setCompoundTag("traits", newDNA.toTagCompound());
 					ItemStack newStack = dna1.newItemStack();
 					newStack.setTagCompound(newCompound);
 					itemStacks[2] = newStack;
@@ -145,7 +106,6 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					decrStackSize(0, 1);
 					decrStackSize(1, 1);
 				}
-				
 			}
 		}
 	}

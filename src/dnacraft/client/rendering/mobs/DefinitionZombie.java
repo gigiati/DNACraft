@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import dnacraft.api.IMobDefinition;
+import dnacraft.common.evolution.Trait;
 
 public class DefinitionZombie extends BaseDefinition implements IMobDefinition {
 
@@ -150,8 +151,8 @@ public class DefinitionZombie extends BaseDefinition implements IMobDefinition {
 	}
 
 	@Override
-	public String getName() {
-		return "zombie";
+	public int getTrait() {
+		return Trait.MONSTER_ZOMBIE;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public interface IMobDefinition {
 	public Vec3 getTailAttachmentPoint();
 	public Vec3[] getWingAttachmentPoints();
 	public Vec3[] getArmAttachmentPoints();
-	public String getName();
+	public int getTrait();
 	public int getLegHeight();
 	public int getBodyHeight();
 	public int getNumberOfLegs();

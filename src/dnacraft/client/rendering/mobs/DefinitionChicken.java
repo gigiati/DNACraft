@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import dnacraft.api.IMobDefinition;
+import dnacraft.common.evolution.Trait;
 
 public class DefinitionChicken extends BaseDefinition implements IMobDefinition {
 
@@ -150,8 +151,8 @@ public class DefinitionChicken extends BaseDefinition implements IMobDefinition 
 	}
 
 	@Override
-	public String getName() {
-		return "chicken";
+	public int getTrait() {
+		return Trait.ANIMAL_CHICKEN;
 	}
 
 	@Override

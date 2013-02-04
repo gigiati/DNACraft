@@ -8,14 +8,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.bouncycastle.jcajce.provider.symmetric.SEED;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerFurnace;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSeeds;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -30,9 +26,7 @@ import dnacraft.common.block.BlockSplicer;
 import dnacraft.common.container.ContainerCentrifuge;
 import dnacraft.common.container.ContainerSplicer;
 import dnacraft.common.entity.EntityMutant;
-import dnacraft.common.evolution.Genome;
-import dnacraft.common.evolution.TraitManager;
-import dnacraft.common.evolution.genome.GenomeSeeds;
+import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 import dnacraft.common.item.metas.MetaDNA;
@@ -98,10 +92,7 @@ public class CommonProxy {
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		
 		Items.itemGeneric = new ItemGeneric(822);
-		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.seeds", Item.seeds, Genome.seeds));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(1, "dnacraft.fragments.porkRaw", Item.porkRaw, Genome.porkRaw));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(2, "dnacraft.fragments.porkCooked", Item.porkCooked, Genome.porkCooked));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(3, "dnacraft.fragments.spider", Item.shovelWood, Genome.spider));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.porkCooked", Item.porkCooked, DNA.porkRaw));
 		
 		int IDs = 600;
 

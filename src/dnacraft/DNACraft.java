@@ -10,7 +10,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import dnacraft.common.CommonProxy;
 import dnacraft.common.block.BlockCentrifuge;
 import dnacraft.common.block.BlockSplicer;
-import dnacraft.common.evolution.TraitManager;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 
@@ -45,8 +44,6 @@ public class DNACraft {
 		
 		configFile.save();
 		
-		TraitManager.instance.put(TraitManager.COLOR_GREEN, 0.5);
-		TraitManager.instance.put(TraitManager.COLOR_RED, 0.5);
 	}
 	
 	@Mod.Init

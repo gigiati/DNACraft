@@ -7,6 +7,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import dnacraft.api.IMobDefinition;
 import dnacraft.client.model.ModelMutant;
+import dnacraft.common.evolution.Trait;
 
 public class DefinitionOcelot extends BaseDefinition implements IMobDefinition {
 
@@ -153,8 +154,8 @@ public class DefinitionOcelot extends BaseDefinition implements IMobDefinition {
 	}
 	
 	@Override
-	public String getName() {
-		return "ocelot";
+	public int getTrait() {
+		return Trait.ANIMAL_OCELOT;
 	}
 
 	@Override

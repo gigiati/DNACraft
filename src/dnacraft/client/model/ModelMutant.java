@@ -23,10 +23,10 @@ import dnacraft.common.entity.EntityMutant;
 @SideOnly(Side.CLIENT)
 public class ModelMutant extends ModelBase {
 
-	public HashMap<String, IMobDefinition> mobs = new HashMap<String, IMobDefinition>();
+	public HashMap<Integer, IMobDefinition> mobs = new HashMap<Integer, IMobDefinition>();
 
 	public void register(IMobDefinition mobdef) {
-		mobs.put(mobdef.getName(), mobdef);
+		mobs.put(mobdef.getTrait(), mobdef);
 	}
 
 	public ModelMutant() {
@@ -51,7 +51,7 @@ public class ModelMutant extends ModelBase {
 		IMobDefinition arms = this.mobs.get(mutant.getArmsModel());
 
 		int legheight = legs.getLegHeight();
-		
+
 		body.renderBody(entity, legSwing, prevLegSwing, wingSwing, yaw, pitch,
 				scale, legheight);
 

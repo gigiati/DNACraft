@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import dnacraft.api.IMobDefinition;
+import dnacraft.common.evolution.Trait;
 
 public class DefinitionCreeper extends BaseDefinition implements IMobDefinition {
 
@@ -118,8 +119,8 @@ public class DefinitionCreeper extends BaseDefinition implements IMobDefinition 
 	}
 
 	@Override
-	public String getName() {
-		return "creeper";
+	public int getTrait() {
+		return Trait.MONSTER_CREEPER;
 	}
 
 	@Override

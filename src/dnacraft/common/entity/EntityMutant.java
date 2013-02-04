@@ -9,7 +9,7 @@ import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import dnacraft.common.entity.ai.EntityAIMutantSwell;
-import dnacraft.common.evolution.TraitManager;
+import dnacraft.common.evolution.DNA;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -53,13 +53,13 @@ public class EntityMutant extends EntityAnimal implements
 	public float field_70889_i = 1.0F;
 
 	/* model/generics stuff */
-	public String head;
-	private String legs;
-	private String body;
-	private String arms;
-	private String wings;
-	private String tail;
-	public NBTTagCompound dna = null;
+	public int head = 1;
+	private int legs = 1;
+	private int body = 1;
+	private int arms = 1;
+	private int wings = 1;
+	private int tail = 1;
+	public DNA dna = null;
 	
 	/* creeper stuff */
     private int timeSinceIgnited;
@@ -89,11 +89,15 @@ public class EntityMutant extends EntityAnimal implements
 	
 	public void setDNAFromTagCompound(NBTTagCompound tagCompound) {
 		if (tagCompound != null && tagCompound.hasKey("traits")) {
-			this.dna = tagCompound.getCompoundTag("traits");
-			System.out.println("We have DNA");
-		}else {
-		System.out.println("We have no DNA");
+			this.dna = DNA.fromNBT(tagCompound.getCompoundTag("traits"));
 		}
+		this.head = this.dna.getHeadType();
+		this.body = this.dna.getHeadType();
+		this.arms = this.dna.getHeadType();
+		this.wings = this.dna.getHeadType();
+		this.legs = this.dna.getHeadType();
+		this.tail = this.dna.getHeadType();
+		/*
 		this.head = TraitManager.instance.getBodyPartFromDNA(this.dna);
         this.body = TraitManager.instance.getBodyPartFromDNA(this.dna);
         this.legs = TraitManager.instance.getBodyPartFromDNA(this.dna);
@@ -103,14 +107,15 @@ public class EntityMutant extends EntityAnimal implements
         if (this.arms != this.body) {
         	this.arms = "pig";
         }
+        */
 	}
 	
 	public void setDNAFromItemStack(ItemStack stack) {
-		NBTTagCompound dna = null;
+		NBTTagCompound compound = null;
 		if (stack.hasTagCompound()) {
-			dna = stack.getTagCompound();
+			compound = stack.getTagCompound();
 		}
-		setDNAFromTagCompound(dna);
+		setDNAFromTagCompound(compound);
         
 	}
 
@@ -297,14 +302,14 @@ public class EntityMutant extends EntityAnimal implements
 	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeEntityToNBT(tag);
 		if (this.dna != null) {
-			tag.setCompoundTag("traits", this.dna);
+			tag.setCompoundTag("traits", this.dna.toNBT());
 		}
-		tag.setString("head", this.head);
-		tag.setString("body", this.body);
-		tag.setString("wings", this.wings);
-		tag.setString("arms", this.arms);
-		tag.setString("tail", this.tail);
-		tag.setString("legs", this.legs);
+		tag.setInteger("head", this.head);
+		tag.setInteger("body", this.body);
+		tag.setInteger("wings", this.wings);
+		tag.setInteger("arms", this.arms);
+		tag.setInteger("tail", this.tail);
+		tag.setInteger("legs", this.legs);
 
 
         if (this.dataWatcher.getWatchableObjectByte(17) == 1)
@@ -320,14 +325,14 @@ public class EntityMutant extends EntityAnimal implements
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readEntityFromNBT(tag);
 		if (tag.hasKey("traits")) {
-			dna = tag.getCompoundTag("traits");
+			dna = DNA.fromNBT(tag.getCompoundTag("traits"));
 		}
-		this.head = tag.getString("head");
-		this.body = tag.getString("body");
-		this.wings = tag.getString("wings");
-		this.arms = tag.getString("arms");
-		this.tail = tag.getString("tail");
-		this.legs = tag.getString("legs");
+		this.head = tag.getInteger("head");
+		this.body = tag.getInteger("body");
+		this.wings = tag.getInteger("wings");
+		this.arms = tag.getInteger("arms");
+		this.tail = tag.getInteger("tail");
+		this.legs = tag.getInteger("legs");
 		
 		
 		/*
@@ -351,44 +356,44 @@ public class EntityMutant extends EntityAnimal implements
 	}
 
 	private void writeStreamData(DataOutput data) throws IOException {
-		data.writeUTF(this.head);
-		data.writeUTF(this.body);
-		data.writeUTF(this.wings);
-		data.writeUTF(this.arms);
-		data.writeUTF(this.legs);
-		data.writeUTF(this.tail);
+		data.writeInt(this.head);
+		data.writeInt(this.body);
+		data.writeInt(this.wings);
+		data.writeInt(this.arms);
+		data.writeInt(this.legs);
+		data.writeInt(this.tail);
 	}
 
 	@Override
 	public void readSpawnData(ByteArrayDataInput data) {
 		try
 	    {
-	      this.head = data.readUTF();
-	      this.body = data.readUTF();
-	      this.wings = data.readUTF();
-	      this.arms = data.readUTF();
-	      this.legs = data.readUTF();
-	      this.tail = data.readUTF();
+	      this.head = data.readInt();
+	      this.body = data.readInt();
+	      this.wings = data.readInt();
+	      this.arms = data.readInt();
+	      this.legs = data.readInt();
+	      this.tail = data.readInt();
 	    }catch(Exception e) {
 	    }
 	}
 
-	public String getBodyModel() {
+	public int getBodyModel() {
 		return this.body;
 	}
-	public String getArmsModel() {
+	public int getArmsModel() {
 		return this.arms;
 	}
-	public String getHeadModel() {
+	public int getHeadModel() {
 		return this.head;
 	}
-	public String getLegsModel() {
+	public int getLegsModel() {
 		return this.legs;
 	}
-	public String getWingsModel() {
+	public int getWingsModel() {
 		return this.wings;
 	}
-	public String getTailModel() {
+	public int getTailModel() {
 		return this.tail;
 	}
 

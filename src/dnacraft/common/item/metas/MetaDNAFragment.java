@@ -8,19 +8,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
-import dnacraft.common.evolution.Genome;
-import dnacraft.common.evolution.TraitManager;
+import dnacraft.common.evolution.DNA;
 
 public class MetaDNAFragment implements IMeta {
 
-	private Genome genome = null;
+	private DNA dna = null;
 	private int id;
 	private String name;
 	
 	public static HashMap<Item, MetaDNAFragment> fragmentsForItems = new HashMap<Item, MetaDNAFragment>();
 	
-	public MetaDNAFragment(int id, String name, Item item, Genome genome) {
-		this.genome = genome;
+	public MetaDNAFragment(int id, String name, Item item, DNA dna) {
+		this.dna = dna;
 		this.id = id;
 		this.name = name;
 		fragmentsForItems.put(item, this);
@@ -51,8 +50,8 @@ public class MetaDNAFragment implements IMeta {
 		return newItemStack(1);
 	}
 	
-	public Genome getGenome() {
-		return genome;
+	public DNA getDNA() {
+		return dna;
 	}
 
 	@Override

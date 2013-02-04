@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import dnacraft.api.IMobDefinition;
+import dnacraft.common.evolution.Trait;
 
 public class DefinitionSpider extends BaseDefinition implements IMobDefinition {
 
@@ -185,8 +186,8 @@ public class DefinitionSpider extends BaseDefinition implements IMobDefinition {
 	}
 	
 	@Override
-	public String getName() {
-		return "spider";
+	public int getTrait() {
+		return Trait.MONSTER_SPIDER;
 	}
 
 	@Override
