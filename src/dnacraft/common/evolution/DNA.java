@@ -56,7 +56,7 @@ public class DNA extends HashMap<String, Genome> {
 	public Tally getInactiveGeneTally(String type) {
 		return getGeneTally(type, false);
 	}
-
+	
 	public Tally getGeneTally(String type, boolean active) {
 		Tally tally = new Tally();
 		for (Gene gene : get(type)) {
@@ -69,6 +69,10 @@ public class DNA extends HashMap<String, Genome> {
 
 	public int getLargestGene(String genome) {
 		return getActiveGeneTally(genome).largest().getKey();
+	}
+	
+	public double getAverageGene(String genome) {
+		return getActiveGeneTally(genome).average();
 	}
 
 	public int getRandomWeightedGene(String genome) {

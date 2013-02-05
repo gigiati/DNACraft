@@ -15,7 +15,8 @@ public class DNACreeper extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.LEG_TYPE, Trait.MONSTER_CREEPER));
 		addGenome(Genome.createGenomeOfType(Genome.TAIL_TYPE, Trait.MONSTER_CREEPER));
 		
-		addGenome(Genome.createGenomeOfType(Genome.AGGRESSION, 10));
+		addGenome(Genome.createGenomeOfType(Genome.AGGRESSION, 7));
+		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 7));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_GREEN));
 		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1, 2));

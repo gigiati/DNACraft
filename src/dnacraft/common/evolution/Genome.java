@@ -35,6 +35,8 @@ public class Genome extends ArrayList<Gene> {
 
 	public static String OFFSPRING = "o";
 	public static String AGGRESSION = "a";
+	
+	public static String TERRITORIALILTY = "ter";
 
 	private String type;
 

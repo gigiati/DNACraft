@@ -16,6 +16,17 @@ public class Tally extends HashMap<Integer, Integer> {
 		}
 		return maxEntry;
 	}
+	
+	public double average() {
+		int total = 0;
+		int count = 0;
+		for (Map.Entry<Integer, Integer> entry : entrySet())
+		{
+			count += entry.getValue();
+			total += entry.getKey() * entry.getValue();
+		}
+		return (double)total / count;
+	}
 
 	public Map.Entry<Integer, Integer> randomWeighted() {
 		return randomWeighted(1);

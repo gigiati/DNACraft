@@ -15,6 +15,7 @@ public class DNAChicken extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TAIL_TYPE, Trait.ANIMAL_CHICKEN));
 		
 		addGenome(Genome.createGenomeOfType(Genome.AGGRESSION, 0));
+		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 0));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_WHITE));
 		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1, 2));

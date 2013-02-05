@@ -8,6 +8,7 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import dnacraft.common.entity.ai.EntityAIDNABasedNearestAttackableTarget;
 import dnacraft.common.entity.ai.EntityAIMutantSwell;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.evolution.Genome;
@@ -64,6 +65,8 @@ public class EntityMutant extends EntityAnimal implements
 	private int arms = 1;
 	private int wings = 1;
 	private int tail = 1;
+	private double aggression = 0;
+	private double territoriality = 0;
 	public DNA dna = null;
 	
 	/* creeper stuff */
@@ -81,14 +84,14 @@ public class EntityMutant extends EntityAnimal implements
         
         this.tasks.addTask(i++, new EntityAISwimming(this));
         //this.tasks.addTask(i++, new EntityAIMutantSwell(this));
-        //this.tasks.addTask(i++, new EntityAIAttackOnCollide(this, EntityLiving.class, this.moveSpeed, false));
+        this.tasks.addTask(i++, new EntityAIAttackOnCollide(this, EntityLiving.class, this.moveSpeed, false));
         this.tasks.addTask(i++, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(i++, new EntityAIWander(this, this.moveSpeed));
         //this.tasks.addTask(i++, new EntityAILeapAtTarget(this, 0.3F));
         this.tasks.addTask(i++, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(i++, new EntityAILookIdle(this));
 
-        //this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true));
+        this.targetTasks.addTask(1, new EntityAIDNABasedNearestAttackableTarget(this));
         //this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
 	}
 	
@@ -102,6 +105,8 @@ public class EntityMutant extends EntityAnimal implements
 		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE, 10);
 		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE, 10);
 		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 10);
+		this.aggression = this.dna.getAverageGene(Genome.AGGRESSION);
+		this.territoriality = this.dna.getAverageGene(Genome.TERRITORIALILTY);
 		if (this.arms != this.body) {
 			this.arms = Trait.ANIMAL_PIG;
 		}
@@ -349,8 +354,9 @@ public class EntityMutant extends EntityAnimal implements
 		tag.setInteger("arms", this.arms);
 		tag.setInteger("tail", this.tail);
 		tag.setInteger("legs", this.legs);
-
-
+		tag.setDouble("aggression", this.aggression);
+		tag.setDouble("territoriality", this.territoriality);
+		
         if (this.dataWatcher.getWatchableObjectByte(17) == 1)
         {
             tag.setBoolean("powered", true);
@@ -372,7 +378,8 @@ public class EntityMutant extends EntityAnimal implements
 		this.arms = tag.getInteger("arms");
 		this.tail = tag.getInteger("tail");
 		this.legs = tag.getInteger("legs");
-		
+		this.aggression = tag.getDouble("aggression");
+		this.territoriality = tag.getDouble("territoriality");
 		
 		/*
 		 * CREEPER behaviour
@@ -434,6 +441,12 @@ public class EntityMutant extends EntityAnimal implements
 	}
 	public int getTailModel() {
 		return this.tail;
+	}
+	public double getAggression() {
+		return this.aggression;
+	}
+	public double getTerritoriality() {
+		return this.territoriality;
 	}
 
 }

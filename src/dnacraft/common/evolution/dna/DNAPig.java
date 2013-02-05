@@ -16,6 +16,7 @@ public class DNAPig extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TAIL_TYPE, Trait.ANIMAL_PIG));
 		
 		addGenome(Genome.createGenomeOfType(Genome.AGGRESSION, 0));
+		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 0));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_PINK));
 		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1, 2));

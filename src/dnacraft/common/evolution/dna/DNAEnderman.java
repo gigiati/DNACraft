@@ -16,6 +16,7 @@ public class DNAEnderman extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TAIL_TYPE, Trait.MONSTER_ENDERMAN));
 		
 		addGenome(Genome.createGenomeOfType(Genome.AGGRESSION, 6));
+		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 6));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_BLACK));
 		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1));
