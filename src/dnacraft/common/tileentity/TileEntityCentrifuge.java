@@ -24,6 +24,10 @@ public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IIn
 			ItemStack tube = itemStacks[1];
 
 			if (input != null && input.stackSize > 0 && tube != null && tube.stackSize > 0) {
+				MetaDNAFragment fragment = MetaDNAFragment.getFragmentForItemStack(input);
+				if (fragment == null) {
+					return;
+				}
 				ItemStack output = MetaDNAFragment.getFragmentForItemStack(input).newItemStack();
 				Item tubeItem = tube.getItem();
 				if (output != null &&
