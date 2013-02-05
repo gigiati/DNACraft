@@ -22,7 +22,6 @@ public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IIn
 		if (!worldObj.isRemote) {
 			ItemStack input = itemStacks[0];
 			ItemStack tube = itemStacks[1];
-
 			if (input != null && input.stackSize > 0 && tube != null && tube.stackSize > 0) {
 				MetaDNAFragment fragment = MetaDNAFragment.getFragmentForItemStack(input);
 				if (fragment == null) {
