@@ -96,12 +96,12 @@ public class EntityMutant extends EntityAnimal implements
 		if (tagCompound != null && tagCompound.hasKey("traits")) {
 			this.dna = DNA.fromNBT(tagCompound.getCompoundTag("traits"));
 		}
-		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE, 2.5);
-		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE, 2.5);
-		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE, 2.5);
-		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE, 2.5);
-		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE, 2.5);
-		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 2.5);
+		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE, 10);
+		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE, 10);
+		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE, 10);
+		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE, 10);
+		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE, 10);
+		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 10);
 		if (this.arms != this.body) {
 			this.arms = Trait.ANIMAL_PIG;
 		}
@@ -133,7 +133,7 @@ public class EntityMutant extends EntityAnimal implements
         if (this.dna == null) return;
         int drops = this.dna.getRandomWeightedGene(Genome.DROP_AMOUNT);
         for (int i = 0; i < drops; i++) {
-            switch(this.dna.getRandomWeightedGene(Genome.DROP_TYPE))
+            switch(this.dna.getRandomWeightedGene(Genome.DROP_TYPE, 1.5))
             {
             case Trait.DROP_CHICKEN:
             	this.dropItem(Item.chickenRaw.itemID, 1);

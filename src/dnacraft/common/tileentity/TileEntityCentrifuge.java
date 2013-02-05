@@ -1,6 +1,8 @@
 package dnacraft.common.tileentity;
 
+import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.metas.MetaDNAFragment;
+import dnacraft.common.item.metas.MetaTestTube;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -19,12 +21,15 @@ public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IIn
 		super.updateEntity();
 		if (!worldObj.isRemote) {
 			ItemStack input = itemStacks[0];
-			ItemStack bottle = itemStacks[1];
+			ItemStack tube = itemStacks[1];
 
-			if (input != null && input.stackSize > 0 && bottle != null && bottle.stackSize > 0) {
+			if (input != null && input.stackSize > 0 && tube != null && tube.stackSize > 0) {
 				ItemStack output = MetaDNAFragment.getFragmentForItemStack(input).newItemStack();
-				Item bottleItem = bottle.getItem();
-				if (output != null && bottleItem != null && bottleItem instanceof ItemGlassBottle) {
+				Item tubeItem = tube.getItem();
+				if (output != null &&
+					tubeItem != null &&
+					tubeItem instanceof ItemGeneric &&
+					((ItemGeneric)tubeItem).isA(tube, MetaTestTube.class)) {
 					if (itemStacks[2] != null) {
 						ItemStack outputStack = itemStacks[2];
 						if (outputStack.getItem() == output.getItem() &&

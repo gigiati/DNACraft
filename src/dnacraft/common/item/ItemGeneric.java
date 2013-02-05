@@ -7,7 +7,9 @@ import java.util.Map.Entry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
+import dnacraft.common.item.metas.MetaBloodSample;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
@@ -85,7 +87,6 @@ public class ItemGeneric extends Item {
 	}
 	
 	public IMeta getMeta(Class klass) {
-		
 		for (Entry<Integer, IMeta> entry : this.metaitems.entrySet()) {
 			if (entry.getValue().getClass().equals(klass)) {
 				return entry.getValue();
@@ -98,6 +99,21 @@ public class ItemGeneric extends Item {
 		return getMeta(itemStack.getItemDamage());
 	}
 	
+	public ItemStack newItemStack(Class meta) {
+		return newItemStack(meta, 1);
+	}
+	
+	public ItemStack newItemStack(Class meta, int number) {
+		return new ItemStack(
+				this,
+				number,
+				getMeta(meta).getId()
+		);
+	}
+	
+	public boolean isA(ItemStack stack, Class klazz) {
+		return stack.getItemDamage() == getMeta(klazz).getId();
+	}
 
 
 }

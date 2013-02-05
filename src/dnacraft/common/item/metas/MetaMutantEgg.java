@@ -35,16 +35,6 @@ public class MetaMutantEgg implements IMeta {
 	public int getId() {
 		return this.id;
 	}
-
-	@Override
-	public ItemStack newItemStack(int count) {
-		return new ItemStack(DNACraft.Items.itemUnstackable, count, this.getId());
-	}
-
-	@Override
-	public ItemStack newItemStack() {
-		return newItemStack(1);
-	}
 	
 	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10)

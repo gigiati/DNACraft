@@ -3,10 +3,12 @@ package dnacraft.common.tileentity;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
+import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 import dnacraft.common.item.metas.MetaBloodSample;
 import dnacraft.common.item.metas.MetaDNA;
 import dnacraft.common.item.metas.MetaDNAFragment;
+import dnacraft.common.item.metas.MetaTestTube;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,8 +41,12 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 				return;
 			}
 			if (fuelStack.getItem() != Item.diamond ||
-				bottleStack.getItem() != Item.glassBottle
+				!(bottleStack.getItem() instanceof ItemGeneric)
 			) {
+				return;
+			}
+			ItemGeneric testTube = (ItemGeneric)bottleStack.getItem();
+			if (!testTube.isA(bottleStack, MetaTestTube.class)) {
 				return;
 			}
 			DNA dnaToUse = null;
@@ -60,7 +66,7 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 				}
 			}
 			if (dnaToUse != null) {
-				ItemStack result = DNACraft.Items.itemUnstackable.getMeta(MetaDNA.class).newItemStack();
+				ItemStack result = DNACraft.Items.itemUnstackable.newItemStack(MetaDNA.class);
 				NBTTagCompound compound = new NBTTagCompound();
 				compound.setCompoundTag("traits", dnaToUse.toNBT());
 				result.setTagCompound(compound);

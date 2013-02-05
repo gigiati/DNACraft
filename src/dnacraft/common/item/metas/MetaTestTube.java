@@ -7,11 +7,11 @@ import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 
-public class MetaBloodSample implements IMeta {
+public class MetaTestTube implements IMeta {
 
 	private int id;
 	
-	public MetaBloodSample(int id) {
+	public MetaTestTube(int id) {
 		this.id = id;
 	}
 	
@@ -22,7 +22,7 @@ public class MetaBloodSample implements IMeta {
 
 	@Override
 	public String getItemNameIS(ItemStack stack) {
-		return "dnacraft.bloodsample";
+		return "dnacraft.testtube";
 	}
 
 	@Override
@@ -30,11 +30,9 @@ public class MetaBloodSample implements IMeta {
 		return this.id;
 	}
 
-
 	@Override
 	public boolean hitEntity(ItemStack itemStack, EntityLiving target,
 			EntityLiving player) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

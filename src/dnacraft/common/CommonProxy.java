@@ -13,8 +13,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -36,13 +40,15 @@ import dnacraft.common.item.metas.MetaBloodSample;
 import dnacraft.common.item.metas.MetaDNA;
 import dnacraft.common.item.metas.MetaDNAFragment;
 import dnacraft.common.item.metas.MetaMutantEgg;
+import dnacraft.common.item.metas.MetaNeedle;
 import dnacraft.common.item.metas.MetaSyringe;
+import dnacraft.common.item.metas.MetaTestTube;
 import dnacraft.common.tileentity.TileEntityCentrifuge;
 import dnacraft.common.tileentity.TileEntitySequencer;
 import dnacraft.common.tileentity.TileEntitySplicer;
 
 public class CommonProxy {
-	
+
 	private class GuiHandler implements IGuiHandler {
 
 		@Override
@@ -79,14 +85,14 @@ public class CommonProxy {
 		}
 
 	}
-	
+
 
 	public Object getGui(InventoryPlayer inventory, TileEntity tileentity) {
 		return null;
 	}
-	
+
 	public void init() {
-		
+
 		DNACraft.Blocks.blockCentrifuge = new BlockCentrifuge(500, Material.ground);
 		GameRegistry.registerBlock(DNACraft.Blocks.blockCentrifuge, "dnacraft.machines.centrifuge");
 		GameRegistry.registerTileEntity(TileEntityCentrifuge.class, "centrifuge");
@@ -94,33 +100,39 @@ public class CommonProxy {
 		DNACraft.Blocks.blockSplicer = new BlockSplicer(501, Material.ground);
 		GameRegistry.registerBlock(DNACraft.Blocks.blockSplicer, "dnacraft.machines.splicer");
 		GameRegistry.registerTileEntity(TileEntitySplicer.class, "splicer");
-		
+
 		DNACraft.Blocks.blockSequencer = new BlockSequencer(502, Material.ground);
 		GameRegistry.registerBlock(DNACraft.Blocks.blockSequencer, "dnacraft.machines.sequencer");
 		GameRegistry.registerTileEntity(TileEntitySequencer.class, "sequencer");
 
 		Items.itemUnstackable = new ItemUnstackable(821);
+
 		Items.itemUnstackable.addMeta(new MetaDNA(0));
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		Items.itemUnstackable.addMeta(new MetaSyringe(2));
 		Items.itemUnstackable.addMeta(new MetaBloodSample(3));
-		
+
 		Items.itemGeneric = new ItemGeneric(822);
-		Items.itemGeneric.addMeta(new MetaDNAFragment(0, "dnacraft.fragments.pig", DNA.pig, Item.porkRaw, Item.porkCooked));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(1, "dnacraft.fragments.chicken", DNA.chicken, Item.feather, Item.chickenRaw, Item.chickenCooked));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(2, "dnacraft.fragments.zombie", DNA.zombie, Item.rottenFlesh));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(3, "dnacraft.fragments.enderman", DNA.enderman, Item.enderPearl, Item.eyeOfEnder));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(4, "dnacraft.fragments.spider", DNA.spider, Item.spiderEye, Item.silk));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(5, "dnacraft.fragments.sheep", DNA.sheep, Item.itemsList[Block.cloth.blockID]));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(6, "dnacraft.fragments.ocelot", DNA.ocelot, Item.fishRaw, Item.fishCooked));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(7, "dnacraft.fragments.creeper", DNA.creeper, Item.gunpowder));
-		
+
+		Items.itemGeneric.addMeta(new MetaTestTube(0));
+		Items.itemGeneric.addMeta(new MetaNeedle(1));
+
+		Items.itemGeneric.addMeta(new MetaDNAFragment(30, "dnacraft.fragments.pig", DNA.pig, Item.porkRaw, Item.porkCooked));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(31, "dnacraft.fragments.chicken", DNA.chicken, Item.feather, Item.chickenRaw, Item.chickenCooked));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(32, "dnacraft.fragments.zombie", DNA.zombie, Item.rottenFlesh));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(33, "dnacraft.fragments.enderman", DNA.enderman, Item.enderPearl, Item.eyeOfEnder));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(34, "dnacraft.fragments.spider", DNA.spider, Item.spiderEye, Item.silk));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(35, "dnacraft.fragments.sheep", DNA.sheep, Item.itemsList[Block.cloth.blockID]));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(36, "dnacraft.fragments.ocelot", DNA.ocelot, Item.fishRaw, Item.fishCooked));
+		Items.itemGeneric.addMeta(new MetaDNAFragment(37, "dnacraft.fragments.creeper", DNA.creeper, Item.gunpowder));
+
 		int IDs = 600;
 
-	    EntityRegistry.registerModEntity(EntityMutant.class, "Mutant", 600, DNACraft.instance, 64, 1, true);
-		
-	    NetworkRegistry.instance().registerGuiHandler(DNACraft.instance, new GuiHandler());
+		EntityRegistry.registerModEntity(EntityMutant.class, "Mutant", 600, DNACraft.instance, 64, 1, true);
+
+		NetworkRegistry.instance().registerGuiHandler(DNACraft.instance, new GuiHandler());
 		setupLanguages();
+		addRecipes();
 	}
 
 	private void setupLanguages() {
@@ -158,8 +170,52 @@ public class CommonProxy {
 		}
 
 	}
+
+	public void addRecipes() {
+
+		ItemGeneric generic = DNACraft.Items.itemGeneric;
+		ItemGeneric unstackable = DNACraft.Items.itemUnstackable;
+
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(
+				generic.newItemStack(MetaTestTube.class, 5),
+				new Object[] {
+					"g g",
+					"g g",
+					" g ",
+					Character.valueOf('g'), new ItemStack(Block.thinGlass)			
+				}
+		));
+		
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(
+				generic.newItemStack(MetaNeedle.class, 16),
+				new Object[] {
+					"i  ",
+					" i ",
+					"  i",
+					Character.valueOf('i'), new ItemStack(Item.ingotIron)			
+				}
+		));
+		
+		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(
+				unstackable.newItemStack(MetaSyringe.class),
+				new Object[] {
+					"n  ",
+					" t ",
+					"  g",
+					Character.valueOf('n'), generic.newItemStack(MetaNeedle.class),
+					Character.valueOf('t'), generic.newItemStack(MetaTestTube.class),
+					Character.valueOf('g'), new ItemStack(Block.glass)		
+				}
+		));
+		
+		CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(
+				unstackable.newItemStack(MetaSyringe.class),
+				unstackable.newItemStack(MetaBloodSample.class)
+		));
+	}
+
 	public void registerRenderInformation()
 	{
-		
+
 	}
 }

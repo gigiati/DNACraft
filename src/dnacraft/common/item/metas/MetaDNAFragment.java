@@ -54,12 +54,10 @@ public class MetaDNAFragment implements IMeta {
 		return this.id;
 	}
 
-	@Override
 	public ItemStack newItemStack(int count) {
 		return new ItemStack(DNACraft.Items.itemGeneric, count, this.getId());
 	}
 
-	@Override
 	public ItemStack newItemStack() {
 		return newItemStack(1);
 	}

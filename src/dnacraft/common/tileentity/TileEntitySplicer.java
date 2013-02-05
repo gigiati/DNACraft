@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
+import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
@@ -98,7 +99,7 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					}
 					NBTTagCompound newCompound = new NBTTagCompound();
 					newCompound.setCompoundTag("traits", newDNA.toNBT());
-					ItemStack newStack = dna1.newItemStack();
+					ItemStack newStack = DNACraft.Items.itemUnstackable.newItemStack(MetaDNA.class);
 					newStack.setTagCompound(newCompound);
 					itemStacks[2] = newStack;
 
