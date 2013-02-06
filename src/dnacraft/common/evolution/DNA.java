@@ -24,6 +24,7 @@ import dnacraft.common.item.metas.MetaDNA;
 
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
@@ -196,6 +197,8 @@ public class DNA extends HashMap<String, Genome> {
 		
 		if (entity instanceof EntityPig) {
 			return DNA.pig;
+		}else if (entity instanceof EntitySheep) {
+			return DNA.sheep;
 		}else if (entity instanceof EntityChicken) {
 			return DNA.chicken;
 		}else if (entity instanceof EntityMutant) {

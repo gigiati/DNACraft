@@ -96,9 +96,11 @@ public class EntityMutant extends EntityAnimal implements
 	}
 	
 	public void setDNAFromTagCompound(NBTTagCompound tagCompound) {
+		
 		if (tagCompound != null && tagCompound.hasKey("traits")) {
 			this.dna = DNA.fromNBT(tagCompound.getCompoundTag("traits"));
 		}
+		
 		this.head = this.dna.getRandomWeightedGene(Genome.HEAD_TYPE, 10);
 		this.body = this.dna.getRandomWeightedGene(Genome.BODY_TYPE, 10);
 		this.arms = this.dna.getRandomWeightedGene(Genome.ARM_TYPE, 10);
@@ -107,6 +109,7 @@ public class EntityMutant extends EntityAnimal implements
 		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 10);
 		this.aggression = this.dna.getAverageGene(Genome.AGGRESSION) / 10;
 		this.territoriality = this.dna.getAverageGene(Genome.TERRITORIALILTY);
+		
 		if (this.arms != this.body) {
 			this.arms = Trait.ANIMAL_PIG;
 		}
@@ -132,7 +135,9 @@ public class EntityMutant extends EntityAnimal implements
     }
     
     public boolean wantsToAttack(EntityLiving entity) {
-
+    	if (entity instanceof EntityPlayer) {
+    		return false;
+    	}
 		if (this.dna == null) return true;
 		DNA targetDNA = null;
 		
@@ -145,12 +150,13 @@ public class EntityMutant extends EntityAnimal implements
 		if (targetDNA == null) return true;
 		
 		double similarity = this.dna.compareTo(targetDNA);
-		
+	
+		System.out.println("SIM: "+ similarity + ", AGG: "+ this.aggression);
 		if (this.aggression > similarity) {
 			return true;
 		}
 		
-    	return true;
+    	return false;
     }
     
     @Override
