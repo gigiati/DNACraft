@@ -51,6 +51,8 @@ public class EntityMutant extends EntityAnimal implements
 
 	public HashMap<String, Double> genome = new HashMap<String, Double>();
 
+	public HashMap<Integer, Double> comparisonCache = new HashMap<Integer, Double>();
+	
 	/* wings stuff */
 	public float field_70886_e = 0.0F;
 	public float destPos = 0.0F;
@@ -147,15 +149,20 @@ public class EntityMutant extends EntityAnimal implements
     		targetDNA = DNA.getDNAForEntity(entity);
     	}
     	
+    	
 		if (targetDNA == null) return true;
-		
-		double similarity = this.dna.compareTo(targetDNA);
+
+		double similarity;
+    	if (comparisonCache.containsKey(entity.entityId)) {
+    		similarity = comparisonCache.get(entity.entityId);
+    	}else {
+    		similarity = this.dna.compareTo(targetDNA);
+    		comparisonCache.put(entity.entityId, similarity);
+    	}
 	
-		System.out.println("SIM: "+ similarity + ", AGG: "+ this.aggression);
 		if (this.aggression > similarity) {
 			return true;
 		}
-		
     	return false;
     }
     

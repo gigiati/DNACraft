@@ -39,7 +39,7 @@ public class DNA extends HashMap<String, Genome> {
 	public static DNA spider = new DNASpider();
 	public static DNA sheep = new DNASheep();
 	public static DNA ocelot = new DNAOcelot();
-
+	
 	private static Random rnd = new Random();
 
 	public DNA() {
@@ -106,7 +106,7 @@ public class DNA extends HashMap<String, Genome> {
 	}
 	
 	public double compareTo(DNA other) {
-
+		
 		Set<String> unique = new HashSet<String>();
 		unique.addAll(keySet());
 		unique.addAll(other.keySet());
