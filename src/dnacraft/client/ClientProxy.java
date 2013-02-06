@@ -1,18 +1,16 @@
 package dnacraft.client;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import dnacraft.client.gui.GuiCentrifuge;
+import dnacraft.client.gui.GuiDNA;
+import dnacraft.client.gui.GuiElectroporator;
 import dnacraft.client.gui.GuiSequencer;
 import dnacraft.client.gui.GuiSplicer;
 import dnacraft.client.model.ModelMutant;
 import dnacraft.client.renderer.entity.RenderMutant;
-import dnacraft.client.rendering.Body;
-import dnacraft.client.rendering.BodyPart;
 import dnacraft.client.rendering.mobs.DefinitionChicken;
 import dnacraft.client.rendering.mobs.DefinitionCreeper;
 import dnacraft.client.rendering.mobs.DefinitionEnderman;
@@ -24,6 +22,7 @@ import dnacraft.client.rendering.mobs.DefinitionZombie;
 import dnacraft.common.CommonProxy;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.tileentity.TileEntityCentrifuge;
+import dnacraft.common.tileentity.TileEntityElectroporator;
 import dnacraft.common.tileentity.TileEntitySequencer;
 import dnacraft.common.tileentity.TileEntitySplicer;
 
@@ -37,10 +36,17 @@ public class ClientProxy extends CommonProxy {
 			return new GuiSplicer(inventory, (TileEntitySplicer) tile);
 		} else if (tile instanceof TileEntitySequencer) {
 			return new GuiSequencer(inventory, (TileEntitySequencer) tile);
+		} else if (tile instanceof TileEntityElectroporator) {
+			return new GuiElectroporator(inventory, (TileEntityElectroporator) tile);
 		}
 		return null;
 	}
-
+	
+	@Override
+	public Object getDNAGui(ItemStack stack) {
+		return new GuiDNA(stack);
+	}
+	
 	@Override
 	public void registerRenderInformation() {
 

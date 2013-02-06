@@ -27,9 +27,11 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import dnacraft.DNACraft;
 import dnacraft.DNACraft.Items;
 import dnacraft.common.block.BlockCentrifuge;
+import dnacraft.common.block.BlockElectroporator;
 import dnacraft.common.block.BlockSequencer;
 import dnacraft.common.block.BlockSplicer;
 import dnacraft.common.container.ContainerCentrifuge;
+import dnacraft.common.container.ContainerElectroporator;
 import dnacraft.common.container.ContainerSequencer;
 import dnacraft.common.container.ContainerSplicer;
 import dnacraft.common.entity.EntityMutant;
@@ -44,6 +46,7 @@ import dnacraft.common.item.metas.MetaNeedle;
 import dnacraft.common.item.metas.MetaSyringe;
 import dnacraft.common.item.metas.MetaTestTube;
 import dnacraft.common.tileentity.TileEntityCentrifuge;
+import dnacraft.common.tileentity.TileEntityElectroporator;
 import dnacraft.common.tileentity.TileEntitySequencer;
 import dnacraft.common.tileentity.TileEntitySplicer;
 
@@ -54,6 +57,11 @@ public class CommonProxy {
 		@Override
 		public Object getClientGuiElement(int ID, EntityPlayer player,
 				World world, int x, int y, int z) {
+			
+			if (ID == 1988) {
+				return getDNAGui(player.getHeldItem());
+			}
+			
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
 
 			if (tile != null) {
@@ -69,6 +77,9 @@ public class CommonProxy {
 		@Override
 		public Object getServerGuiElement(int ID, EntityPlayer player,
 				World world, int x, int y, int z) {
+			if (ID == 1988) {
+				return null;
+			}
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
 
 			if (tile != null) {
@@ -78,6 +89,8 @@ public class CommonProxy {
 					return new ContainerSplicer(player.inventory, (TileEntitySplicer) tile);
 				}else if (tile instanceof TileEntitySequencer) {
 					return new ContainerSequencer(player.inventory, (TileEntitySequencer) tile);
+				}else if (tile instanceof TileEntityElectroporator) {
+					return new ContainerElectroporator(player.inventory, (TileEntityElectroporator) tile);
 				}
 			}
 
@@ -88,6 +101,10 @@ public class CommonProxy {
 
 
 	public Object getGui(InventoryPlayer inventory, TileEntity tileentity) {
+		return null;
+	}
+	
+	public Object getDNAGui(ItemStack stack) {
 		return null;
 	}
 
@@ -104,6 +121,10 @@ public class CommonProxy {
 		DNACraft.Blocks.blockSequencer = new BlockSequencer(502, Material.ground);
 		GameRegistry.registerBlock(DNACraft.Blocks.blockSequencer, "dnacraft.machines.sequencer");
 		GameRegistry.registerTileEntity(TileEntitySequencer.class, "sequencer");
+		
+		DNACraft.Blocks.blockElectroporator = new BlockElectroporator(503, Material.ground);
+		GameRegistry.registerBlock(DNACraft.Blocks.blockElectroporator, "dnacraft.machines.electroporator");
+		GameRegistry.registerTileEntity(TileEntityElectroporator.class, "electroporator");
 
 		Items.itemUnstackable = new ItemUnstackable(821);
 

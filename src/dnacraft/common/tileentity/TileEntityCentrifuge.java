@@ -16,6 +16,10 @@ import net.minecraftforge.common.ISidedInventory;
 
 public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IInventory {
 
+	public TileEntityCentrifuge () {
+		itemStacks = new ItemStack[3];
+	}
+	
 	@Override
 	public void updateEntity() {
 		super.updateEntity();

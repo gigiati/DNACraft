@@ -11,6 +11,7 @@ dnacraft.fragments.sheep.name=Fragmento de ADN de oveja
 dnacraft.machines.centrifuge.name=Centrifuga de ADN
 dnacraft.machines.splicer.name=Montador de ADN
 dnacraft.machines.sequencer.name=Secuenciador de ADN
+dnacraft.machines.electroporator.name=Electroporator de ADN
 
 dnacraft.dna.name=ADN
 dnacraft.egg.name=Huevo mutante

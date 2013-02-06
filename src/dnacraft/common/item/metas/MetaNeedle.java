@@ -37,6 +37,12 @@ public class MetaNeedle implements IMeta {
 	}
 
 	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
+			World world) {
+		return itemStack;
+	}
+
+	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player,
 			World world, int x, int y, int z, int side, float par8, float par9,
 			float par10) {

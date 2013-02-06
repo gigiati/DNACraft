@@ -86,6 +86,11 @@ public class Genome extends ArrayList<Gene> {
 		Genome genome = new Genome(compound.getName());
 		int[] traits = compound.getIntArray("traits");
 		byte[] actives = compound.getByteArray("actives");
+
+		if (traits.length != GENOME_SIZE || actives.length != GENOME_SIZE )  {
+			return null;
+		}
+		
 		for (int i = 0; i < GENOME_SIZE; i++) {
 			genome.add(
 				new Gene(traits[i], actives[i] == 1)

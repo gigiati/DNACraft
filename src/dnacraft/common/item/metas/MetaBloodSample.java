@@ -45,4 +45,10 @@ public class MetaBloodSample implements IMeta {
 		return false;
 	}
 
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
+			World world) {
+		return itemStack;
+	}
+
 }

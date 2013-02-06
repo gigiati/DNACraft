@@ -25,6 +25,12 @@ public class MetaSyringe implements IMeta {
 	}
 
 	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
+			World world) {
+		return itemStack;
+	}
+
+	@Override
 	public String getItemNameIS(ItemStack stack) {
 		return "dnacraft.syringe";
 	}

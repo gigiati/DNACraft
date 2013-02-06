@@ -1,7 +1,8 @@
 package dnacraft.common.block;
 
 import dnacraft.DNACraft;
-import dnacraft.common.tileentity.TileEntitySplicer;
+import dnacraft.common.tileentity.TileEntityElectroporator;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -9,21 +10,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockSplicer extends BlockContainer {
-
-	public BlockSplicer(int par1, Material par2Material) {
+public class BlockElectroporator extends BlockContainer {
+	
+	public BlockElectroporator(int par1, Material par2Material) {
 		super(par1, par2Material);
 		setCreativeTab(CreativeTabs.tabMisc);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntitySplicer();
+		return new TileEntityElectroporator();
 	}
-
+	
 	@Override
 	public String getBlockName() {
-		return "dnacraft.machines.splicer";
+		return "dnacraft.machines.electroporator";
 	}
 	
 	@Override

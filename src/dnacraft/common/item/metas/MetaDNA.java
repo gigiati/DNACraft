@@ -41,45 +41,25 @@ public class MetaDNA implements IMeta {
 	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10)
     {
-        if (world.isRemote)
-        {
-            return true;
-        }
-        else
-        {	
-        	
-            int blockID = world.getBlockId(x, y, z);
-            x += Facing.offsetsXForSide[side];
-            y += Facing.offsetsYForSide[side];
-            z += Facing.offsetsZForSide[side];
-            double var12 = 0.0D;
-
-            if (side == 1 && Block.blocksList[blockID] != null && Block.blocksList[blockID].getRenderType() == 11)
-            {
-                var12 = 0.5D;
-            }
-
-            EntityMutant mutant = new EntityMutant(world);
-            
-            if (mutant != null)
-            {
-                mutant.setLocationAndAngles((double)x + 0.5D, (double)y + var12, (double)z + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
-                mutant.rotationYawHead = mutant.rotationYaw;
-                mutant.renderYawOffset = mutant.rotationYaw;
-                mutant.setDNAFromItemStack(itemStack.copy());
-                world.spawnEntityInWorld(mutant);
-            }
-
-            --itemStack.stackSize;
-
-            return true;
-        }
+		if (!world.isRemote)
+	    {
+	    	return true;
+	    }
+		player.openGui(DNACraft.instance, 1988,  world, 0, 0, 0);
+		return false;
     }
 
 	@Override
 	public boolean hitEntity(ItemStack itemStack, EntityLiving  target,
 			EntityLiving player) {
 		return true;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
+			World world) {
+		player.openGui(DNACraft.instance, 1988, world, 0, 0, 0);
+		return itemStack;
 	}
 	
 	

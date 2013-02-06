@@ -12,6 +12,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
+import dnacraft.common.entity.EntityMutant;
 
 public class MetaMutantEgg implements IMeta {
 
@@ -39,12 +40,13 @@ public class MetaMutantEgg implements IMeta {
 	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10)
     {
-        if (world.isRemote)
+		if (world.isRemote)
         {
             return true;
         }
         else
-        {
+        {	
+        	
             int blockID = world.getBlockId(x, y, z);
             x += Facing.offsetsXForSide[side];
             y += Facing.offsetsYForSide[side];
@@ -55,17 +57,16 @@ public class MetaMutantEgg implements IMeta {
             {
                 var12 = 0.5D;
             }
+
+            EntityMutant mutant = new EntityMutant(world);
             
-            Entity mob = EntityList.createEntityByName("Mutant", world);
-            if (mob != null && mob instanceof EntityLiving)
+            if (mutant != null)
             {
-                EntityLiving livingMob = (EntityLiving)mob;
-                mob.setLocationAndAngles((double)x + 0.5D, (double)y + var12, (double)z + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
-                livingMob.rotationYawHead = livingMob.rotationYaw;
-                livingMob.renderYawOffset = livingMob.rotationYaw;
-                livingMob.initCreature();
-                world.spawnEntityInWorld(mob);
-                livingMob.playLivingSound();
+                mutant.setLocationAndAngles((double)x + 0.5D, (double)y + var12, (double)z + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
+                mutant.rotationYawHead = mutant.rotationYaw;
+                mutant.renderYawOffset = mutant.rotationYaw;
+                mutant.setDNAFromItemStack(itemStack.copy());
+                world.spawnEntityInWorld(mutant);
             }
 
             --itemStack.stackSize;
@@ -78,5 +79,11 @@ public class MetaMutantEgg implements IMeta {
 	public boolean hitEntity(ItemStack itemStack, EntityLiving target,
 			EntityLiving player) {
 		return true;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
+			World world) {
+		return itemStack;
 	}
 }

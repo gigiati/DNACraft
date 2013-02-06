@@ -60,6 +60,15 @@ public class ItemGeneric extends Item {
         return true;
 	}
 	
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    {
+		IMeta meta = getMeta(itemStack.getItemDamage());
+		if (meta != null) {
+			return meta.onItemRightClick(itemStack, player, world);
+		}
+        return itemStack;
+    }
+	
 	@Override
 	public boolean hitEntity(ItemStack itemStack, EntityLiving target,
 			EntityLiving player) {

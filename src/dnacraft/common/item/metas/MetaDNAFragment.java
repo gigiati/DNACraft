@@ -78,4 +78,10 @@ public class MetaDNAFragment implements IMeta {
 			EntityLiving player) {
 		return true;
 	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
+			World world) {
+		return itemStack;
+	}
 }

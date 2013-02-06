@@ -184,11 +184,13 @@ public class DNA extends HashMap<String, Genome> {
 			System.out.println("Genome: " + entry.getKey());
 			Genome genome = entry.getValue();
 			String str = "";
-			for (int i = 0; i < genome.size(); i++) {
-				Gene g = genome.get(i);
-				str += g.getTrait() + ":" + (g.isActive() ? 1 : 0) + ",";
+			if (genome != null) {
+				for (int i = 0; i < genome.size(); i++) {
+					Gene g = genome.get(i);
+					str += g.getTrait() + ":" + (g.isActive() ? 1 : 0) + ",";
+				}
+				System.out.println(str);
 			}
-			System.out.println(str);
 		}
 
 	}

@@ -11,6 +11,7 @@ dnacraft.fragments.sheep.name=Sheep DNA Fragment
 dnacraft.machines.centrifuge.name=DNA Centrifuge
 dnacraft.machines.splicer.name=DNA Splicer
 dnacraft.machines.sequencer.name=DNA Sequencer
+dnacraft.machines.electroporator.name=DNA Electroporator
 
 dnacraft.dna.name=DNA
 dnacraft.egg.name=Mutant Egg
