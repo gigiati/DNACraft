@@ -39,4 +39,8 @@ public class Gene {
 	public Gene clone() {
 		return new Gene(this.trait, this.active);
 	}
+	
+	public boolean matches(Gene gene) {
+		return getTrait() == gene.getTrait();
+	}
 }

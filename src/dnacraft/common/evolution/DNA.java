@@ -103,6 +103,24 @@ public class DNA extends HashMap<String, Genome> {
 		}
 		return dna;
 	}
+	
+	public double compareTo(DNA other) {
+
+		Set<String> unique = new HashSet<String>();
+		unique.addAll(keySet());
+		unique.addAll(other.keySet());
+		int matching = 0;
+		for (String key : unique) {
+			Genome otherGenome = other.get(key);
+			Genome myGenome = get(key);
+			if (myGenome != null && otherGenome != null) {
+				matching += myGenome.compareTo(otherGenome);
+			}
+		}
+		
+		return ((double) matching / 40 ) / unique.size();
+		
+	}
 
 	public static DNA merge(DNA dna1, DNA dna2) {
 

@@ -91,8 +91,8 @@ public class EntityMutant extends EntityAnimal implements
         this.tasks.addTask(i++, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(i++, new EntityAILookIdle(this));
 
-        this.targetTasks.addTask(1, new EntityAIDNABasedNearestAttackableTarget(this));
-        //this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(1, new EntityAIDNABasedNearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, true));
+        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
 	}
 	
 	public void setDNAFromTagCompound(NBTTagCompound tagCompound) {
@@ -105,7 +105,7 @@ public class EntityMutant extends EntityAnimal implements
 		this.wings = this.dna.getRandomWeightedGene(Genome.WING_TYPE, 10);
 		this.legs = this.dna.getRandomWeightedGene(Genome.LEG_TYPE, 10);
 		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 10);
-		this.aggression = this.dna.getAverageGene(Genome.AGGRESSION);
+		this.aggression = this.dna.getAverageGene(Genome.AGGRESSION) / 10;
 		this.territoriality = this.dna.getAverageGene(Genome.TERRITORIALILTY);
 		if (this.arms != this.body) {
 			this.arms = Trait.ANIMAL_PIG;
@@ -129,6 +129,28 @@ public class EntityMutant extends EntityAnimal implements
     public boolean isAIEnabled()
     {
         return true;
+    }
+    
+    public boolean wantsToAttack(EntityLiving entity) {
+
+		if (this.dna == null) return true;
+		DNA targetDNA = null;
+		
+    	if (entity instanceof EntityMutant) {
+    		targetDNA = ((EntityMutant) entity).dna;
+    	} else {
+    		targetDNA = DNA.getDNAForEntity(entity);
+    	}
+    	
+		if (targetDNA == null) return true;
+		
+		double similarity = this.dna.compareTo(targetDNA);
+		
+		if (this.aggression > similarity) {
+			return true;
+		}
+		
+    	return true;
     }
     
     @Override

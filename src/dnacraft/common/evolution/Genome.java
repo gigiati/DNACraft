@@ -48,6 +48,18 @@ public class Genome extends ArrayList<Gene> {
 		return type;
 	}
 	
+	public int compareTo(Genome genome) {
+		Gene g;
+		int matches = 0;
+		for (int i = 0; i < this.size(); i++) {
+			if (this.get(i).matches(genome.get(i)))
+			{
+				matches++;
+			}
+		}
+		return matches;
+	}
+	
 	public NBTTagCompound toNBT() {
 		
 		NBTTagCompound compound = new NBTTagCompound();
