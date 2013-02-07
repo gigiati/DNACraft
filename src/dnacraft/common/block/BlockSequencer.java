@@ -9,11 +9,11 @@ import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.common.tileentity.TileEntitySequencer;
 
-public class BlockSequencer extends BlockContainer {
+public class BlockSequencer extends BlockGeneric {
 
 	public BlockSequencer(int par1, Material par2Material) {
 		super(par1, par2Material);
-		setCreativeTab(CreativeTabs.tabMisc);
+		textureIndex = 0;
 	}
 
 	@Override
@@ -24,19 +24,5 @@ public class BlockSequencer extends BlockContainer {
 	@Override
 	public String getBlockName() {
 		return "dnacraft.machines.sequencer";
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			if (player.isSneaking()) {
-				return false;
-			}
-			player.openGui(DNACraft.instance, 1989, world, x, y, z);
-			return true;
-		}
-
-		return true;
 	}
 }

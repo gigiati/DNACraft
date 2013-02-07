@@ -3,19 +3,22 @@ package dnacraft.common.block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import dnacraft.DNACraft;
 import dnacraft.common.tileentity.TileEntityElectroporator;
 
-public class BlockElectroporator extends BlockContainer {
+public class BlockElectroporator extends BlockGeneric {
 	
 	public BlockElectroporator(int par1, Material par2Material) {
 		super(par1, par2Material);
-		setCreativeTab(CreativeTabs.tabMisc);
+		textureIndex = 16;
 	}
-
+	
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityElectroporator();
@@ -24,19 +27,5 @@ public class BlockElectroporator extends BlockContainer {
 	@Override
 	public String getBlockName() {
 		return "dnacraft.machines.electroporator";
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			if (player.isSneaking()) {
-				return false;
-			}
-			player.openGui(DNACraft.instance, 1987, world, x, y, z);
-			return true;
-		}
-
-		return true;
 	}
 }

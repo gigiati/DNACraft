@@ -11,7 +11,7 @@ import dnacraft.common.item.metas.MetaDNADataCard;
 import dnacraft.common.item.metas.MetaMutantEgg;
 
 public class TileEntityElectroporator extends BaseInventoryTileEntity implements IInventory {
-
+	
 	public TileEntityElectroporator() {
 	}
 

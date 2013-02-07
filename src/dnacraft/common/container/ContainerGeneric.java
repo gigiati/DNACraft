@@ -41,5 +41,9 @@ public class ContainerGeneric extends BaseContainer {
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return tileentity.isUseableByPlayer(entityplayer);
 	}
+	
+	public BaseInventoryTileEntity getTileEntity() {
+		return this.tileentity;
+	}
 
 }

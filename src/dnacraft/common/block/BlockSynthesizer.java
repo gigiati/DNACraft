@@ -9,13 +9,13 @@ import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.common.tileentity.TileEntitySynthesizer;
 
-public class BlockSynthesizer extends BlockContainer {
+public class BlockSynthesizer extends BlockGeneric {
 
 	public BlockSynthesizer(int id, Material material) {
 		super(id, material);
-		setCreativeTab(CreativeTabs.tabMisc);
+		textureIndex = 32;
 	}
-
+	
 	@Override
 	public String getBlockName() {
 		return "dnacraft.machines.synthesizer";
@@ -26,17 +26,4 @@ public class BlockSynthesizer extends BlockContainer {
 		return new TileEntitySynthesizer();
 	}
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			if (player.isSneaking()) {
-				return false;
-			}
-			player.openGui(DNACraft.instance, 1987, world, x, y, z);
-			return true;
-		}
-
-		return true;
-	}
 }
