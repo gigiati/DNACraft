@@ -16,10 +16,9 @@ public class ContainerSequencer extends BaseContainer
 		this.playerInventory = playerInventory;
 		this.sequencer = sequencer;
 
-		addSlotToContainer(new Slot(sequencer, 0, 55, 35)); // fuel
-		addSlotToContainer(new Slot(sequencer, 1, 83, 49)); //bottle
-		addSlotToContainer(new Slot(sequencer, 2, 83, 21)); // sample
-		addSlotToContainer(new Slot(sequencer, 3, 119, 35)); // output
+		addSlotToContainer(new Slot(sequencer, 0, 98, 25)); //bottle
+		addSlotToContainer(new Slot(sequencer, 1, 62, 25)); // sample
+		addSlotToContainer(new Slot(sequencer, 2, 80, 52)); // output
 
 		for (int l = 0; l < 3; l++) {
 			for (int k1 = 0; k1 < 9; k1++) {

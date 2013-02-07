@@ -16,7 +16,7 @@ import dnacraft.common.item.metas.MetaOrganicSample;
 public class TileEntitySequencer extends BaseInventoryTileEntity implements IInventory {
 
 	public TileEntitySequencer() {
-		itemStacks = new ItemStack[4];
+		itemStacks = new ItemStack[3];
 	}
 	
 	@Override
@@ -28,19 +28,16 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 	public void updateEntity() {
 		super.updateEntity();
 		if (!worldObj.isRemote) {
-			ItemStack fuelStack = itemStacks[0];
-			ItemStack paperStack = itemStacks[1];
-			ItemStack sampleStack = itemStacks[2];
-			ItemStack outputStack = itemStacks[3];
+			ItemStack paperStack = itemStacks[0];
+			ItemStack sampleStack = itemStacks[1];
+			ItemStack outputStack = itemStacks[2];
 			if (outputStack != null && outputStack.stackSize > 0 ) {
 				return;
 			}
-			if (fuelStack == null || paperStack == null || sampleStack == null) {
+			if (paperStack == null || sampleStack == null) {
 				return;
 			}
-			if (fuelStack.getItem() != Item.diamond ||
-					paperStack.getItem() != Item.paper
-			) {
+			if (paperStack.getItem() != Item.paper) {
 				return;
 			}
 			Item sample = sampleStack.getItem();
@@ -65,8 +62,7 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 				result.setTagCompound(compound);
 				this.decrStackSize(0, 1);
 				this.decrStackSize(1, 1);
-				this.decrStackSize(2, 1);
-				itemStacks[3] = result;
+				itemStacks[2] = result;
 			}
 		}
 	}
