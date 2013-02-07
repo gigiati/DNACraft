@@ -2,7 +2,7 @@ package dnacraft.common.tileentity;
 
 import dnacraft.DNACraft;
 import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNADataCard;
+import dnacraft.common.item.metas.MetaDNAProfile;
 import dnacraft.common.item.metas.MetaMutantEgg;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -32,7 +32,7 @@ public class TileEntitySynthesizer extends BaseInventoryTileEntity implements II
 			
 			if (inputItem == DNACraft.Items.itemUnstackable) {
 				
-				if (DNACraft.Items.itemUnstackable.isA(input, MetaDNADataCard.class)) {
+				if (DNACraft.Items.itemUnstackable.isA(input, MetaDNAProfile.class)) {
 
 					NBTTagCompound compound = input.getTagCompound();
 					if (compound == null) { 

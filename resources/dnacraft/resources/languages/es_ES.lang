@@ -18,9 +18,10 @@ dnacraft.gui.splicer.name=Montador de ADN
 dnacraft.gui.sequencer.name=Secuenciador de ADN
 dnacraft.gui.electroporator.name=Electroevaporador de ADN
 
-dnacraft.dna.name=ADN Sample Card
+dnacraft.dnaprofile.name=ADN Profile
 dnacraft.egg.name=Huevo mutante
 dnacraft.syringe.name=Jeringa
 dnacraft.bloodsample.name=Muestra de sangre
 dnacraft.needle.name=Needle
 dnacraft.testtube.name=Tubo de pruebas
+dnacraft.dna.name=ADN

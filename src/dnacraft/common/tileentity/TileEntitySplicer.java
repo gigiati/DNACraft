@@ -8,7 +8,7 @@ import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
-import dnacraft.common.item.metas.MetaDNADataCard;
+import dnacraft.common.item.metas.MetaDNAProfile;
 
 public class TileEntitySplicer extends BaseInventoryTileEntity implements IInventory {
 
@@ -33,14 +33,14 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					IMeta meta1 = ((ItemGeneric)item1).getMeta(input1);
 					IMeta meta2 = ((ItemGeneric)item2).getMeta(input2);
 					
-					MetaDNADataCard dna1 = null;
-					MetaDNADataCard dna2 = null;
+					MetaDNAProfile dna1 = null;
+					MetaDNAProfile dna2 = null;
 					
-					if (!(meta1 instanceof MetaDNADataCard) || !(meta2 instanceof MetaDNADataCard)) {
+					if (!(meta1 instanceof MetaDNAProfile) || !(meta2 instanceof MetaDNAProfile)) {
 						return;
 					}
-					dna1 = (MetaDNADataCard) meta1;
-					dna2 = (MetaDNADataCard) meta2;
+					dna1 = (MetaDNAProfile) meta1;
+					dna2 = (MetaDNAProfile) meta2;
 
 					DNA dnaFromTag1 = new DNA();
 					DNA dnaFromTag2 = new DNA();
@@ -56,7 +56,7 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					
 					NBTTagCompound newCompound = new NBTTagCompound();
 					newCompound.setCompoundTag("traits", newDNA.toNBT());
-					ItemStack newStack = DNACraft.Items.itemUnstackable.newItemStack(MetaDNADataCard.class);
+					ItemStack newStack = DNACraft.Items.itemUnstackable.newItemStack(MetaDNAProfile.class);
 					newStack.setTagCompound(newCompound);
 					itemStacks[2] = newStack;
 

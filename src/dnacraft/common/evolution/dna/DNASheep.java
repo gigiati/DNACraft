@@ -19,6 +19,9 @@ public class DNASheep extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 0));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_WHITE));
 		
+		addGenome(Genome.createGenomeOfType(Genome.DAMAGE, 0));
+		addGenome(Genome.createGenomeOfType(Genome.HEALTH, 8));
+		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1, 3));
 		addGenome(Genome.createGenomeOfType(Genome.DROP_TYPE, Trait.DROP_WOOL));
 		

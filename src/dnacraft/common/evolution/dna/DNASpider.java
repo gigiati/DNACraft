@@ -18,6 +18,9 @@ public class DNASpider extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 6));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_BLACK));
 		
+		addGenome(Genome.createGenomeOfType(Genome.DAMAGE, 3));
+		addGenome(Genome.createGenomeOfType(Genome.HEALTH, 16));
+		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1, 2));
 		addGenome(Genome.createGenomeOfType(Genome.DROP_TYPE, Trait.DROP_STRING, Trait.DROP_SPIDER_EYE));
 		

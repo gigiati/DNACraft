@@ -18,6 +18,9 @@ public class DNAZombie extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 5));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_GREEN));
 		
+		addGenome(Genome.createGenomeOfType(Genome.DAMAGE, 3));
+		addGenome(Genome.createGenomeOfType(Genome.HEALTH, 20));
+		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1));
 		addGenome(Genome.createGenomeOfType(Genome.DROP_TYPE, Trait.DROP_ROTTEN_FLESH));
 		

@@ -18,7 +18,7 @@ dnacraft.gui.splicer=DNA Splicer
 dnacraft.gui.sequencer=DNA Sequencer
 dnacraft.gui.electroporator=DNA Electroporator
 
-dnacraft.dnacard.name=DNA Sample Card
+dnacraft.dnaprofile.name=DNA Profile
 dnacraft.egg.name=Mutant Egg
 dnacraft.syringe.name=Syringe
 dnacraft.bloodsample.name=Blood Sample

@@ -19,8 +19,11 @@ public class DNAOcelot extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 2));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_YELLOW));
 		
+		addGenome(Genome.createGenomeOfType(Genome.DAMAGE, 2));
+		addGenome(Genome.createGenomeOfType(Genome.HEALTH, 10));
+		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 0));
-		addGenome(Genome.createGenomeOfType(Genome.DROP_TYPE, Trait.DROP_FEATHER, Trait.DROP_CHICKEN));
+		addGenome(Genome.createGenomeOfType(Genome.DROP_TYPE, Trait.DROP_NOTHING));
 		
 		addGenome(Genome.createGenomeOfType(Genome.OFFSPRING, 1));
 	}

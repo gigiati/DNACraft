@@ -32,6 +32,7 @@ public class Trait {
 	public static final int COLOR_GREEN 		= 3;
 	public static final int COLOR_BLACK 		= 4;
 	public static final int COLOR_YELLOW 		= 5;
+	public static final int DROP_NOTHING 		= 99;
 	
 
 }

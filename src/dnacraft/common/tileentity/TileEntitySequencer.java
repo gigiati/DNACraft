@@ -10,7 +10,8 @@ import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.metas.MetaBloodSample;
 import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNADataCard;
+import dnacraft.common.item.metas.MetaDNAProfile;
+import dnacraft.common.item.metas.MetaMutantEgg;
 import dnacraft.common.item.metas.MetaOrganicSample;
 
 public class TileEntitySequencer extends BaseInventoryTileEntity implements IInventory {
@@ -47,7 +48,9 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 			DNA dnaToUse = null;
 			ItemGeneric genericSample = (ItemGeneric) sample;
 			IMeta sampleMeta = genericSample.getMeta(sampleStack);
-			if (genericSample.isA(sampleStack, MetaBloodSample.class) || genericSample.isA(sampleStack, MetaDNA.class)) {
+			if (genericSample.isA(sampleStack, MetaBloodSample.class) ||
+					genericSample.isA(sampleStack, MetaDNA.class) ||
+					genericSample.isA(sampleStack, MetaMutantEgg.class)) {
 				if (sampleStack.hasTagCompound()) {
 					NBTTagCompound compound = sampleStack.getTagCompound();
 					dnaToUse = DNA.fromNBT(compound.getCompoundTag("traits"));
@@ -56,7 +59,7 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 				dnaToUse = ((MetaOrganicSample)genericSample.getMeta(sampleStack)).getDNA();
 			}
 			if (dnaToUse != null) {
-				ItemStack result = DNACraft.Items.itemUnstackable.newItemStack(MetaDNADataCard.class);
+				ItemStack result = DNACraft.Items.itemUnstackable.newItemStack(MetaDNAProfile.class);
 				NBTTagCompound compound = new NBTTagCompound();
 				compound.setCompoundTag("traits", dnaToUse.toNBT());
 				result.setTagCompound(compound);

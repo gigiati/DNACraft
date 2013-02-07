@@ -59,6 +59,8 @@ public class EntityMutant extends EntityAnimal implements
 	private int tail = 1;
 	private double aggression = 0;
 	private double territoriality = 0;
+	private int damage = 0;
+	private int maxHealth = 0;
 	public DNA dna = null;
 	
 	/* creeper stuff */
@@ -101,7 +103,9 @@ public class EntityMutant extends EntityAnimal implements
 		this.tail = this.dna.getRandomWeightedGene(Genome.TAIL_TYPE, 10);
 		this.aggression = this.dna.getAverageGene(Genome.AGGRESSION) / 10;
 		this.territoriality = this.dna.getAverageGene(Genome.TERRITORIALILTY);
-		
+		this.maxHealth = (int)this.dna.getAverageGene(Genome.HEALTH);
+		this.health = this.maxHealth;
+		this.damage = (int)this.dna.getAverageGene(Genome.DAMAGE);
 		if (this.arms != this.body) {
 			this.arms = Trait.ANIMAL_PIG;
 		}
@@ -125,6 +129,7 @@ public class EntityMutant extends EntityAnimal implements
     {
         return true;
     }
+    
     
     public boolean wantsToAttack(EntityLiving entity) {
     	if (entity instanceof EntityPlayer) {
@@ -165,6 +170,8 @@ public class EntityMutant extends EntityAnimal implements
         for (int i = 0; i < drops; i++) {
             switch(this.dna.getRandomWeightedGene(Genome.DROP_TYPE, 1.5))
             {
+            case Trait.DROP_NOTHING:
+            	break;
             case Trait.DROP_CHICKEN:
             	this.dropItem(Item.chickenRaw.itemID, 1);
             	break;
@@ -194,8 +201,6 @@ public class EntityMutant extends EntityAnimal implements
             	break;
             }
         }
-
-        //this.dropItem(var2, 1);
     }
     
     public boolean attackEntityAsMob(Entity par1Entity)
@@ -253,7 +258,7 @@ public class EntityMutant extends EntityAnimal implements
 
 	@Override
 	public int getMaxHealth() {
-		return 30;
+    	return this.maxHealth;
 	}
 	
 	@Override
@@ -381,6 +386,8 @@ public class EntityMutant extends EntityAnimal implements
 		tag.setInteger("legs", this.legs);
 		tag.setDouble("aggression", this.aggression);
 		tag.setDouble("territoriality", this.territoriality);
+		tag.setInteger("maxHealth", this.maxHealth);
+		tag.setInteger("damage", this.damage);
 		
         if (this.dataWatcher.getWatchableObjectByte(17) == 1)
         {
@@ -405,6 +412,8 @@ public class EntityMutant extends EntityAnimal implements
 		this.legs = tag.getInteger("legs");
 		this.aggression = tag.getDouble("aggression");
 		this.territoriality = tag.getDouble("territoriality");
+		this.maxHealth = tag.getInteger("maxHealth");
+		this.damage = tag.getInteger("damage");
 		
 		/*
 		 * CREEPER behaviour
@@ -433,6 +442,8 @@ public class EntityMutant extends EntityAnimal implements
 		data.writeInt(this.arms);
 		data.writeInt(this.legs);
 		data.writeInt(this.tail);
+		data.writeInt(this.maxHealth);
+		data.writeInt(this.damage);
 	}
 
 	@Override
@@ -445,6 +456,9 @@ public class EntityMutant extends EntityAnimal implements
 	      this.arms = data.readInt();
 	      this.legs = data.readInt();
 	      this.tail = data.readInt();
+	      this.maxHealth = data.readInt();
+	      this.health = maxHealth;
+	      this.damage = data.readInt();
 	    }catch(Exception e) {
 	    }
 	}

@@ -19,8 +19,12 @@ public class DNAEnderman extends DNA {
 		addGenome(Genome.createGenomeOfType(Genome.TERRITORIALILTY, 6));
 		addGenome(Genome.createGenomeOfType(Genome.COLOR, Trait.COLOR_BLACK));
 		
+		addGenome(Genome.createGenomeOfType(Genome.DAMAGE, 4));
+		addGenome(Genome.createGenomeOfType(Genome.HEALTH, 40));
+		
 		addGenome(Genome.createGenomeOfType(Genome.DROP_AMOUNT, 1));
 		addGenome(Genome.createGenomeOfType(Genome.DROP_TYPE, Trait.DROP_ENDERPEARL));
+		
 		
 		addGenome(Genome.createGenomeOfType(Genome.OFFSPRING, 1));
 	}

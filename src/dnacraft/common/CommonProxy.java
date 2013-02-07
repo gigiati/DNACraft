@@ -37,7 +37,7 @@ import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 import dnacraft.common.item.metas.MetaBloodSample;
 import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNADataCard;
+import dnacraft.common.item.metas.MetaDNAProfile;
 import dnacraft.common.item.metas.MetaMutantEgg;
 import dnacraft.common.item.metas.MetaNeedle;
 import dnacraft.common.item.metas.MetaOrganicSample;
@@ -130,7 +130,7 @@ public class CommonProxy {
 
 		Items.itemUnstackable = new ItemUnstackable(821);
 
-		Items.itemUnstackable.addMeta(new MetaDNADataCard(0));
+		Items.itemUnstackable.addMeta(new MetaDNAProfile(0));
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		Items.itemUnstackable.addMeta(new MetaSyringe(2));
 		Items.itemUnstackable.addMeta(new MetaBloodSample(3));

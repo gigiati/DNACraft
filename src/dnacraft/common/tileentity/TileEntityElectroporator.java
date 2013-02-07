@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import dnacraft.DNACraft;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNADataCard;
+import dnacraft.common.item.metas.MetaDNAProfile;
 import dnacraft.common.item.metas.MetaMutantEgg;
 
 public class TileEntityElectroporator extends BaseInventoryTileEntity implements IInventory {

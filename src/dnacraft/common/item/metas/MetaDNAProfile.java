@@ -7,11 +7,11 @@ import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 
-public class MetaDNADataCard implements IMeta {
+public class MetaDNAProfile implements IMeta {
 
 	private int id;
 	
-	public MetaDNADataCard(int id) {
+	public MetaDNAProfile(int id) {
 		this.id = id;
 	}
 
@@ -22,7 +22,7 @@ public class MetaDNADataCard implements IMeta {
 
 	@Override
 	public String getItemNameIS(ItemStack stack) {
-		return "dnacraft.dnacard";
+		return "dnacraft.dnaprofile";
 	}
 
 	@Override
