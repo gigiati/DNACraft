@@ -1,13 +1,8 @@
 package dnacraft.client.rendering.mobs;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import dnacraft.api.IMobDefinition;

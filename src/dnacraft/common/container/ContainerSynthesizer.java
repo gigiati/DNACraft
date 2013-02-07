@@ -3,22 +3,20 @@ package dnacraft.common.container;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import dnacraft.common.tileentity.TileEntitySplicer;
+import dnacraft.common.tileentity.TileEntitySynthesizer;
 
-public class ContainerSplicer extends BaseContainer {
+public class ContainerSynthesizer extends BaseContainer {
 
 	protected IInventory playerInventory;
-	protected TileEntitySplicer splicer;
+	protected TileEntitySynthesizer synthesizer;
 	
-	public ContainerSplicer(IInventory playerInventory, TileEntitySplicer splicer) {
-		super(splicer.getSizeInventory());
-		
+	public ContainerSynthesizer(IInventory playerInventory, TileEntitySynthesizer synthesizer) {
+		super(synthesizer.getSizeInventory());
 		this.playerInventory = playerInventory;
-		this.splicer = splicer;
+		this.synthesizer = synthesizer;
 		
-		addSlotToContainer(new Slot(splicer, 0, 44, 36));
-		addSlotToContainer(new Slot(splicer, 1, 80, 36));
-		addSlotToContainer(new Slot(splicer, 2, 116, 36));
+		addSlotToContainer(new Slot(synthesizer, 0, 44, 36));
+		addSlotToContainer(new Slot(synthesizer, 1, 80, 36));
 
 		for (int l = 0; l < 3; l++) {
 			for (int k1 = 0; k1 < 9; k1++) {
@@ -33,7 +31,7 @@ public class ContainerSplicer extends BaseContainer {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return splicer.isUseableByPlayer(entityplayer);
+		return synthesizer.isUseableByPlayer(entityplayer);
 	}
 
 }

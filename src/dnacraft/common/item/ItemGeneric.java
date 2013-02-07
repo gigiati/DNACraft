@@ -4,19 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import dnacraft.DNACraft;
-import dnacraft.api.IMeta;
-import dnacraft.common.item.metas.MetaBloodSample;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import dnacraft.api.IMeta;
 
 public class ItemGeneric extends Item {
 

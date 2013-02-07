@@ -1,9 +1,8 @@
 package dnacraft.common.entity.ai;
 
-import dnacraft.common.entity.EntityMutant;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.monster.EntityCreeper;
+import dnacraft.common.entity.EntityMutant;
 
 
 public class EntityAIMutantSwell extends EntityAIBase

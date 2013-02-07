@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
-import dnacraft.common.item.ItemUnstackable;
 
 public class MetaSyringe implements IMeta {
 	

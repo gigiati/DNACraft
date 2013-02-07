@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import dnacraft.api.IMeta;
 
-public class MetaTestTube implements IMeta {
+public class MetaDNA implements IMeta {
 
 	private int id;
 	
-	public MetaTestTube(int id) {
+	public MetaDNA(int id) {
 		this.id = id;
 	}
 	
@@ -20,14 +20,8 @@ public class MetaTestTube implements IMeta {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
-			World world) {
-		return itemStack;
-	}
-
-	@Override
 	public String getItemNameIS(ItemStack stack) {
-		return "dnacraft.testtube";
+		return "dnacraft.dna";
 	}
 
 	@Override
@@ -38,14 +32,20 @@ public class MetaTestTube implements IMeta {
 	@Override
 	public boolean hitEntity(ItemStack itemStack, EntityLiving target,
 			EntityLiving player) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player,
 			World world, int x, int y, int z, int side, float par8, float par9,
 			float par10) {
-		return false;
+		return true;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStack, EntityPlayer player,
+			World world) {
+		return itemStack;
 	}
 
 }

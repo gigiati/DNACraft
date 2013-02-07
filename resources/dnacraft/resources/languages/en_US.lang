@@ -8,14 +8,15 @@ dnacraft.samples.spider.name=Spider Sample
 dnacraft.samples.enderman.name=Enderman Sample
 dnacraft.samples.sheep.name=Sheep Sample
 
-dnacraft.machines.centrifuge.name=DNA Centrifuge
+dnacraft.machines.synthesizer.name=DNA Synthesizer
 dnacraft.machines.splicer.name=DNA Splicer
 dnacraft.machines.sequencer.name=DNA Sequencer
 dnacraft.machines.electroporator.name=DNA Electroporator
 
-dnacraft.dna.name=DNA Sample Card
+dnacraft.dnacard.name=DNA Sample Card
 dnacraft.egg.name=Mutant Egg
 dnacraft.syringe.name=Syringe
 dnacraft.bloodsample.name=Blood Sample
 dnacraft.needle.name=Needle
 dnacraft.testtube.name=Test Tube
+dnacraft.dna.name=DNA

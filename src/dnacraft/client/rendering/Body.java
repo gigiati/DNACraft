@@ -3,9 +3,7 @@ package dnacraft.client.rendering;
 import java.util.HashMap;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBox;
 import net.minecraft.util.Vec3;
-import net.minecraft.client.model.ModelRenderer;
 
 public class Body extends BodyPart {
 

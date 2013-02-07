@@ -2,11 +2,14 @@ package dnacraft.common.item.metas;
 
 import java.util.HashMap;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
@@ -35,7 +38,20 @@ public class MetaOrganicSample implements IMeta {
 		this.id = id;
 		this.name = name;
 		for (Object obj : objs) {
-			sampleForItems.put(obj, this);
+			ItemStack stack = null;
+			if (obj instanceof Item) {
+				stack = new ItemStack((Item)obj);
+			}else if (obj instanceof Block) {
+				stack = new ItemStack((Block)obj);
+			}
+			if (stack != null) {
+				sampleForItems.put(obj, this);
+				CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(
+						newItemStack(1),
+						stack,
+						DNACraft.Items.itemGeneric.newItemStack(MetaTestTube.class)
+				));
+			}
 		}
 	}
 	

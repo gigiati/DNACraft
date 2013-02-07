@@ -1,13 +1,13 @@
 package dnacraft.client.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 import dnacraft.common.container.ContainerSplicer;
 import dnacraft.common.tileentity.TileEntitySplicer;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.StatCollector;
 
 public class GuiSplicer extends GuiContainer {
 

@@ -26,29 +26,30 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import dnacraft.DNACraft;
 import dnacraft.DNACraft.Items;
-import dnacraft.common.block.BlockCentrifuge;
 import dnacraft.common.block.BlockElectroporator;
 import dnacraft.common.block.BlockSequencer;
 import dnacraft.common.block.BlockSplicer;
-import dnacraft.common.container.ContainerCentrifuge;
+import dnacraft.common.block.BlockSynthesizer;
 import dnacraft.common.container.ContainerElectroporator;
 import dnacraft.common.container.ContainerSequencer;
 import dnacraft.common.container.ContainerSplicer;
+import dnacraft.common.container.ContainerSynthesizer;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 import dnacraft.common.item.metas.MetaBloodSample;
-import dnacraft.common.item.metas.MetaDNASampleCard;
-import dnacraft.common.item.metas.MetaOrganicSample;
+import dnacraft.common.item.metas.MetaDNA;
+import dnacraft.common.item.metas.MetaDNADataCard;
 import dnacraft.common.item.metas.MetaMutantEgg;
 import dnacraft.common.item.metas.MetaNeedle;
+import dnacraft.common.item.metas.MetaOrganicSample;
 import dnacraft.common.item.metas.MetaSyringe;
 import dnacraft.common.item.metas.MetaTestTube;
-import dnacraft.common.tileentity.TileEntityCentrifuge;
 import dnacraft.common.tileentity.TileEntityElectroporator;
 import dnacraft.common.tileentity.TileEntitySequencer;
 import dnacraft.common.tileentity.TileEntitySplicer;
+import dnacraft.common.tileentity.TileEntitySynthesizer;
 
 public class CommonProxy {
 
@@ -83,14 +84,14 @@ public class CommonProxy {
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
 
 			if (tile != null) {
-				if (tile instanceof TileEntityCentrifuge) {
-					return new ContainerCentrifuge(player.inventory, (TileEntityCentrifuge) tile);
-				}else if (tile instanceof TileEntitySplicer) {
+				if (tile instanceof TileEntitySplicer) {
 					return new ContainerSplicer(player.inventory, (TileEntitySplicer) tile);
 				}else if (tile instanceof TileEntitySequencer) {
 					return new ContainerSequencer(player.inventory, (TileEntitySequencer) tile);
 				}else if (tile instanceof TileEntityElectroporator) {
 					return new ContainerElectroporator(player.inventory, (TileEntityElectroporator) tile);
+				}else if (tile instanceof TileEntitySynthesizer) {
+					return new ContainerSynthesizer(player.inventory, (TileEntitySynthesizer) tile);
 				}
 			}
 
@@ -110,10 +111,6 @@ public class CommonProxy {
 
 	public void init() {
 
-		DNACraft.Blocks.blockCentrifuge = new BlockCentrifuge(500, Material.ground);
-		GameRegistry.registerBlock(DNACraft.Blocks.blockCentrifuge, "dnacraft.machines.centrifuge");
-		GameRegistry.registerTileEntity(TileEntityCentrifuge.class, "centrifuge");
-
 		DNACraft.Blocks.blockSplicer = new BlockSplicer(501, Material.ground);
 		GameRegistry.registerBlock(DNACraft.Blocks.blockSplicer, "dnacraft.machines.splicer");
 		GameRegistry.registerTileEntity(TileEntitySplicer.class, "splicer");
@@ -125,13 +122,18 @@ public class CommonProxy {
 		DNACraft.Blocks.blockElectroporator = new BlockElectroporator(503, Material.ground);
 		GameRegistry.registerBlock(DNACraft.Blocks.blockElectroporator, "dnacraft.machines.electroporator");
 		GameRegistry.registerTileEntity(TileEntityElectroporator.class, "electroporator");
+		
+		DNACraft.Blocks.blockSynthesizer = new BlockSynthesizer(504, Material.ground);
+		GameRegistry.registerBlock(DNACraft.Blocks.blockSynthesizer, "dnacraft.machines.synthesizer");
+		GameRegistry.registerTileEntity(TileEntitySynthesizer.class, "synthesizer");
 
 		Items.itemUnstackable = new ItemUnstackable(821);
 
-		Items.itemUnstackable.addMeta(new MetaDNASampleCard(0));
+		Items.itemUnstackable.addMeta(new MetaDNADataCard(0));
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		Items.itemUnstackable.addMeta(new MetaSyringe(2));
 		Items.itemUnstackable.addMeta(new MetaBloodSample(3));
+		Items.itemUnstackable.addMeta(new MetaDNA(4));
 
 		Items.itemGeneric = new ItemGeneric(822);
 

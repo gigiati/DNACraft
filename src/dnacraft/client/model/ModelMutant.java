@@ -2,22 +2,13 @@ package dnacraft.client.model;
 
 import java.util.HashMap;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBox;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.TextureOffset;
 import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dnacraft.api.IMobDefinition;
-import dnacraft.client.rendering.Body;
-import dnacraft.client.rendering.BodyPart;
 import dnacraft.common.entity.EntityMutant;
 
 @SideOnly(Side.CLIENT)

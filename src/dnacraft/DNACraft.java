@@ -8,10 +8,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import dnacraft.common.CommonProxy;
-import dnacraft.common.block.BlockCentrifuge;
 import dnacraft.common.block.BlockElectroporator;
 import dnacraft.common.block.BlockSequencer;
 import dnacraft.common.block.BlockSplicer;
+import dnacraft.common.block.BlockSynthesizer;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 
@@ -33,10 +33,10 @@ public class DNACraft {
 	
 	public static class Blocks
 	{
-		public static BlockCentrifuge blockCentrifuge;
 		public static BlockSplicer blockSplicer;
 		public static BlockSequencer blockSequencer;
 		public static BlockElectroporator blockElectroporator;
+		public static BlockSynthesizer blockSynthesizer;
 	}
 	
 	@Mod.PreInit

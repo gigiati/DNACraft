@@ -1,11 +1,7 @@
 package dnacraft.api;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Vec3;
-import dnacraft.client.rendering.Body;
-import dnacraft.client.rendering.BodyPart;
 
 public interface IMobDefinition {
 	public void renderHead(Entity entity, float legSwing,

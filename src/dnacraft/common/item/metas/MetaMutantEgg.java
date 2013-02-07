@@ -1,16 +1,12 @@
 package dnacraft.common.item.metas;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.entity.EntityMutant;
 

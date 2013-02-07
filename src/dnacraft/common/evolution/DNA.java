@@ -1,6 +1,5 @@
 package dnacraft.common.evolution;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +9,11 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import dnacraft.common.Tally;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.evolution.dna.DNAChicken;
@@ -20,14 +24,6 @@ import dnacraft.common.evolution.dna.DNAPig;
 import dnacraft.common.evolution.dna.DNASheep;
 import dnacraft.common.evolution.dna.DNASpider;
 import dnacraft.common.evolution.dna.DNAZombie;
-import dnacraft.common.item.metas.MetaDNASampleCard;
-
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagIntArray;
 
 public class DNA extends HashMap<String, Genome> {
 

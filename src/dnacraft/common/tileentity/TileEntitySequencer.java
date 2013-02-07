@@ -1,19 +1,17 @@
 package dnacraft.common.tileentity;
 
-import dnacraft.DNACraft;
-import dnacraft.api.IMeta;
-import dnacraft.common.evolution.DNA;
-import dnacraft.common.item.ItemGeneric;
-import dnacraft.common.item.ItemUnstackable;
-import dnacraft.common.item.metas.MetaBloodSample;
-import dnacraft.common.item.metas.MetaDNASampleCard;
-import dnacraft.common.item.metas.MetaOrganicSample;
-import dnacraft.common.item.metas.MetaTestTube;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import dnacraft.DNACraft;
+import dnacraft.api.IMeta;
+import dnacraft.common.evolution.DNA;
+import dnacraft.common.item.ItemGeneric;
+import dnacraft.common.item.metas.MetaBloodSample;
+import dnacraft.common.item.metas.MetaDNA;
+import dnacraft.common.item.metas.MetaDNADataCard;
+import dnacraft.common.item.metas.MetaOrganicSample;
 
 public class TileEntitySequencer extends BaseInventoryTileEntity implements IInventory {
 
@@ -52,7 +50,7 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 			DNA dnaToUse = null;
 			ItemGeneric genericSample = (ItemGeneric) sample;
 			IMeta sampleMeta = genericSample.getMeta(sampleStack);
-			if (genericSample.isA(sampleStack, MetaBloodSample.class)) {
+			if (genericSample.isA(sampleStack, MetaBloodSample.class) || genericSample.isA(sampleStack, MetaDNA.class)) {
 				if (sampleStack.hasTagCompound()) {
 					NBTTagCompound compound = sampleStack.getTagCompound();
 					dnaToUse = DNA.fromNBT(compound.getCompoundTag("traits"));
@@ -61,7 +59,7 @@ public class TileEntitySequencer extends BaseInventoryTileEntity implements IInv
 				dnaToUse = ((MetaOrganicSample)genericSample.getMeta(sampleStack)).getDNA();
 			}
 			if (dnaToUse != null) {
-				ItemStack result = DNACraft.Items.itemUnstackable.newItemStack(MetaDNASampleCard.class);
+				ItemStack result = DNACraft.Items.itemUnstackable.newItemStack(MetaDNADataCard.class);
 				NBTTagCompound compound = new NBTTagCompound();
 				compound.setCompoundTag("traits", dnaToUse.toNBT());
 				result.setTagCompound(compound);

@@ -1,24 +1,25 @@
 package dnacraft.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import dnacraft.common.container.ContainerCentrifuge;
-import dnacraft.common.tileentity.TileEntityCentrifuge;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 
-public class GuiCentrifuge extends GuiContainer {
+import org.lwjgl.opengl.GL11;
 
-	public GuiCentrifuge(InventoryPlayer inventory, TileEntityCentrifuge centrifuge) {
-		super(new ContainerCentrifuge(inventory, centrifuge));
+import dnacraft.common.container.ContainerSynthesizer;
+import dnacraft.common.tileentity.TileEntitySynthesizer;
+
+public class GuiSynthesizer extends GuiContainer {
+
+	public GuiSynthesizer(InventoryPlayer inventory, TileEntitySynthesizer synthesizer) {
+		super(new ContainerSynthesizer(inventory, synthesizer));
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
 			int var3) {
 		int var4 = this.mc.renderEngine
-				.getTexture("/dnacraft/resources/gfx/gui-centrifuge.png");
+				.getTexture("/dnacraft/resources/gfx/gui-splicer.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(var4);
 		int var5 = (this.width - this.xSize) / 2;
@@ -29,7 +30,7 @@ public class GuiCentrifuge extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String sensorGuiName = StatCollector
-				.translateToLocal("dnacraft.gui.centrifuge");
+				.translateToLocal("dnacraft.gui.synthesizer");
 		fontRenderer.drawString(sensorGuiName,
 				this.xSize / 2
 						- (fontRenderer.getStringWidth(sensorGuiName) / 2), 6,

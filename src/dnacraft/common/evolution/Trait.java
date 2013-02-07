@@ -1,6 +1,5 @@
 package dnacraft.common.evolution;
 
-import java.util.Random;
 
 public class Trait {
 

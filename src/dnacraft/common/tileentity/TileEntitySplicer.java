@@ -1,29 +1,16 @@
 package dnacraft.common.tileentity;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
 import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
-import dnacraft.common.item.metas.MetaDNASampleCard;
-import dnacraft.common.item.metas.MetaOrganicSample;
+import dnacraft.common.item.metas.MetaDNADataCard;
 
 public class TileEntitySplicer extends BaseInventoryTileEntity implements IInventory {
-
-	public TileEntitySplicer() {
-		super();
-	}
-	
 
 	@Override
 	public void updateEntity() {
@@ -46,14 +33,14 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					IMeta meta1 = ((ItemGeneric)item1).getMeta(input1);
 					IMeta meta2 = ((ItemGeneric)item2).getMeta(input2);
 					
-					MetaDNASampleCard dna1 = null;
-					MetaDNASampleCard dna2 = null;
+					MetaDNADataCard dna1 = null;
+					MetaDNADataCard dna2 = null;
 					
-					if (!(meta1 instanceof MetaDNASampleCard) || !(meta2 instanceof MetaDNASampleCard)) {
+					if (!(meta1 instanceof MetaDNADataCard) || !(meta2 instanceof MetaDNADataCard)) {
 						return;
 					}
-					dna1 = (MetaDNASampleCard) meta1;
-					dna2 = (MetaDNASampleCard) meta2;
+					dna1 = (MetaDNADataCard) meta1;
+					dna2 = (MetaDNADataCard) meta2;
 
 					DNA dnaFromTag1 = new DNA();
 					DNA dnaFromTag2 = new DNA();
@@ -69,7 +56,7 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					
 					NBTTagCompound newCompound = new NBTTagCompound();
 					newCompound.setCompoundTag("traits", newDNA.toNBT());
-					ItemStack newStack = DNACraft.Items.itemUnstackable.newItemStack(MetaDNASampleCard.class);
+					ItemStack newStack = DNACraft.Items.itemUnstackable.newItemStack(MetaDNADataCard.class);
 					newStack.setTagCompound(newCompound);
 					itemStacks[2] = newStack;
 

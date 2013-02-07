@@ -2,15 +2,16 @@ package dnacraft.client.gui;
 
 import java.util.Map.Entry;
 
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StringTranslate;
+
 import org.lwjgl.opengl.GL11;
 
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.evolution.Gene;
 import dnacraft.common.evolution.Genome;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StringTranslate;
 
 public class GuiDNA extends GuiScreen {
 	
