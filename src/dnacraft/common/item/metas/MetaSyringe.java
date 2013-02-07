@@ -78,4 +78,9 @@ public class MetaSyringe implements IMeta {
 		
 		return true;
 	}
+	
+	@Override
+	public boolean displayInCreative() {
+		return true;
+	}
 }

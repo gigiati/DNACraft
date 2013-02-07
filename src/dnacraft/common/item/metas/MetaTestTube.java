@@ -48,4 +48,8 @@ public class MetaTestTube implements IMeta {
 		return false;
 	}
 
+	@Override
+	public boolean displayInCreative() {
+		return true;
+	}
 }

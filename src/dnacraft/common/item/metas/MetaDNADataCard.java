@@ -54,6 +54,10 @@ public class MetaDNADataCard implements IMeta {
 		return itemStack;
 	}
 	
-	
+
+	@Override
+	public boolean displayInCreative() {
+		return false;
+	}
 
 }

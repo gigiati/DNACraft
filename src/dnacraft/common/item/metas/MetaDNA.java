@@ -47,5 +47,10 @@ public class MetaDNA implements IMeta {
 			World world) {
 		return itemStack;
 	}
+	
+	@Override
+	public boolean displayInCreative() {
+		return false;
+	}
 
 }

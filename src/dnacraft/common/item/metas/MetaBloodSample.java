@@ -50,4 +50,9 @@ public class MetaBloodSample implements IMeta {
 		return itemStack;
 	}
 
+	@Override
+	public boolean displayInCreative() {
+		return false;
+	}
+
 }

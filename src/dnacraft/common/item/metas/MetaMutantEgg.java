@@ -82,4 +82,9 @@ public class MetaMutantEgg implements IMeta {
 			World world) {
 		return itemStack;
 	}
+	
+	@Override
+	public boolean displayInCreative() {
+		return false;
+	}
 }

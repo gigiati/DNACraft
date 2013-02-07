@@ -79,7 +79,9 @@ public class ItemGeneric extends Item {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List subItems) {
 		for (Entry<Integer, IMeta> entry : metaitems.entrySet()) {
-			subItems.add(new ItemStack(id, 1, entry.getKey()));
+			if (entry.getValue().displayInCreative()) {
+				subItems.add(new ItemStack(id, 1, entry.getKey()));
+			}
 		}
 	}
 
