@@ -30,10 +30,7 @@ import dnacraft.common.block.BlockElectroporator;
 import dnacraft.common.block.BlockSequencer;
 import dnacraft.common.block.BlockSplicer;
 import dnacraft.common.block.BlockSynthesizer;
-import dnacraft.common.container.ContainerElectroporator;
-import dnacraft.common.container.ContainerSequencer;
-import dnacraft.common.container.ContainerSplicer;
-import dnacraft.common.container.ContainerSynthesizer;
+import dnacraft.common.container.ContainerGeneric;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
@@ -46,6 +43,7 @@ import dnacraft.common.item.metas.MetaNeedle;
 import dnacraft.common.item.metas.MetaOrganicSample;
 import dnacraft.common.item.metas.MetaSyringe;
 import dnacraft.common.item.metas.MetaTestTube;
+import dnacraft.common.tileentity.BaseInventoryTileEntity;
 import dnacraft.common.tileentity.TileEntityElectroporator;
 import dnacraft.common.tileentity.TileEntitySequencer;
 import dnacraft.common.tileentity.TileEntitySplicer;
@@ -84,17 +82,20 @@ public class CommonProxy {
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
 
 			if (tile != null) {
+				int[] slots = null;
 				if (tile instanceof TileEntitySplicer) {
-					return new ContainerSplicer(player.inventory, (TileEntitySplicer) tile);
+					slots = ContainerGeneric.SLOTS_SPLICER;
 				}else if (tile instanceof TileEntitySequencer) {
-					return new ContainerSequencer(player.inventory, (TileEntitySequencer) tile);
+					slots = ContainerGeneric.SLOTS_SEQUENCER;
 				}else if (tile instanceof TileEntityElectroporator) {
-					return new ContainerElectroporator(player.inventory, (TileEntityElectroporator) tile);
+					slots = ContainerGeneric.SLOTS_ELECTROPORATOR;
 				}else if (tile instanceof TileEntitySynthesizer) {
-					return new ContainerSynthesizer(player.inventory, (TileEntitySynthesizer) tile);
+					slots = ContainerGeneric.SLOTS_SYNTHESIZER;
+				}
+				if (slots != null) {
+					return new ContainerGeneric(player.inventory, (BaseInventoryTileEntity)tile, slots);
 				}
 			}
-
 			return null;
 		}
 

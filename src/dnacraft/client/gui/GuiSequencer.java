@@ -6,13 +6,13 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import dnacraft.common.container.ContainerSequencer;
+import dnacraft.common.container.ContainerGeneric;
 import dnacraft.common.tileentity.TileEntitySequencer;
 
 public class GuiSequencer extends GuiContainer {
 
 	public GuiSequencer(InventoryPlayer inventory, TileEntitySequencer sequencer) {
-		super(new ContainerSequencer(inventory, sequencer));
+		super(new ContainerGeneric(inventory, sequencer, ContainerGeneric.SLOTS_SEQUENCER));
 	}
 
 	@Override
@@ -29,11 +29,11 @@ public class GuiSequencer extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String sensorGuiName = StatCollector
+		String machineName = StatCollector
 				.translateToLocal("dnacraft.gui.sequencer");
-		fontRenderer.drawString(sensorGuiName,
+		fontRenderer.drawString(machineName,
 				this.xSize / 2
-						- (fontRenderer.getStringWidth(sensorGuiName) / 2), 6,
+						- (fontRenderer.getStringWidth(machineName) / 2), 6,
 				4210752);
 		fontRenderer.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,

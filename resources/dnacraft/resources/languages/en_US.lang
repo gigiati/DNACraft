@@ -13,6 +13,11 @@ dnacraft.machines.splicer.name=DNA Splicer
 dnacraft.machines.sequencer.name=DNA Sequencer
 dnacraft.machines.electroporator.name=DNA Electroporator
 
+dnacraft.gui.synthesizer=DNA Synthesizer
+dnacraft.gui.splicer=DNA Splicer
+dnacraft.gui.sequencer=DNA Sequencer
+dnacraft.gui.electroporator=DNA Electroporator
+
 dnacraft.dnacard.name=DNA Sample Card
 dnacraft.egg.name=Mutant Egg
 dnacraft.syringe.name=Syringe

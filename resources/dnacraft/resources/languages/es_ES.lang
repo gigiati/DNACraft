@@ -8,10 +8,15 @@ dnacraft.samples.spider.name=Fragmento de ADN de araña
 dnacraft.samples.enderman.name=Fragmento de ADN de enderman
 dnacraft.samples.sheep.name=Fragmento de ADN de oveja
 
-dnacraft.machines.centrifuge.name=Centrifuga de ADN
+dnacraft.machines.synthesizer.name=Sintetizador de ADN
 dnacraft.machines.splicer.name=Montador de ADN
 dnacraft.machines.sequencer.name=Secuenciador de ADN
 dnacraft.machines.electroporator.name=Electroevaporador de ADN
+
+dnacraft.gui.synthesizer.name=Sintetizador de ADN
+dnacraft.gui.splicer.name=Montador de ADN
+dnacraft.gui.sequencer.name=Secuenciador de ADN
+dnacraft.gui.electroporator.name=Electroevaporador de ADN
 
 dnacraft.dna.name=ADN Sample Card
 dnacraft.egg.name=Huevo mutante

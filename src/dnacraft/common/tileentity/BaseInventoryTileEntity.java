@@ -1,12 +1,13 @@
 package dnacraft.common.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class BaseInventoryTileEntity extends TileEntity {
+public class BaseInventoryTileEntity extends TileEntity implements IInventory {
 
 	protected ItemStack[] itemStacks = new ItemStack[4];
 
@@ -89,6 +90,11 @@ public class BaseInventoryTileEntity extends TileEntity {
 		}
 
 		nbttagcompound.setTag("Items", nbttaglist);
+	}
+
+	@Override
+	public String getInvName() {
+		return null;
 	}	
 	
 }

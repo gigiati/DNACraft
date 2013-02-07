@@ -6,13 +6,13 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import dnacraft.common.container.ContainerSplicer;
+import dnacraft.common.container.ContainerGeneric;
 import dnacraft.common.tileentity.TileEntitySplicer;
 
 public class GuiSplicer extends GuiContainer {
 
 	public GuiSplicer(InventoryPlayer inventory, TileEntitySplicer splicer) {
-		super(new ContainerSplicer(inventory, splicer));
+		super(new ContainerGeneric(inventory, splicer, ContainerGeneric.SLOTS_SPLICER));
 	}
 
 
@@ -30,11 +30,11 @@ public class GuiSplicer extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String sensorGuiName = StatCollector
+		String machineName = StatCollector
 				.translateToLocal("dnacraft.gui.splicer");
-		fontRenderer.drawString(sensorGuiName,
+		fontRenderer.drawString(machineName,
 				this.xSize / 2
-						- (fontRenderer.getStringWidth(sensorGuiName) / 2), 6,
+						- (fontRenderer.getStringWidth(machineName) / 2), 6,
 				4210752);
 		fontRenderer.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
