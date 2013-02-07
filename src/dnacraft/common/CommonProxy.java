@@ -39,8 +39,8 @@ import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 import dnacraft.common.item.metas.MetaBloodSample;
-import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNAFragment;
+import dnacraft.common.item.metas.MetaDNASampleCard;
+import dnacraft.common.item.metas.MetaOrganicSample;
 import dnacraft.common.item.metas.MetaMutantEgg;
 import dnacraft.common.item.metas.MetaNeedle;
 import dnacraft.common.item.metas.MetaSyringe;
@@ -128,7 +128,7 @@ public class CommonProxy {
 
 		Items.itemUnstackable = new ItemUnstackable(821);
 
-		Items.itemUnstackable.addMeta(new MetaDNA(0));
+		Items.itemUnstackable.addMeta(new MetaDNASampleCard(0));
 		Items.itemUnstackable.addMeta(new MetaMutantEgg(1));
 		Items.itemUnstackable.addMeta(new MetaSyringe(2));
 		Items.itemUnstackable.addMeta(new MetaBloodSample(3));
@@ -138,14 +138,14 @@ public class CommonProxy {
 		Items.itemGeneric.addMeta(new MetaTestTube(0));
 		Items.itemGeneric.addMeta(new MetaNeedle(1));
 
-		Items.itemGeneric.addMeta(new MetaDNAFragment(30, "dnacraft.fragments.pig", DNA.pig, Item.porkRaw, Item.porkCooked));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(31, "dnacraft.fragments.chicken", DNA.chicken, Item.feather, Item.chickenRaw, Item.chickenCooked));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(32, "dnacraft.fragments.zombie", DNA.zombie, Item.rottenFlesh));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(33, "dnacraft.fragments.enderman", DNA.enderman, Item.enderPearl, Item.eyeOfEnder));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(34, "dnacraft.fragments.spider", DNA.spider, Item.spiderEye, Item.silk));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(35, "dnacraft.fragments.sheep", DNA.sheep, Item.itemsList[Block.cloth.blockID]));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(36, "dnacraft.fragments.ocelot", DNA.ocelot, Item.fishRaw, Item.fishCooked));
-		Items.itemGeneric.addMeta(new MetaDNAFragment(37, "dnacraft.fragments.creeper", DNA.creeper, Item.gunpowder));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(30, "dnacraft.samples.pig", DNA.pig, Item.porkRaw, Item.porkCooked));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(31, "dnacraft.samples.chicken", DNA.chicken, Item.feather, Item.chickenRaw, Item.chickenCooked));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(32, "dnacraft.samples.zombie", DNA.zombie, Item.rottenFlesh));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(33, "dnacraft.samples.enderman", DNA.enderman, Item.enderPearl, Item.eyeOfEnder));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(34, "dnacraft.samples.spider", DNA.spider, Item.spiderEye, Item.silk));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(35, "dnacraft.samples.sheep", DNA.sheep, Item.itemsList[Block.cloth.blockID]));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(36, "dnacraft.samples.ocelot", DNA.ocelot, Item.fishRaw, Item.fishCooked));
+		Items.itemGeneric.addMeta(new MetaOrganicSample(37, "dnacraft.samples.creeper", DNA.creeper, Item.gunpowder));
 
 		int IDs = 600;
 

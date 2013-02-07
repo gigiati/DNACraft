@@ -1,19 +1,19 @@
-dnacraft.fragments.seed.name=Fragmento de ADN de semilla
-dnacraft.fragments.pig.name=Fragemento de ADN de cerdo
-dnacraft.fragments.chicken.name=Fragmento de ADN de pollo
-dnacraft.fragments.zombie.name=Fragmento de ADN de zombie
-dnacraft.fragments.creeper.name=Fragmento de ADN de creeper
-dnacraft.fragments.ocelot.name=Fragmento de ADN de ocelote
-dnacraft.fragments.spider.name=Fragmento de ADN de araña
-dnacraft.fragments.enderman.name=Fragmento de ADN de enderman
-dnacraft.fragments.sheep.name=Fragmento de ADN de oveja
+dnacraft.samples.seed.name=Fragmento de ADN de semilla
+dnacraft.samples.pig.name=Fragemento de ADN de cerdo
+dnacraft.samples.chicken.name=Fragmento de ADN de pollo
+dnacraft.samples.zombie.name=Fragmento de ADN de zombie
+dnacraft.samples.creeper.name=Fragmento de ADN de creeper
+dnacraft.samples.ocelot.name=Fragmento de ADN de ocelote
+dnacraft.samples.spider.name=Fragmento de ADN de araña
+dnacraft.samples.enderman.name=Fragmento de ADN de enderman
+dnacraft.samples.sheep.name=Fragmento de ADN de oveja
 
 dnacraft.machines.centrifuge.name=Centrifuga de ADN
 dnacraft.machines.splicer.name=Montador de ADN
 dnacraft.machines.sequencer.name=Secuenciador de ADN
-dnacraft.machines.electroporator.name=Electroporator de ADN
+dnacraft.machines.electroporator.name=Electroevaporador de ADN
 
-dnacraft.dna.name=ADN
+dnacraft.dna.name=ADN Sample Card
 dnacraft.egg.name=Huevo mutante
 dnacraft.syringe.name=Jeringa
 dnacraft.bloodsample.name=Muestra de sangre

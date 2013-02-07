@@ -1,19 +1,19 @@
-dnacraft.fragments.seed.name=Seed DNA Fragment
-dnacraft.fragments.pig.name=Pig DNA Fragment
-dnacraft.fragments.chicken.name=Chicken DNA Fragment
-dnacraft.fragments.zombie.name=Zombie DNA Fragment
-dnacraft.fragments.creeper.name=Creeper DNA Fragment
-dnacraft.fragments.ocelot.name=Ocelot DNA Fragment
-dnacraft.fragments.spider.name=Spider DNA Fragment
-dnacraft.fragments.enderman.name=Enderman DNA Fragment
-dnacraft.fragments.sheep.name=Sheep DNA Fragment
+dnacraft.samples.seed.name=Seed Sample
+dnacraft.samples.pig.name=Pig Sample
+dnacraft.samples.chicken.name=Chicken Sample
+dnacraft.samples.zombie.name=Zombie Sample
+dnacraft.samples.creeper.name=Creeper Sample
+dnacraft.samples.ocelot.name=Ocelot Sample
+dnacraft.samples.spider.name=Spider Sample
+dnacraft.samples.enderman.name=Enderman Sample
+dnacraft.samples.sheep.name=Sheep Sample
 
 dnacraft.machines.centrifuge.name=DNA Centrifuge
 dnacraft.machines.splicer.name=DNA Splicer
 dnacraft.machines.sequencer.name=DNA Sequencer
 dnacraft.machines.electroporator.name=DNA Electroporator
 
-dnacraft.dna.name=DNA
+dnacraft.dna.name=DNA Sample Card
 dnacraft.egg.name=Mutant Egg
 dnacraft.syringe.name=Syringe
 dnacraft.bloodsample.name=Blood Sample

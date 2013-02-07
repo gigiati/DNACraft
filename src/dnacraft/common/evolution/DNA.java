@@ -20,7 +20,7 @@ import dnacraft.common.evolution.dna.DNAPig;
 import dnacraft.common.evolution.dna.DNASheep;
 import dnacraft.common.evolution.dna.DNASpider;
 import dnacraft.common.evolution.dna.DNAZombie;
-import dnacraft.common.item.metas.MetaDNA;
+import dnacraft.common.item.metas.MetaDNASampleCard;
 
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityPig;

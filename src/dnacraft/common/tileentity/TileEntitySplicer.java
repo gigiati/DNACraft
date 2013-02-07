@@ -15,8 +15,8 @@ import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
-import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNAFragment;
+import dnacraft.common.item.metas.MetaDNASampleCard;
+import dnacraft.common.item.metas.MetaOrganicSample;
 
 public class TileEntitySplicer extends BaseInventoryTileEntity implements IInventory {
 
@@ -46,60 +46,30 @@ public class TileEntitySplicer extends BaseInventoryTileEntity implements IInven
 					IMeta meta1 = ((ItemGeneric)item1).getMeta(input1);
 					IMeta meta2 = ((ItemGeneric)item2).getMeta(input2);
 					
-					MetaDNA dna1 = null;
-					MetaDNA dna2 = null;
-					MetaDNAFragment fragment = null;
+					MetaDNASampleCard dna1 = null;
+					MetaDNASampleCard dna2 = null;
 					
-					if (meta1 instanceof MetaDNA) {
-						dna1 = (MetaDNA)meta1;
-					}
-					if (meta2 instanceof MetaDNA) {
-						if (dna1 == null) {
-							dna1 = (MetaDNA)meta2;
-						}else {
-							dna2 = (MetaDNA)meta2;
-						}
-					}
-					
-					if (meta1 instanceof MetaDNAFragment) {
-						fragment = (MetaDNAFragment)meta1;
-					}else if (meta2 instanceof MetaDNAFragment) {
-						fragment = (MetaDNAFragment)meta2;
-					}
-
-					if ((dna1 == null && dna2 == null) || (dna1 == null && fragment == null)) {
+					if (!(meta1 instanceof MetaDNASampleCard) || !(meta2 instanceof MetaDNASampleCard)) {
 						return;
 					}
-					
-					DNA newDNA = null;
-					if (dna1 != null && dna2 != null) {
-						DNA dnaFromTag1 = new DNA();
-						DNA dnaFromTag2 = new DNA();
-						if (input1.hasTagCompound()) {
-							NBTTagCompound tag1 = input1.getTagCompound();
-							dnaFromTag1 = DNA.fromNBT(tag1.getCompoundTag("traits"));
-						}
-						if (input2.hasTagCompound()) {
-							NBTTagCompound tag2 = input2.getTagCompound();
-							dnaFromTag2 = DNA.fromNBT(tag2.getCompoundTag("traits"));
-						}
-						newDNA = DNA.merge(dnaFromTag1, dnaFromTag2);
-					}else if (dna1 != null && fragment != null) {
-						DNA stackDNA = new DNA();
-						ItemStack stack = null;
-						if (meta1 instanceof MetaDNA) {
-							stack = input1;
-						}else {
-							stack = input2;
-						}
-						if (stack.hasTagCompound()) {
-							stackDNA = DNA.fromNBT(stack.getTagCompound().getCompoundTag("traits"));
-						}
-						newDNA = DNA.mergeFragment(stackDNA, fragment.getDNA());
+					dna1 = (MetaDNASampleCard) meta1;
+					dna2 = (MetaDNASampleCard) meta2;
+
+					DNA dnaFromTag1 = new DNA();
+					DNA dnaFromTag2 = new DNA();
+					if (input1.hasTagCompound()) {
+						NBTTagCompound tag1 = input1.getTagCompound();
+						dnaFromTag1 = DNA.fromNBT(tag1.getCompoundTag("traits"));
 					}
+					if (input2.hasTagCompound()) {
+						NBTTagCompound tag2 = input2.getTagCompound();
+						dnaFromTag2 = DNA.fromNBT(tag2.getCompoundTag("traits"));
+					}
+					DNA newDNA = DNA.merge(dnaFromTag1, dnaFromTag2);
+					
 					NBTTagCompound newCompound = new NBTTagCompound();
 					newCompound.setCompoundTag("traits", newDNA.toNBT());
-					ItemStack newStack = DNACraft.Items.itemUnstackable.newItemStack(MetaDNA.class);
+					ItemStack newStack = DNACraft.Items.itemUnstackable.newItemStack(MetaDNASampleCard.class);
 					newStack.setTagCompound(newCompound);
 					itemStacks[2] = newStack;
 

@@ -121,7 +121,11 @@ public class ItemGeneric extends Item {
 	}
 	
 	public boolean isA(ItemStack stack, Class klazz) {
-		return stack.getItemDamage() == getMeta(klazz).getId();
+		IMeta meta = getMeta(stack);
+		if (meta == null || !klazz.isAssignableFrom(meta.getClass())) { 
+			return false;
+		}
+		return stack.getItemDamage() == meta.getId();
 	}
 
 

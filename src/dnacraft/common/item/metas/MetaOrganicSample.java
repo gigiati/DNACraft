@@ -11,31 +11,31 @@ import dnacraft.DNACraft;
 import dnacraft.api.IMeta;
 import dnacraft.common.evolution.DNA;
 
-public class MetaDNAFragment implements IMeta {
+public class MetaOrganicSample implements IMeta {
 
 	private DNA dna = null;
 	private int id;
 	private String name;
 	
-	public static HashMap<Object, MetaDNAFragment> fragmentsForItems = new HashMap<Object, MetaDNAFragment>();
+	public static HashMap<Object, MetaOrganicSample> sampleForItems = new HashMap<Object, MetaOrganicSample>();
 
-	public static MetaDNAFragment getFragmentForItemStack(ItemStack stack) {
+	public static MetaOrganicSample getFragmentForItemStack(ItemStack stack) {
 		Item item = stack.getItem();
 		if (item != null) {
-			if (fragmentsForItems.containsKey(item)) {
-				return MetaDNAFragment.fragmentsForItems.get(item);
+			if (sampleForItems.containsKey(item)) {
+				return MetaOrganicSample.sampleForItems.get(item);
 			}
 		}
 		return null;
 	}
 	
 
-	public MetaDNAFragment(int id, String name, DNA dna, Object...objs) {
+	public MetaOrganicSample(int id, String name, DNA dna, Object...objs) {
 		this.dna = dna;
 		this.id = id;
 		this.name = name;
 		for (Object obj : objs) {
-			fragmentsForItems.put(obj, this);
+			sampleForItems.put(obj, this);
 		}
 	}
 	

@@ -15,11 +15,11 @@ import dnacraft.api.IMeta;
 import dnacraft.common.entity.EntityMutant;
 import dnacraft.common.evolution.Genome;
 
-public class MetaDNA implements IMeta {
+public class MetaDNASampleCard implements IMeta {
 
 	private int id;
 	
-	public MetaDNA(int id) {
+	public MetaDNASampleCard(int id) {
 		this.id = id;
 	}
 

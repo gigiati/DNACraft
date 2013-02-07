@@ -1,7 +1,7 @@
 package dnacraft.common.tileentity;
 
 import dnacraft.common.item.ItemGeneric;
-import dnacraft.common.item.metas.MetaDNAFragment;
+import dnacraft.common.item.metas.MetaOrganicSample;
 import dnacraft.common.item.metas.MetaTestTube;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -27,11 +27,11 @@ public class TileEntityCentrifuge extends BaseInventoryTileEntity implements IIn
 			ItemStack input = itemStacks[0];
 			ItemStack tube = itemStacks[1];
 			if (input != null && input.stackSize > 0 && tube != null && tube.stackSize > 0) {
-				MetaDNAFragment fragment = MetaDNAFragment.getFragmentForItemStack(input);
+				MetaOrganicSample fragment = MetaOrganicSample.getFragmentForItemStack(input);
 				if (fragment == null) {
 					return;
 				}
-				ItemStack output = MetaDNAFragment.getFragmentForItemStack(input).newItemStack();
+				ItemStack output = MetaOrganicSample.getFragmentForItemStack(input).newItemStack();
 				Item tubeItem = tube.getItem();
 				if (output != null &&
 					tubeItem != null &&

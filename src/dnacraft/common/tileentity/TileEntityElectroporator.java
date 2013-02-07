@@ -6,8 +6,8 @@ import dnacraft.common.evolution.DNA;
 import dnacraft.common.item.ItemGeneric;
 import dnacraft.common.item.ItemUnstackable;
 import dnacraft.common.item.metas.MetaBloodSample;
-import dnacraft.common.item.metas.MetaDNA;
-import dnacraft.common.item.metas.MetaDNAFragment;
+import dnacraft.common.item.metas.MetaDNASampleCard;
+import dnacraft.common.item.metas.MetaOrganicSample;
 import dnacraft.common.item.metas.MetaMutantEgg;
 import dnacraft.common.item.metas.MetaTestTube;
 import net.minecraft.inventory.IInventory;
@@ -42,7 +42,7 @@ public class TileEntityElectroporator extends BaseInventoryTileEntity implements
 				return;
 			}
 			ItemGeneric dnaItem = (ItemGeneric)dnaStack.getItem();
-			if (!dnaItem.isA(dnaStack, MetaDNA.class)) {
+			if (!dnaItem.isA(dnaStack, MetaDNASampleCard.class)) {
 				return;
 			}
 			NBTTagCompound compound = dnaStack.getTagCompound();
