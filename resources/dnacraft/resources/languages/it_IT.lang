@@ -1,0 +1,27 @@
+dnacraft.samples.seed.name=Campione di semi
+dnacraft.samples.pig.name=Campione di maiale
+dnacraft.samples.chicken.name=Campione di pollo
+dnacraft.samples.zombie.name=Campione di zombie
+dnacraft.samples.creeper.name=Campione di creeper
+dnacraft.samples.ocelot.name=Campione di gatto selvatico
+dnacraft.samples.spider.name=Campione di ragno
+dnacraft.samples.enderman.name=Campione di enderman
+dnacraft.samples.sheep.name=Campione di pecora
+
+dnacraft.machines.synthesizer.name=Sintetizzatore di DNA
+dnacraft.machines.splicer.name=Compilatore di DNA
+dnacraft.machines.sequencer.name=Sequencer di DNA
+dnacraft.machines.electroporator.name=Eletroevaporatore di DNA
+
+dnacraft.gui.synthesizer=Sintetizzatore di DNA
+dnacraft.gui.splicer=Compilatore di DNA
+dnacraft.gui.sequencer=Sequencer di DNA
+dnacraft.gui.electroporator=Eletroevaporatore di DNA
+
+dnacraft.dnaprofile.name=Profilo di DNA
+dnacraft.egg.name=uovo mutante
+dnacraft.syringe.name=Siringa
+dnacraft.bloodsample.name=Campione di sangue
+dnacraft.needle.name=Ago
+dnacraft.testtube.name=Provetta
+dnacraft.dna.name=DNA
