@@ -1,0 +1,27 @@
+dnacraft.samples.seed.name=Echantillon de graine
+dnacraft.samples.pig.name=Echantillon de cochon
+dnacraft.samples.chicken.name=Echantillon de poulet
+dnacraft.samples.zombie.name=Echantillon de zombie
+dnacraft.samples.creeper.name=Echantillon de creeper
+dnacraft.samples.ocelot.name=Echantillon de chat sauvage
+dnacraft.samples.spider.name=Echantillon d'arraignée
+dnacraft.samples.enderman.name=Echantillon d'enderman
+dnacraft.samples.sheep.name=Echantillon de mouton
+
+dnacraft.machines.synthesizer.name=Synthétiseur d'ADN
+dnacraft.machines.splicer.name=Compilateur d'ADN
+dnacraft.machines.sequencer.name=Séquenceur d'ADN
+dnacraft.machines.electroporator.name=Electroévaporateur d'ADN
+
+dnacraft.gui.synthesizer=Synthétiseur d'ADN
+dnacraft.gui.splicer=Compilateur d'ADN
+dnacraft.gui.sequencer=Séquenceur d'ADN
+dnacraft.gui.electroporator=Electroévaporateur d'ADN
+
+dnacraft.dnaprofile.name=Profile ADN
+dnacraft.egg.name=Oeuf mutant
+dnacraft.syringe.name=Seringue
+dnacraft.bloodsample.name=Echantillon de sang
+dnacraft.needle.name=Aiguille
+dnacraft.testtube.name=Eprouvette
+dnacraft.dna.name=ADN
